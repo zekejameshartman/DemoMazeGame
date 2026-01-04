@@ -1,3 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
+using DemoMazeGame.Services;
+
 namespace DemoMazeGame
 {
     // This is the main entry point for the maze game
@@ -10,96 +13,119 @@ namespace DemoMazeGame
 
         static async Task Main(string[] args)
         {
-            // Create the menu system
-            Menu menu = new Menu();
+            // Set up dependency injection
+            var services = new ServiceCollection();
+            services.AddSingleton<IAppLogger, AppLogger>();
+            services.AddSingleton<IAiSessionLogger, AiSessionLogger>();
+            var serviceProvider = services.BuildServiceProvider();
 
-            // Try to get API key: environment variable first, then .env file
-            string apiKey = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY") ?? "";
-            if (string.IsNullOrEmpty(apiKey))
+            // Get services
+            var appLogger = serviceProvider.GetRequiredService<IAppLogger>();
+            var sessionLogger = serviceProvider.GetRequiredService<IAiSessionLogger>();
+
+            appLogger.LogInfo("Application started");
+
+            try
             {
-                apiKey = LoadApiKeyFromEnvFile();
-            }
+                // Create the menu system
+                Menu menu = new Menu();
 
-            // AI player (created later if we have an API key)
-            AiPlayer? aiPlayer = null;
-
-            // Main application loop
-            bool keepRunning = true;
-
-            while (keepRunning)
-            {
-                // Show main menu and get user choice
-                string choice = menu.ShowMainMenu();
-
-                if (choice == "1")
+                // Try to get API key: environment variable first, then .env file
+                string apiKey = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY") ?? "";
+                if (string.IsNullOrEmpty(apiKey))
                 {
-                    // Play as Human
-                    Game game = new Game();
-                    game.PlayAsHuman();
-                    menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), "Human");
+                    apiKey = LoadApiKeyFromEnvFile();
                 }
-                else if (choice == "2")
+
+                // AI player (created later if we have an API key)
+                AiPlayer? aiPlayer = null;
+
+                // Main application loop
+                bool keepRunning = true;
+
+                while (keepRunning)
                 {
-                    // Watch AI Play
-                    // First, make sure we have an API key
-                    if (string.IsNullOrEmpty(apiKey))
+                    // Show main menu and get user choice
+                    string choice = menu.ShowMainMenu();
+
+                    if (choice == "1")
                     {
-                        apiKey = menu.AskForApiKey();
-                        if (!string.IsNullOrEmpty(apiKey))
+                        // Play as Human
+                        Game game = new Game(appLogger, sessionLogger);
+                        game.PlayAsHuman();
+                        menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), "Human");
+                    }
+                    else if (choice == "2")
+                    {
+                        // Watch AI Play
+                        // First, make sure we have an API key
+                        if (string.IsNullOrEmpty(apiKey))
                         {
-                            SaveApiKeyToEnvFile(apiKey);
+                            apiKey = menu.AskForApiKey();
+                            if (!string.IsNullOrEmpty(apiKey))
+                            {
+                                SaveApiKeyToEnvFile(apiKey);
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(apiKey))
+                        {
+                            appLogger.LogWarning("No API key provided for AI player");
+                            Console.WriteLine("No API key provided. Cannot run AI player.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            // Create AI player if we haven't yet
+                            if (aiPlayer == null)
+                            {
+                                aiPlayer = new AiPlayer(apiKey, appLogger);
+                            }
+
+                            // Get the selected model
+                            string modelId = AiPlayer.ModelIds[menu.SelectedModelIndex];
+                            string modelName = AiPlayer.ModelNames[menu.SelectedModelIndex];
+
+                            // Run the game with AI
+                            Game game = new Game(appLogger, sessionLogger);
+                            await game.PlayAsAi(
+                                aiPlayer,
+                                modelId,
+                                modelName,
+                                menu.ShowCoordinates,
+                                menu.ShowAsciiMap,
+                                menu.DelayBetweenMoves
+                            );
+                            menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), modelName);
                         }
                     }
-
-                    if (string.IsNullOrEmpty(apiKey))
+                    else if (choice == "3")
                     {
-                        Console.WriteLine("No API key provided. Cannot run AI player.");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
+                        // Select AI Model
+                        menu.ShowModelSelectionMenu();
                     }
-                    else
+                    else if (choice == "4")
                     {
-                        // Create AI player if we haven't yet
-                        if (aiPlayer == null)
-                        {
-                            aiPlayer = new AiPlayer(apiKey);
-                        }
-
-                        // Get the selected model
-                        string modelId = AiPlayer.ModelIds[menu.SelectedModelIndex];
-                        string modelName = AiPlayer.ModelNames[menu.SelectedModelIndex];
-
-                        // Run the game with AI
-                        Game game = new Game();
-                        await game.PlayAsAi(
-                            aiPlayer,
-                            modelId,
-                            modelName,
-                            menu.ShowCoordinates,
-                            menu.ShowAsciiMap,
-                            menu.DelayBetweenMoves
-                        );
-                        menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), modelName);
+                        // Settings
+                        menu.ShowSettingsMenu();
+                    }
+                    else if (choice == "5")
+                    {
+                        // Quit
+                        keepRunning = false;
                     }
                 }
-                else if (choice == "3")
-                {
-                    // Select AI Model
-                    menu.ShowModelSelectionMenu();
-                }
-                else if (choice == "4")
-                {
-                    // Settings
-                    menu.ShowSettingsMenu();
-                }
-                else if (choice == "5")
-                {
-                    // Quit
-                    keepRunning = false;
-                }
+
+                appLogger.LogInfo("Application exiting normally");
+                Console.WriteLine("Thanks for playing! Good luck with your science fair project!");
             }
-
-            Console.WriteLine("Thanks for playing! Good luck with your science fair project!");
+            catch (Exception ex)
+            {
+                appLogger.LogError("Unhandled exception in main loop", ex);
+                Console.WriteLine("An error occurred. Check logs/app.log for details.");
+                throw;
+            }
         }
 
         // Load the API key from the .env file if it exists

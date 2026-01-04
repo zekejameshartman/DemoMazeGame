@@ -1,9 +1,20 @@
+using DemoMazeGame.Services;
+
 namespace DemoMazeGame
 {
     // This class contains the main game logic
     // It handles both human players and AI players
     public class Game
     {
+        private readonly IAppLogger _logger;
+        private readonly IAiSessionLogger _sessionLogger;
+
+        public Game(IAppLogger logger, IAiSessionLogger sessionLogger)
+        {
+            _logger = logger;
+            _sessionLogger = sessionLogger;
+        }
+
         // The maze map - 1 = wall, 0 = open path, 2 = exit
         // This is a more interesting maze for testing AI spatial reasoning
         private int[,] map =
@@ -117,6 +128,14 @@ namespace DemoMazeGame
             moveCount = 0;
             gameWon = false;
 
+            // Track session outcome
+            bool stoppedByUser = false;
+            bool errorOccurred = false;
+            string? errorMessage = null;
+
+            // Start session logging
+            _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs);
+
             // Reset the AI's conversation history for a fresh start
             ai.ResetConversation();
 
@@ -140,27 +159,45 @@ namespace DemoMazeGame
                 Console.WriteLine();
                 Console.WriteLine("--- Asking AI for next move... ---");
                 Console.WriteLine($"Prompt: {prompt}");
-                // Get the AI's move
-                string direction = await ai.GetAiMove(prompt, modelId);
 
-                Console.WriteLine("AI chose: " + direction);
+                // Get the AI's move with metrics
+                var moveResult = await ai.GetAiMove(prompt, modelId);
+
+                Console.WriteLine("AI chose: " + moveResult.Direction);
 
                 // Check for errors
-                if (direction == "ERROR")
+                if (moveResult.IsError)
                 {
                     Console.WriteLine("AI returned an error. Stopping game.");
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
+                    errorOccurred = true;
+                    errorMessage = moveResult.ErrorMessage;
                     break;
                 }
 
+                // Store previous position for logging
+                int fromRow = playerRow;
+                int fromCol = playerCol;
+
                 // Try to move
-                bool moved = TryMove(direction);
+                bool moved = TryMove(moveResult.Direction);
+                moveCount++;
+
+                // Log the move
+                _sessionLogger.LogMove(
+                    moveCount,
+                    moveResult.Direction,
+                    fromRow, fromCol,
+                    playerRow, playerCol,
+                    moved,
+                    moveResult.PromptTokens,
+                    moveResult.CompletionTokens,
+                    moveResult.ActualCostUsd
+                );
 
                 if (moved)
                 {
-                    moveCount++;
-
                     // Check for win
                     if (map[playerRow, playerCol] == 2)
                     {
@@ -174,7 +211,6 @@ namespace DemoMazeGame
                 else
                 {
                     Console.WriteLine("AI tried to walk into a wall!");
-                    moveCount++;  // Count failed moves too
                 }
 
                 // Wait before next move (so humans can watch)
@@ -187,15 +223,20 @@ namespace DemoMazeGame
                     if (key.Key == ConsoleKey.Q)
                     {
                         Console.WriteLine("Stopped by user.");
+                        stoppedByUser = true;
                         break;
                     }
                 }
             }
 
-            if (moveCount >= maxMoves)
+            bool reachedMaxMoves = moveCount >= maxMoves;
+            if (reachedMaxMoves)
             {
                 Console.WriteLine("AI reached maximum moves (" + maxMoves + ") without finding exit.");
             }
+
+            // End session logging
+            _sessionLogger.EndSession(gameWon, stoppedByUser, reachedMaxMoves, errorOccurred, errorMessage);
         }
 
         // Try to move in a direction, returns true if successful
