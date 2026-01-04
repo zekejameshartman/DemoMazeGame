@@ -1,131 +1,141 @@
-﻿namespace DemoMazeGame
+namespace DemoMazeGame
 {
+    // This is the main entry point for the maze game
+    // It creates the menu and handles the main application loop
     internal class Program
-    {// arrays are collections of data, identified by brackets after the var type
-        static int[,] map =  // x, y mapping = x is horizontal axis, which is col. y is vertical axis, which is row
-        {
-            {1,1,1,1,1,1,1,1,1,1},
-            {1,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,2,1},
-            {1,1,1,1,1,1,1,1,1,1},
-        };
+    {
+        // Path to the .env file (in the project directory, already gitignored)
+        private static readonly string EnvFilePath = Path.Combine(
+            AppContext.BaseDirectory, "..", "..", "..", ".env");
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var row = 1;
-            var col = 1; 
-            string userInput;
+            // Create the menu system
+            Menu menu = new Menu();
 
-            while (true)
+            // Try to get API key: environment variable first, then .env file
+            string apiKey = Environment.GetEnvironmentVariable("OPENROUTER_API_KEY") ?? "";
+            if (string.IsNullOrEmpty(apiKey))
             {
-                Console.WriteLine("You are in a maze. Which way do you want to go? N/S/E/W or Q to Quit");
-                Console.WriteLine($"  You are at {col}, {row}");
+                apiKey = LoadApiKeyFromEnvFile();
+            }
 
-                userInput = Console.ReadLine();
+            // AI player (created later if we have an API key)
+            AiPlayer? aiPlayer = null;
 
-                Console.WriteLine("You entered: " + userInput);
+            // Main application loop
+            bool keepRunning = true;
 
-                if (userInput.ToUpper() == "N")
+            while (keepRunning)
+            {
+                // Show main menu and get user choice
+                string choice = menu.ShowMainMenu();
+
+                if (choice == "1")
                 {
-                    if (IsValidMove(row, col, "N"))
+                    // Play as Human
+                    Game game = new Game();
+                    game.PlayAsHuman();
+                    menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), "Human");
+                }
+                else if (choice == "2")
+                {
+                    // Watch AI Play
+                    // First, make sure we have an API key
+                    if (string.IsNullOrEmpty(apiKey))
                     {
-                        row--;
+                        apiKey = menu.AskForApiKey();
+                        if (!string.IsNullOrEmpty(apiKey))
+                        {
+                            SaveApiKeyToEnvFile(apiKey);
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(apiKey))
+                    {
+                        Console.WriteLine("No API key provided. Cannot run AI player.");
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
                     }
                     else
                     {
-                        Console.WriteLine("You can't go that way!");
-                    }
-                }
-                else if (userInput.ToUpper() == "E")
-                {
-                    if (IsValidMove(row, col, "E"))
-                    {
-                        col++;
-                    }
-                    else
-                    {
-                        Console.WriteLine("You can't go that way!");
-                    }
-                }
-                else if (userInput.ToUpper() == "S")
-                {
-                    if (IsValidMove(row, col, "S"))
-                    {
-                        row++;
-                    }
-                    else
-                    {
-                        Console.WriteLine("You can't go that way!");
-                    }
-                }
-                else if (userInput.ToUpper() == "W")
-                {
-                    if (IsValidMove(row, col, "W"))
-                    {
-                        col--;
-                    }
-                    else
-                    {
-                        Console.WriteLine("You can't go that way!");
-                    }
-                }
-                else if (userInput.ToUpper() == "Q")
-                {
-                    break;
-                }
+                        // Create AI player if we haven't yet
+                        if (aiPlayer == null)
+                        {
+                            aiPlayer = new AiPlayer(apiKey);
+                        }
 
-                if (map[row, col] == 2)
-                {
-                    Console.WriteLine("You found the exit! Contratulations!");
-                    break;
+                        // Get the selected model
+                        string modelId = AiPlayer.ModelIds[menu.SelectedModelIndex];
+                        string modelName = AiPlayer.ModelNames[menu.SelectedModelIndex];
+
+                        // Run the game with AI
+                        Game game = new Game();
+                        await game.PlayAsAi(
+                            aiPlayer,
+                            modelId,
+                            modelName,
+                            menu.ShowCoordinates,
+                            menu.ShowAsciiMap,
+                            menu.DelayBetweenMoves
+                        );
+                        menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), modelName);
+                    }
                 }
+                else if (choice == "3")
+                {
+                    // Select AI Model
+                    menu.ShowModelSelectionMenu();
+                }
+                else if (choice == "4")
+                {
+                    // Settings
+                    menu.ShowSettingsMenu();
+                }
+                else if (choice == "5")
+                {
+                    // Quit
+                    keepRunning = false;
+                }
+            }
 
-                Console.WriteLine($"You are at {col}, {row}");
-            } // end while
-
-            Console.WriteLine("Thanks for playing!");
+            Console.WriteLine("Thanks for playing! Good luck with your science fair project!");
         }
 
-        // private - tells the code who can use this method (private = only this class, public = anyone, internal = this project)
-        // static - optional modifier, tells c# that the method can be called without creating an instance of the class
-        // bool - return type, tells c# what type of data the method will return (void = no return, int, string, bool, etc.)
-        // IsValidMove - name of the method
-        // parens - parameters, passes data into the method
-        private static bool IsValidMove(int row, int col, string direction)
+        // Load the API key from the .env file if it exists
+        private static string LoadApiKeyFromEnvFile()
         {
-            // get desired location
-            int newCol = col;
-            int newRow = row;
+            try
+            {
+                if (File.Exists(EnvFilePath))
+                {
+                    foreach (string line in File.ReadAllLines(EnvFilePath))
+                    {
+                        if (line.StartsWith("OPENROUTER_API_KEY="))
+                        {
+                            return line.Substring("OPENROUTER_API_KEY=".Length).Trim();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Ignore errors reading the file
+            }
+            return "";
+        }
 
-            if (direction.ToUpper() == "N")
+        // Save the API key to the .env file
+        private static void SaveApiKeyToEnvFile(string apiKey)
+        {
+            try
             {
-                newRow = row-1;
+                File.WriteAllText(EnvFilePath, "OPENROUTER_API_KEY=" + apiKey + Environment.NewLine);
             }
-            else if (direction.ToUpper() == "S")
+            catch
             {
-                newRow = row+1;
+                // Ignore errors writing the file
             }
-            else if (direction.ToUpper() == "W")
-            {
-                newCol = col-1;
-            }
-            else if (direction.ToUpper() == "E")
-            {
-                newCol = col+1;
-            }
-
-            if (map[newRow, newCol] == 1)
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
-
-
-    
-
