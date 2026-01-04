@@ -1,4 +1,5 @@
 using DemoMazeGame.Services;
+using Spectre.Console;
 
 namespace DemoMazeGame
 {
@@ -39,6 +40,8 @@ namespace DemoMazeGame
         // Game statistics
         private int moveCount = 0;
         private bool gameWon = false;
+        private decimal runningCost = 0m;  // Running total of API costs
+        private int totalTokens = 0;       // Running total of tokens used
 
         // Maximum moves before giving up (prevents infinite loops)
         private int maxMoves = 200;
@@ -46,10 +49,15 @@ namespace DemoMazeGame
         // Run the game with a human player
         public void PlayAsHuman()
         {
-            Console.Clear();
-            Console.WriteLine("=== HUMAN PLAYER MODE ===");
-            Console.WriteLine("Use N/S/E/W to move, Q to quit");
-            Console.WriteLine();
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+                new Rule("[bold cyan]Human Player Mode[/]")
+                    .RuleStyle("grey")
+                    .Centered());
+
+            AnsiConsole.MarkupLine("[grey]Use[/] [yellow]N/S/E/W[/] [grey]to move,[/] [red]Q[/] [grey]to quit[/]");
+            AnsiConsole.WriteLine();
 
             // Reset game state
             playerRow = 1;
@@ -64,9 +72,9 @@ namespace DemoMazeGame
                 DrawMaze();
 
                 // Show current position
-                Console.WriteLine("Position: (" + playerCol + ", " + playerRow + ")");
-                Console.WriteLine("Moves: " + moveCount);
-                Console.Write("Enter direction (N/S/E/W) or Q to quit: ");
+                AnsiConsole.MarkupLine($"[grey]Position:[/] [cyan]({playerCol}, {playerRow})[/]");
+                AnsiConsole.MarkupLine($"[grey]Moves:[/] [yellow]{moveCount}[/]");
+                AnsiConsole.Markup("[green]Enter direction[/] [grey](N/S/E/W or Q)[/]: ");
 
                 // Get player input
                 string input = Console.ReadLine() ?? "";
@@ -97,36 +105,43 @@ namespace DemoMazeGame
                     }
                     else
                     {
-                        Console.WriteLine("You can't go that way! There's a wall.");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
+                        AnsiConsole.MarkupLine("[red]You can't go that way! There's a wall.[/]");
+                        AnsiConsole.MarkupLine("[grey]Press any key to continue...[/]");
+                        Console.ReadKey(true);
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid direction. Use N, S, E, or W.");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
+                    AnsiConsole.MarkupLine("[red]Invalid direction. Use N, S, E, or W.[/]");
+                    AnsiConsole.MarkupLine("[grey]Press any key to continue...[/]");
+                    Console.ReadKey(true);
                 }
 
-                Console.Clear();
+                AnsiConsole.Clear();
             }
         }
 
         // Run the game with an AI player
         public async Task PlayAsAi(AiPlayer ai, string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayMs)
         {
-            Console.Clear();
-            Console.WriteLine("=== AI PLAYER MODE ===");
-            Console.WriteLine("AI Model: " + modelName);
-            Console.WriteLine("Press any key to start, or Q during play to stop...");
-            Console.ReadKey();
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+                new Rule("[bold cyan]AI Player Mode[/]")
+                    .RuleStyle("grey")
+                    .Centered());
+
+            AnsiConsole.MarkupLine($"[grey]AI Model:[/] [cyan]{modelName}[/]");
+            AnsiConsole.MarkupLine("[grey]Press any key to start, or[/] [red]Q[/] [grey]during play to stop...[/]");
+            Console.ReadKey(true);
 
             // Reset game state
             playerRow = 1;
             playerCol = 1;
             moveCount = 0;
             gameWon = false;
+            runningCost = 0m;
+            totalTokens = 0;
 
             // Track session outcome
             bool stoppedByUser = false;
@@ -142,35 +157,38 @@ namespace DemoMazeGame
             // Main game loop
             while (moveCount < maxMoves)
             {
-                Console.Clear();
+                AnsiConsole.Clear();
+
+                // Draw header with stats
+                DrawAiHeader(modelName);
 
                 // Draw the maze
                 DrawMaze();
 
-                // Show current position
-                Console.WriteLine("AI: " + modelName);
-                Console.WriteLine("Position: (" + playerCol + ", " + playerRow + ")");
-                Console.WriteLine("Moves: " + moveCount);
+                // Show current position and stats
+                DrawAiStats();
 
                 // Build the prompt for the AI
                 string prompt = AiPlayer.BuildPrompt(map, playerRow, playerCol, showCoordinates, showAsciiMap);
 
-                // Show what we're sending to the AI
-                Console.WriteLine();
-                Console.WriteLine("--- Asking AI for next move... ---");
-                Console.WriteLine($"Prompt: {prompt}");
+                // Show thinking indicator
+                AnsiConsole.MarkupLine("[yellow]🤔 Asking AI for next move...[/]");
 
                 // Get the AI's move with metrics
                 var moveResult = await ai.GetAiMove(prompt, modelId);
 
-                Console.WriteLine("AI chose: " + moveResult.Direction);
+                // Update running totals
+                runningCost += moveResult.ActualCostUsd;
+                totalTokens += moveResult.TotalTokens;
+
+                AnsiConsole.MarkupLine($"[green]→[/] AI chose: [bold cyan]{moveResult.Direction}[/]");
 
                 // Check for errors
                 if (moveResult.IsError)
                 {
-                    Console.WriteLine("AI returned an error. Stopping game.");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
+                    AnsiConsole.MarkupLine("[red]AI returned an error. Stopping game.[/]");
+                    AnsiConsole.MarkupLine("[grey]Press any key to continue...[/]");
+                    Console.ReadKey(true);
                     errorOccurred = true;
                     errorMessage = moveResult.ErrorMessage;
                     break;
@@ -202,15 +220,17 @@ namespace DemoMazeGame
                     if (map[playerRow, playerCol] == 2)
                     {
                         gameWon = true;
-                        Console.Clear();
+                        AnsiConsole.Clear();
+                        DrawAiHeader(modelName);
                         DrawMaze();
-                        Console.WriteLine("THE AI FOUND THE EXIT!");
+                        DrawAiStats();
+                        AnsiConsole.MarkupLine("[bold green]🎉 THE AI FOUND THE EXIT! 🎉[/]");
                         break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("AI tried to walk into a wall!");
+                    AnsiConsole.MarkupLine("[red]💥 AI tried to walk into a wall![/]");
                 }
 
                 // Wait before next move (so humans can watch)
@@ -222,7 +242,7 @@ namespace DemoMazeGame
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.Q)
                     {
-                        Console.WriteLine("Stopped by user.");
+                        AnsiConsole.MarkupLine("[yellow]Stopped by user.[/]");
                         stoppedByUser = true;
                         break;
                     }
@@ -232,11 +252,42 @@ namespace DemoMazeGame
             bool reachedMaxMoves = moveCount >= maxMoves;
             if (reachedMaxMoves)
             {
-                Console.WriteLine("AI reached maximum moves (" + maxMoves + ") without finding exit.");
+                AnsiConsole.MarkupLine($"[yellow]AI reached maximum moves ({maxMoves}) without finding exit.[/]");
             }
 
             // End session logging
             _sessionLogger.EndSession(gameWon, stoppedByUser, reachedMaxMoves, errorOccurred, errorMessage);
+        }
+
+        // Draw the AI mode header with model info
+        private void DrawAiHeader(string modelName)
+        {
+            AnsiConsole.Write(
+                new Rule($"[bold cyan]AI: {modelName}[/]")
+                    .RuleStyle("grey")
+                    .LeftJustified());
+        }
+
+        // Draw AI stats panel with running cost
+        private void DrawAiStats()
+        {
+            var table = new Table()
+                .Border(TableBorder.Rounded)
+                .BorderColor(Color.Grey)
+                .AddColumn(new TableColumn("[yellow]Position[/]").Centered())
+                .AddColumn(new TableColumn("[yellow]Moves[/]").Centered())
+                .AddColumn(new TableColumn("[yellow]Tokens[/]").Centered())
+                .AddColumn(new TableColumn("[yellow]Cost[/]").Centered());
+
+            table.AddRow(
+                $"[cyan]({playerCol}, {playerRow})[/]",
+                $"[white]{moveCount}[/] / {maxMoves}",
+                $"[white]{totalTokens:N0}[/]",
+                $"[green]${runningCost:F6}[/]"
+            );
+
+            AnsiConsole.Write(table);
+            AnsiConsole.WriteLine();
         }
 
         // Try to move in a direction, returns true if successful
@@ -275,14 +326,17 @@ namespace DemoMazeGame
             return true;
         }
 
-        // Draw the maze to the console
+        // Draw the maze to the console with colors
         private void DrawMaze()
         {
-            Console.WriteLine();
+            AnsiConsole.WriteLine();
 
             // Get maze dimensions
             int rows = map.GetLength(0);
             int cols = map.GetLength(1);
+
+            // Build the maze display
+            var mazeBuilder = new System.Text.StringBuilder();
 
             // Draw each row
             for (int row = 0; row < rows; row++)
@@ -292,7 +346,7 @@ namespace DemoMazeGame
                     // Check if this is the player's position
                     if (row == playerRow && col == playerCol)
                     {
-                        Console.Write("P ");  // P for player
+                        mazeBuilder.Append("[bold cyan]P[/] ");  // P for player
                     }
                     else
                     {
@@ -300,25 +354,26 @@ namespace DemoMazeGame
 
                         if (cell == 1)
                         {
-                            Console.Write("# ");  // Wall
+                            mazeBuilder.Append("[grey]#[/] ");  // Wall
                         }
                         else if (cell == 0)
                         {
-                            Console.Write(". ");  // Open path
+                            mazeBuilder.Append("[white].[/] ");  // Open path
                         }
                         else if (cell == 2)
                         {
-                            Console.Write("X ");  // Exit
+                            mazeBuilder.Append("[bold green]X[/] ");  // Exit
                         }
                     }
                 }
 
-                Console.WriteLine();  // New line after each row
+                mazeBuilder.AppendLine();  // New line after each row
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Legend: P=Player, #=Wall, .=Path, X=Exit");
-            Console.WriteLine();
+            AnsiConsole.Markup(mazeBuilder.ToString());
+            AnsiConsole.WriteLine();
+            AnsiConsole.MarkupLine("[grey]Legend:[/] [cyan]P[/]=Player  [grey]#[/]=Wall  [white].[/]=Path  [green]X[/]=Exit");
+            AnsiConsole.WriteLine();
         }
 
         // Get whether the game was won

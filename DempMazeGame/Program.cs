@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using DemoMazeGame.Services;
+using Spectre.Console;
 
 namespace DemoMazeGame
 {
@@ -71,9 +72,9 @@ namespace DemoMazeGame
                         if (string.IsNullOrEmpty(apiKey))
                         {
                             appLogger.LogWarning("No API key provided for AI player");
-                            Console.WriteLine("No API key provided. Cannot run AI player.");
-                            Console.WriteLine("Press any key to continue...");
-                            Console.ReadKey();
+                            AnsiConsole.MarkupLine("[red]No API key provided. Cannot run AI player.[/]");
+                            AnsiConsole.MarkupLine("[grey]Press any key to continue...[/]");
+                            Console.ReadKey(true);
                         }
                         else
                         {
@@ -118,12 +119,12 @@ namespace DemoMazeGame
                 }
 
                 appLogger.LogInfo("Application exiting normally");
-                Console.WriteLine("Thanks for playing! Good luck with your science fair project!");
+                AnsiConsole.MarkupLine("[cyan]Thanks for playing![/] [yellow]Good luck with your science fair project![/]");
             }
             catch (Exception ex)
             {
                 appLogger.LogError("Unhandled exception in main loop", ex);
-                Console.WriteLine("An error occurred. Check logs/app.log for details.");
+                AnsiConsole.MarkupLine("[red]An error occurred. Check logs/app.log for details.[/]");
                 throw;
             }
         }

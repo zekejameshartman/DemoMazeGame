@@ -1,3 +1,5 @@
+using Spectre.Console;
+
 namespace DemoMazeGame
 {
     // This class handles all the menu screens in the game
@@ -12,66 +14,86 @@ namespace DemoMazeGame
         // Show the main menu and get the user's choice
         public string ShowMainMenu()
         {
-            Console.Clear();
-            Console.WriteLine("========================================");
-            Console.WriteLine("       MAZE GAME - LLM EXPERIMENT       ");
-            Console.WriteLine("========================================");
-            Console.WriteLine();
-            Console.WriteLine("  1. Play as Human");
-            Console.WriteLine("  2. Watch AI Play");
-            Console.WriteLine("  3. Select AI Model");
-            Console.WriteLine("  4. Settings");
-            Console.WriteLine("  5. Quit");
-            Console.WriteLine();
-            Console.WriteLine("Current AI: " + AiPlayer.ModelNames[SelectedModelIndex]);
-            Console.WriteLine();
-            Console.Write("Enter your choice (1-5): ");
+            AnsiConsole.Clear();
 
-            string choice = Console.ReadLine() ?? "";
-            return choice.Trim();
+            // Display header
+            AnsiConsole.Write(
+                new FigletText("Maze Game")
+                    .Centered()
+                    .Color(Color.Cyan1));
+
+            AnsiConsole.Write(
+                new Rule("[bold yellow]LLM Spatial Reasoning Experiment[/]")
+                    .RuleStyle("grey")
+                    .Centered());
+
+            AnsiConsole.WriteLine();
+
+            // Show current AI model
+            AnsiConsole.MarkupLine($"[grey]Current AI:[/] [cyan]{AiPlayer.ModelNames[SelectedModelIndex]}[/]");
+            AnsiConsole.WriteLine();
+
+            // Create selection prompt
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[green]What would you like to do?[/]")
+                    .PageSize(10)
+                    .HighlightStyle(new Style(Color.Cyan1, decoration: Decoration.Bold))
+                    .AddChoices(new[]
+                    {
+                        "[bold]1[/] Play as Human",
+                        "[bold]2[/] Watch AI Play",
+                        "[bold]3[/] Select AI Model",
+                        "[bold]4[/] Settings",
+                        "[bold]5[/] Quit"
+                    }));
+
+            // Extract the number from the choice
+            if (choice.Contains("1")) return "1";
+            if (choice.Contains("2")) return "2";
+            if (choice.Contains("3")) return "3";
+            if (choice.Contains("4")) return "4";
+            if (choice.Contains("5")) return "5";
+            return "";
         }
 
         // Show the AI model selection menu
         public void ShowModelSelectionMenu()
         {
-            Console.Clear();
-            Console.WriteLine("========================================");
-            Console.WriteLine("         SELECT AI MODEL                ");
-            Console.WriteLine("========================================");
-            Console.WriteLine();
+            AnsiConsole.Clear();
 
-            // Show all available models
+            AnsiConsole.Write(
+                new Rule("[bold cyan]Select AI Model[/]")
+                    .RuleStyle("grey")
+                    .Centered());
+
+            AnsiConsole.WriteLine();
+
+            // Build choices with current selection indicator
+            var choices = new List<string>();
             for (int i = 0; i < AiPlayer.ModelNames.Length; i++)
             {
-                // Put an arrow next to the currently selected model
-                if (i == SelectedModelIndex)
-                {
-                    Console.WriteLine("  >> " + (i + 1) + ". " + AiPlayer.ModelNames[i] + " (selected)");
-                }
-                else
-                {
-                    Console.WriteLine("     " + (i + 1) + ". " + AiPlayer.ModelNames[i]);
-                }
+                string indicator = i == SelectedModelIndex ? " [green](current)[/]" : "";
+                choices.Add($"{AiPlayer.ModelNames[i]}{indicator}");
             }
+            choices.Add("[grey]← Back to Main Menu[/]");
 
-            Console.WriteLine();
-            Console.WriteLine("     0. Back to Main Menu");
-            Console.WriteLine();
-            Console.Write("Enter your choice: ");
+            var selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[yellow]Choose an AI model:[/]")
+                    .PageSize(10)
+                    .HighlightStyle(new Style(Color.Cyan1, decoration: Decoration.Bold))
+                    .AddChoices(choices));
 
-            string choice = Console.ReadLine() ?? "";
-
-            // Try to parse the choice as a number
-            if (int.TryParse(choice, out int modelNumber))
+            // Find which model was selected
+            for (int i = 0; i < AiPlayer.ModelNames.Length; i++)
             {
-                // Check if it's a valid model number (1 through 5)
-                if (modelNumber >= 1 && modelNumber <= AiPlayer.ModelNames.Length)
+                if (selection.Contains(AiPlayer.ModelNames[i]))
                 {
-                    SelectedModelIndex = modelNumber - 1;  // Convert to 0-based index
-                    Console.WriteLine();
-                    Console.WriteLine("Selected: " + AiPlayer.ModelNames[SelectedModelIndex]);
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
+                    SelectedModelIndex = i;
+                    AnsiConsole.MarkupLine($"\n[green]✓[/] Selected: [cyan]{AiPlayer.ModelNames[i]}[/]");
+                    Thread.Sleep(800);
+                    break;
                 }
             }
         }
@@ -83,52 +105,73 @@ namespace DemoMazeGame
 
             while (stayInSettings)
             {
-                Console.Clear();
-                Console.WriteLine("========================================");
-                Console.WriteLine("             SETTINGS                   ");
-                Console.WriteLine("========================================");
-                Console.WriteLine();
-                Console.WriteLine("  1. Show coordinates to AI: " + (ShowCoordinates ? "YES" : "NO"));
-                Console.WriteLine("  2. Show ASCII map to AI: " + (ShowAsciiMap ? "YES" : "NO"));
-                Console.WriteLine("  3. Delay between moves: " + DelayBetweenMoves + " ms");
-                Console.WriteLine();
-                Console.WriteLine("  0. Back to Main Menu");
-                Console.WriteLine();
-                Console.Write("Enter your choice: ");
+                AnsiConsole.Clear();
 
-                string choice = Console.ReadLine() ?? "";
+                AnsiConsole.Write(
+                    new Rule("[bold cyan]Settings[/]")
+                        .RuleStyle("grey")
+                        .Centered());
 
-                if (choice == "1")
+                AnsiConsole.WriteLine();
+
+                // Show current settings in a table
+                var table = new Table()
+                    .Border(TableBorder.Rounded)
+                    .BorderColor(Color.Grey)
+                    .AddColumn(new TableColumn("[yellow]Setting[/]").Centered())
+                    .AddColumn(new TableColumn("[yellow]Value[/]").Centered());
+
+                table.AddRow(
+                    "Show coordinates to AI",
+                    ShowCoordinates ? "[green]YES[/]" : "[red]NO[/]");
+                table.AddRow(
+                    "Show ASCII map to AI",
+                    ShowAsciiMap ? "[green]YES[/]" : "[red]NO[/]");
+                table.AddRow(
+                    "Delay between moves",
+                    $"[cyan]{DelayBetweenMoves}[/] ms");
+
+                AnsiConsole.Write(table);
+                AnsiConsole.WriteLine();
+
+                var choice = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Select a setting to change:[/]")
+                        .HighlightStyle(new Style(Color.Cyan1, decoration: Decoration.Bold))
+                        .AddChoices(new[]
+                        {
+                            "[bold]1[/] Toggle coordinates",
+                            "[bold]2[/] Toggle ASCII map",
+                            "[bold]3[/] Change delay",
+                            "[grey]← Back to Main Menu[/]"
+                        }));
+
+                if (choice.Contains("1"))
                 {
-                    // Toggle the coordinates setting
                     ShowCoordinates = !ShowCoordinates;
                 }
-                else if (choice == "2")
+                else if (choice.Contains("2"))
                 {
-                    // Toggle the ASCII map setting
                     ShowAsciiMap = !ShowAsciiMap;
                 }
-                else if (choice == "3")
+                else if (choice.Contains("3"))
                 {
-                    // Ask for new delay value
-                    Console.Write("Enter delay in milliseconds (100-2000): ");
-                    string delayInput = Console.ReadLine() ?? "";
-
-                    if (int.TryParse(delayInput, out int newDelay))
-                    {
-                        // Make sure the delay is in a reasonable range
-                        if (newDelay >= 100 && newDelay <= 2000)
-                        {
-                            DelayBetweenMoves = newDelay;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid delay. Must be between 100 and 2000.");
-                            Console.ReadKey();
-                        }
-                    }
+                    var newDelay = AnsiConsole.Prompt(
+                        new TextPrompt<int>("[yellow]Enter delay in milliseconds[/] [grey](100-2000)[/]:")
+                            .DefaultValue(DelayBetweenMoves)
+                            .ValidationErrorMessage("[red]Please enter a valid number[/]")
+                            .Validate(delay =>
+                            {
+                                return delay switch
+                                {
+                                    < 100 => ValidationResult.Error("[red]Delay must be at least 100ms[/]"),
+                                    > 2000 => ValidationResult.Error("[red]Delay must be at most 2000ms[/]"),
+                                    _ => ValidationResult.Success()
+                                };
+                            }));
+                    DelayBetweenMoves = newDelay;
                 }
-                else if (choice == "0")
+                else if (choice.Contains("Back"))
                 {
                     stayInSettings = false;
                 }
@@ -138,43 +181,70 @@ namespace DemoMazeGame
         // Ask user for their OpenRouter API key
         public string AskForApiKey()
         {
-            Console.Clear();
-            Console.WriteLine("========================================");
-            Console.WriteLine("         OPENROUTER API KEY             ");
-            Console.WriteLine("========================================");
-            Console.WriteLine();
-            Console.WriteLine("To use AI players, you need an OpenRouter API key.");
-            Console.WriteLine("Get one free at: https://openrouter.ai/keys");
-            Console.WriteLine();
-            Console.WriteLine("You can also set the OPENROUTER_API_KEY environment variable.");
-            Console.WriteLine();
-            Console.Write("Enter your API key (or press Enter to skip): ");
+            AnsiConsole.Clear();
 
-            string key = Console.ReadLine() ?? "";
+            AnsiConsole.Write(
+                new Rule("[bold cyan]OpenRouter API Key[/]")
+                    .RuleStyle("grey")
+                    .Centered());
+
+            AnsiConsole.WriteLine();
+
+            var panel = new Panel(
+                new Markup(
+                    "[yellow]To use AI players, you need an OpenRouter API key.[/]\n\n" +
+                    "Get one free at: [link=https://openrouter.ai/keys][cyan]https://openrouter.ai/keys[/][/]\n\n" +
+                    "[grey]You can also set the OPENROUTER_API_KEY environment variable.[/]"))
+                .Border(BoxBorder.Rounded)
+                .BorderColor(Color.Grey)
+                .Padding(1, 1);
+
+            AnsiConsole.Write(panel);
+            AnsiConsole.WriteLine();
+
+            var key = AnsiConsole.Prompt(
+                new TextPrompt<string>("[green]Enter your API key[/] [grey](or press Enter to skip)[/]:")
+                    .AllowEmpty());
+
             return key.Trim();
         }
 
         // Show a message when the game ends
         public void ShowGameResult(bool won, int moves, string playerType)
         {
-            Console.WriteLine();
-            Console.WriteLine("========================================");
+            AnsiConsole.WriteLine();
 
             if (won)
             {
-                Console.WriteLine("  CONGRATULATIONS! The exit was found!");
+                AnsiConsole.Write(
+                    new Panel(
+                        new Markup(
+                            "[bold green]🎉 CONGRATULATIONS! 🎉[/]\n\n" +
+                            "[green]The exit was found![/]\n\n" +
+                            $"[grey]Player:[/] [cyan]{playerType}[/]\n" +
+                            $"[grey]Total moves:[/] [yellow]{moves}[/]"))
+                        .Border(BoxBorder.Double)
+                        .BorderColor(Color.Green)
+                        .Padding(2, 1)
+                        .Header("[bold green] Victory! [/]"));
             }
             else
             {
-                Console.WriteLine("  Game ended without finding the exit.");
+                AnsiConsole.Write(
+                    new Panel(
+                        new Markup(
+                            "[yellow]Game ended without finding the exit.[/]\n\n" +
+                            $"[grey]Player:[/] [cyan]{playerType}[/]\n" +
+                            $"[grey]Total moves:[/] [yellow]{moves}[/]"))
+                        .Border(BoxBorder.Rounded)
+                        .BorderColor(Color.Yellow)
+                        .Padding(2, 1)
+                        .Header("[bold yellow] Game Over [/]"));
             }
 
-            Console.WriteLine("  Player: " + playerType);
-            Console.WriteLine("  Total moves: " + moves);
-            Console.WriteLine("========================================");
-            Console.WriteLine();
-            Console.WriteLine("Press any key to return to menu...");
-            Console.ReadKey();
+            AnsiConsole.WriteLine();
+            AnsiConsole.MarkupLine("[grey]Press any key to return to menu...[/]");
+            Console.ReadKey(true);
         }
     }
 }
