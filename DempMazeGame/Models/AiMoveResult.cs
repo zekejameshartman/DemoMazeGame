@@ -11,5 +11,11 @@ namespace DemoMazeGame.Models
         public int TotalTokens { get; set; }
         // Actual cost in USD as reported by OpenRouter's usage accounting
         public decimal ActualCostUsd { get; set; }
+
+        // Raw API data for detailed logging
+        public string RequestJson { get; set; } = "";
+        public string ResponseJson { get; set; } = "";
+        public int HttpStatusCode { get; set; }
+        public double LatencyMs { get; set; }
     }
 }

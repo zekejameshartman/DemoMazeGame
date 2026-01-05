@@ -10,6 +10,8 @@ namespace DemoMazeGame
         public bool ShowCoordinates = false;    // Whether to show coordinates to AI
         public bool ShowAsciiMap = false;       // Whether to show ASCII map to AI
         public int DelayBetweenMoves = 500;     // Milliseconds to wait between AI moves
+        public bool ShowAiPrompt = false;       // Whether to show the prompt sent to AI
+        public bool Breadcrumbs = false;        // Whether to add breadcrumb hints about revisited spots
 
         // Show the main menu and get the user's choice
         public string ShowMainMenu()
@@ -128,6 +130,12 @@ namespace DemoMazeGame
                     "Show ASCII map to AI",
                     ShowAsciiMap ? "[green]YES[/]" : "[red]NO[/]");
                 table.AddRow(
+                    "Show AI prompt",
+                    ShowAiPrompt ? "[green]YES[/]" : "[red]NO[/]");
+                table.AddRow(
+                    "Breadcrumbs",
+                    Breadcrumbs ? "[green]YES[/]" : "[red]NO[/]");
+                table.AddRow(
                     "Delay between moves",
                     $"[cyan]{DelayBetweenMoves}[/] ms");
 
@@ -142,7 +150,9 @@ namespace DemoMazeGame
                         {
                             "[bold]1[/] Toggle coordinates",
                             "[bold]2[/] Toggle ASCII map",
-                            "[bold]3[/] Change delay",
+                            "[bold]3[/] Toggle show AI prompt",
+                            "[bold]4[/] Toggle breadcrumbs",
+                            "[bold]5[/] Change delay",
                             "[grey]← Back to Main Menu[/]"
                         }));
 
@@ -155,6 +165,14 @@ namespace DemoMazeGame
                     ShowAsciiMap = !ShowAsciiMap;
                 }
                 else if (choice.Contains("3"))
+                {
+                    ShowAiPrompt = !ShowAiPrompt;
+                }
+                else if (choice.Contains("4"))
+                {
+                    Breadcrumbs = !Breadcrumbs;
+                }
+                else if (choice.Contains("5"))
                 {
                     var newDelay = AnsiConsole.Prompt(
                         new TextPrompt<int>("[yellow]Enter delay in milliseconds[/] [grey](100-2000)[/]:")

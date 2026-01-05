@@ -10,6 +10,7 @@ namespace DemoMazeGame.Services
         private readonly IAppLogger _appLogger;
         private readonly string _sessionsDir;
         private AiSessionLog? _currentSession;
+        private ApiSessionLog? _currentApiLog;
         private HashSet<(int row, int col)> _visitedPositions = new();
         private (int row, int col)? _previousPosition;
 
@@ -41,6 +42,14 @@ namespace DemoMazeGame.Services
                     ShowAsciiMap = showAsciiMap,
                     DelayBetweenMoves = delayBetweenMoves
                 }
+            };
+
+            // Initialize paired API log
+            _currentApiLog = new ApiSessionLog
+            {
+                StartTime = DateTime.UtcNow,
+                ModelId = modelId,
+                ModelName = modelName
             };
 
             _visitedPositions.Clear();
@@ -101,6 +110,21 @@ namespace DemoMazeGame.Services
             _currentSession.Cost.TotalCostUsd += costUsd;
         }
 
+        public void LogApiCall(int moveNumber, string requestJson, string responseJson, int httpStatusCode, double latencyMs)
+        {
+            if (_currentApiLog == null) return;
+
+            _currentApiLog.Calls.Add(new ApiCallEntry
+            {
+                MoveNumber = moveNumber,
+                Timestamp = DateTime.UtcNow,
+                RequestJson = requestJson,
+                ResponseJson = responseJson,
+                HttpStatusCode = httpStatusCode,
+                LatencyMs = latencyMs
+            });
+        }
+
         public void EndSession(bool won, bool stoppedByUser, bool reachedMaxMoves, bool errorOccurred, string? errorMessage = null)
         {
             if (_currentSession == null) return;
@@ -125,13 +149,15 @@ namespace DemoMazeGame.Services
                 _currentSession.Cost.CostPerMove = _currentSession.Cost.TotalCostUsd / _currentSession.Metrics.TotalMoves;
             }
 
-            // Save to file
+            // Save both log files
             SaveSession();
+            SaveApiLog();
 
             string outcome = won ? "WON" : stoppedByUser ? "STOPPED" : reachedMaxMoves ? "MAX_MOVES" : errorOccurred ? "ERROR" : "UNKNOWN";
             _appLogger.LogInfo($"AI session ended: {_currentSession.Model.Name} - {outcome} in {_currentSession.Metrics.TotalMoves} moves");
 
             _currentSession = null;
+            _currentApiLog = null;
         }
 
         private void SaveSession()
@@ -154,6 +180,29 @@ namespace DemoMazeGame.Services
             catch (Exception ex)
             {
                 _appLogger.LogError("Failed to save session log", ex);
+            }
+        }
+
+        private void SaveApiLog()
+        {
+            if (_currentApiLog == null || _currentApiLog.Calls.Count == 0) return;
+
+            try
+            {
+                // Filename: timestamp_modelname_api.json (paired with session log)
+                string timestamp = _currentApiLog.StartTime.ToString("yyyy-MM-dd_HHmmss");
+                string safeModelName = _currentApiLog.ModelName.Replace(" ", "-").Replace("/", "-").Replace(":", "").ToLower();
+                string fileName = $"{timestamp}_{safeModelName}_api.json";
+                string filePath = Path.Combine(_sessionsDir, fileName);
+
+                string json = JsonSerializer.Serialize(_currentApiLog, _jsonOptions);
+                File.WriteAllText(filePath, json);
+
+                _appLogger.LogInfo($"API log saved: {fileName}");
+            }
+            catch (Exception ex)
+            {
+                _appLogger.LogError("Failed to save API log", ex);
             }
         }
     }

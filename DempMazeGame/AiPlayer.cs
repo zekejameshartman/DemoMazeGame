@@ -18,18 +18,6 @@ namespace DemoMazeGame
         // Logger for errors and events
         private readonly IAppLogger _logger;
 
-        // Conversation history - keeps track of all messages sent and received
-        private List<ChatMessage> conversationHistory = new List<ChatMessage>();
-
-        // Simple class to hold a chat message
-        private class ChatMessage
-        {
-            public string Role { get; set; } = "";
-            public string Content { get; set; } = "";
-        }
-
-
-
         // List of available AI models we can test
         // Each model has a display name and the actual model ID used by OpenRouter
         public static readonly string[] ModelNames =
@@ -64,25 +52,18 @@ namespace DemoMazeGame
             httpClient.DefaultRequestHeaders.Add("X-Title", "Demo Maze Game");
         }
 
-        // Reset the conversation history (call this at the start of each new game)
-        public void ResetConversation()
-        {
-            conversationHistory.Clear();
-        }
-
         // This method asks the AI which direction to move
         // Returns AiMoveResult with direction and token/cost metrics
+        // Each call sends only the single prompt - no conversation history
         public async Task<AiMoveResult> GetAiMove(string prompt, string modelId)
         {
             var result = new AiMoveResult();
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
-                // Add the user's prompt to the conversation history
-                conversationHistory.Add(new ChatMessage { Role = "user", Content = prompt });
-
-                // Build the messages array from conversation history
-                var messages = conversationHistory.Select(m => new { role = m.Role, content = m.Content }).ToArray();
+                // Build the messages array - just one user message with our self-contained prompt
+                var messages = new[] { new { role = "user", content = prompt } };
 
                 // Build the request body as a JSON object
                 // OpenRouter uses the same format as OpenAI's chat API
@@ -91,20 +72,25 @@ namespace DemoMazeGame
                 {
                     model = modelId,
                     messages = messages,
-                    max_tokens = 50,  // We only need a short response
+                    max_tokens = 10,  // We only need one letter (N, S, E, or W)
                     temperature = 0.1,  // Low temperature = more consistent responses
                     usage = new { include = true }  // Request actual cost from OpenRouter
                 };
 
                 // Convert the request to JSON
                 string jsonRequest = JsonSerializer.Serialize(requestBody);
+                result.RequestJson = jsonRequest;  // Store for API logging
                 var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
                 // Send the request to OpenRouter
                 HttpResponseMessage response = await httpClient.PostAsync("chat/completions", content);
+                stopwatch.Stop();
+                result.LatencyMs = stopwatch.Elapsed.TotalMilliseconds;
+                result.HttpStatusCode = (int)response.StatusCode;
 
                 // Read the response
                 string jsonResponse = await response.Content.ReadAsStringAsync();
+                result.ResponseJson = jsonResponse;  // Store for API logging
 
                 // Check if the request was successful
                 if (!response.IsSuccessStatusCode)
@@ -120,9 +106,6 @@ namespace DemoMazeGame
                 // Parse the JSON response to get the AI's answer, usage, and actual cost
                 var (aiResponse, promptTokens, completionTokens, actualCost) = ParseResponseWithUsage(jsonResponse);
 
-                // Add the assistant's response to the conversation history
-                conversationHistory.Add(new ChatMessage { Role = "assistant", Content = aiResponse });
-
                 // Extract just the direction letter from the response
                 string direction = ExtractDirection(aiResponse);
 
@@ -136,6 +119,8 @@ namespace DemoMazeGame
             }
             catch (Exception ex)
             {
+                stopwatch.Stop();
+                result.LatencyMs = stopwatch.Elapsed.TotalMilliseconds;
                 _logger.LogError("Error calling AI", ex);
                 Console.WriteLine("Error calling AI: " + ex.Message);
                 result.IsError = true;
@@ -247,10 +232,17 @@ namespace DemoMazeGame
         }
 
         // Build the prompt that describes the current maze situation to the AI
-        public static string BuildPrompt(int[,] map, int row, int col, bool includeCoordinates, bool includeAsciiMap)
+        // This is a self-contained prompt with everything the AI needs
+        public static string BuildPrompt(
+            int[,] map,
+            int row,
+            int col,
+            bool includeCoordinates,
+            bool includeAsciiMap,
+            List<GameMoveRecord> moveHistory,
+            bool breadcrumbs)
         {
-            // Start with basic instructions
-            StringBuilder prompt = new StringBuilder();
+            var prompt = new StringBuilder();
             prompt.AppendLine("You are navigating a maze. Your goal is to find the exit.");
             prompt.AppendLine();
 
@@ -262,35 +254,87 @@ namespace DemoMazeGame
                 prompt.AppendLine(BuildAsciiMap(map, row, col));
             }
 
+            // Show current position
+            if (includeCoordinates)
+            {
+                prompt.AppendLine($"Your current position: ({col},{row})");
+                prompt.AppendLine();
+            }
+
             // Describe what the player can see in each direction
             prompt.AppendLine("From your current position, here is what you see:");
             prompt.AppendLine();
 
-            // Check North
+            // Check each direction
             int northCell = map[row - 1, col];
-            prompt.Append("  NORTH: ");
-            prompt.AppendLine(DescribeCell(northCell));
+            prompt.AppendLine("  NORTH: " + DescribeCell(northCell));
 
-            // Check South
             int southCell = map[row + 1, col];
-            prompt.Append("  SOUTH: ");
-            prompt.AppendLine(DescribeCell(southCell));
+            prompt.AppendLine("  SOUTH: " + DescribeCell(southCell));
 
-            // Check East
             int eastCell = map[row, col + 1];
-            prompt.Append("  EAST: ");
-            prompt.AppendLine(DescribeCell(eastCell));
+            prompt.AppendLine("  EAST: " + DescribeCell(eastCell));
 
-            // Check West
             int westCell = map[row, col - 1];
-            prompt.Append("  WEST: ");
-            prompt.AppendLine(DescribeCell(westCell));
+            prompt.AppendLine("  WEST: " + DescribeCell(westCell));
 
-            // Optionally include coordinates (for testing if it helps the AI)
-            if (includeCoordinates)
+            // Include full move history - AI needs all context to make good decisions
+            if (moveHistory.Count > 0)
             {
                 prompt.AppendLine();
-                prompt.AppendLine("Your current coordinates are: (" + col + ", " + row + ")");
+
+                // Count how many times we've visited each position
+                var visitCounts = new Dictionary<string, int>();
+                foreach (var move in moveHistory)
+                {
+                    if (!move.HitWall)
+                    {
+                        string posKey = $"{move.ToCol},{move.ToRow}";
+                        if (visitCounts.ContainsKey(posKey))
+                            visitCounts[posKey]++;
+                        else
+                            visitCounts[posKey] = 1;
+                    }
+                }
+
+                if (breadcrumbs)
+                {
+                    prompt.AppendLine("You have been leaving breadcrumbs as you travel.");
+                    prompt.AppendLine("Your journey so far:");
+                }
+                else
+                {
+                    prompt.AppendLine("Move history:");
+                }
+
+                // Display all moves
+                foreach (var move in moveHistory)
+                {
+                    string moveStr = move.ToCompactString();
+
+                    // If breadcrumbs is on, mark revisited spots
+                    if (breadcrumbs && !move.HitWall)
+                    {
+                        string posKey = $"{move.ToCol},{move.ToRow}";
+                        if (visitCounts.ContainsKey(posKey) && visitCounts[posKey] > 1)
+                        {
+                            moveStr += " [crumbs]";
+                        }
+                    }
+
+                    prompt.AppendLine("  " + moveStr);
+                }
+
+                // If breadcrumbs is on and we're revisiting a lot, add a hint
+                if (breadcrumbs)
+                {
+                    string currentPosKey = $"{col},{row}";
+                    if (visitCounts.ContainsKey(currentPosKey) && visitCounts[currentPosKey] >= 2)
+                    {
+                        prompt.AppendLine();
+                        prompt.AppendLine("WARNING: Lots of breadcrumbs here - you're going in circles!");
+                    }
+                }
             }
 
             // Final instruction

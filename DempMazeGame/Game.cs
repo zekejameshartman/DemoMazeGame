@@ -1,3 +1,4 @@
+using DemoMazeGame.Models;
 using DemoMazeGame.Services;
 using Spectre.Console;
 
@@ -45,6 +46,9 @@ namespace DemoMazeGame
 
         // Maximum moves before giving up (prevents infinite loops)
         private int maxMoves = 200;
+
+        // Move history for AI prompting
+        private List<GameMoveRecord> moveHistory = new List<GameMoveRecord>();
 
         // Run the game with a human player
         public void PlayAsHuman()
@@ -122,7 +126,15 @@ namespace DemoMazeGame
         }
 
         // Run the game with an AI player
-        public async Task PlayAsAi(AiPlayer ai, string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayMs)
+        public async Task PlayAsAi(
+            AiPlayer ai,
+            string modelId,
+            string modelName,
+            bool showCoordinates,
+            bool showAsciiMap,
+            int delayMs,
+            bool showAiPrompt,
+            bool breadcrumbs)
         {
             AnsiConsole.Clear();
 
@@ -142,6 +154,7 @@ namespace DemoMazeGame
             gameWon = false;
             runningCost = 0m;
             totalTokens = 0;
+            moveHistory.Clear();
 
             // Track session outcome
             bool stoppedByUser = false;
@@ -151,25 +164,26 @@ namespace DemoMazeGame
             // Start session logging
             _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs);
 
-            // Reset the AI's conversation history for a fresh start
-            ai.ResetConversation();
-
             // Main game loop
             while (moveCount < maxMoves)
             {
                 AnsiConsole.Clear();
 
-                // Draw header with stats
-                DrawAiHeader(modelName);
+                // Build the prompt for the AI (we need it before drawing if showing prompt)
+                string prompt = AiPlayer.BuildPrompt(
+                    map, playerRow, playerCol, showCoordinates, showAsciiMap, moveHistory, breadcrumbs);
 
-                // Draw the maze
-                DrawMaze();
-
-                // Show current position and stats
-                DrawAiStats();
-
-                // Build the prompt for the AI
-                string prompt = AiPlayer.BuildPrompt(map, playerRow, playerCol, showCoordinates, showAsciiMap);
+                // Draw game output - either normal or two-column layout
+                if (showAiPrompt)
+                {
+                    DrawTwoColumnLayout(modelName, prompt);
+                }
+                else
+                {
+                    DrawAiHeader(modelName);
+                    DrawMaze();
+                    DrawAiStats();
+                }
 
                 // Show thinking indicator
                 AnsiConsole.MarkupLine("[yellow]🤔 Asking AI for next move...[/]");
@@ -202,7 +216,19 @@ namespace DemoMazeGame
                 bool moved = TryMove(moveResult.Direction);
                 moveCount++;
 
-                // Log the move
+                // Add to move history for next prompt
+                moveHistory.Add(new GameMoveRecord
+                {
+                    MoveNumber = moveCount,
+                    Direction = moveResult.Direction,
+                    FromRow = fromRow,
+                    FromCol = fromCol,
+                    ToRow = playerRow,
+                    ToCol = playerCol,
+                    HitWall = !moved
+                });
+
+                // Log the move to session file
                 _sessionLogger.LogMove(
                     moveCount,
                     moveResult.Direction,
@@ -212,6 +238,15 @@ namespace DemoMazeGame
                     moveResult.PromptTokens,
                     moveResult.CompletionTokens,
                     moveResult.ActualCostUsd
+                );
+
+                // Log the raw API request/response for debugging
+                _sessionLogger.LogApiCall(
+                    moveCount,
+                    moveResult.RequestJson,
+                    moveResult.ResponseJson,
+                    moveResult.HttpStatusCode,
+                    moveResult.LatencyMs
                 );
 
                 if (moved)
@@ -288,6 +323,79 @@ namespace DemoMazeGame
 
             AnsiConsole.Write(table);
             AnsiConsole.WriteLine();
+        }
+
+        // Draw a two-column layout: game on left, AI prompt on right
+        // Uses Spectre.Console Columns for stable layout
+        private void DrawTwoColumnLayout(string modelName, string prompt)
+        {
+            DrawAiHeader(modelName);
+
+            // Build the left column content (maze + stats)
+            var leftBuilder = new System.Text.StringBuilder();
+            leftBuilder.AppendLine();
+
+            // Add maze
+            int rows = map.GetLength(0);
+            int cols = map.GetLength(1);
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (row == playerRow && col == playerCol)
+                        leftBuilder.Append("[bold cyan]P[/] ");
+                    else if (map[row, col] == 1)
+                        leftBuilder.Append("[grey]#[/] ");
+                    else if (map[row, col] == 0)
+                        leftBuilder.Append("[white].[/] ");
+                    else if (map[row, col] == 2)
+                        leftBuilder.Append("[bold green]X[/] ");
+                }
+                leftBuilder.AppendLine();
+            }
+            leftBuilder.AppendLine();
+            leftBuilder.AppendLine($"[grey]Pos:[/] [cyan]({playerCol},{playerRow})[/] [grey]Moves:[/] {moveCount}/{maxMoves}");
+            leftBuilder.AppendLine($"[grey]Cost:[/] [green]${runningCost:F6}[/]");
+
+            // Build the right column content (prompt - truncated for display)
+            var rightBuilder = new System.Text.StringBuilder();
+            rightBuilder.AppendLine("[yellow]── AI Prompt ──[/]");
+
+            var promptLines = prompt.Split('\n');
+            int maxLines = 25;  // Limit display lines
+            int showLines = Math.Min(promptLines.Length, maxLines);
+
+            for (int i = 0; i < showLines; i++)
+            {
+                string line = promptLines[i].TrimEnd();
+                // Escape any Spectre markup characters in the prompt
+                line = line.Replace("[", "[[").Replace("]", "]]");
+                // Truncate long lines
+                if (line.Length > 45)
+                {
+                    line = line.Substring(0, 42) + "...";
+                }
+                rightBuilder.AppendLine("[grey]" + line + "[/]");
+            }
+
+            if (promptLines.Length > maxLines)
+            {
+                rightBuilder.AppendLine($"[grey]... ({promptLines.Length - maxLines} more lines)[/]");
+            }
+
+            // Use Spectre Columns for side-by-side display
+            var table = new Table()
+                .Border(TableBorder.None)
+                .HideHeaders()
+                .AddColumn(new TableColumn("Left").Width(30))
+                .AddColumn(new TableColumn("Right").Width(50));
+
+            table.AddRow(
+                new Markup(leftBuilder.ToString()),
+                new Markup(rightBuilder.ToString())
+            );
+
+            AnsiConsole.Write(table);
         }
 
         // Try to move in a direction, returns true if successful

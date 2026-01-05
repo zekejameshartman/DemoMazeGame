@@ -96,7 +96,9 @@ namespace DemoMazeGame
                                 modelName,
                                 menu.ShowCoordinates,
                                 menu.ShowAsciiMap,
-                                menu.DelayBetweenMoves
+                                menu.DelayBetweenMoves,
+                                menu.ShowAiPrompt,
+                                menu.Breadcrumbs
                             );
                             menu.ShowGameResult(game.WasGameWon(), game.GetMoveCount(), modelName);
                         }
