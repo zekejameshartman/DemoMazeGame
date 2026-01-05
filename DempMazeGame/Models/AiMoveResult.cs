@@ -12,6 +12,9 @@ namespace DemoMazeGame.Models
         // Actual cost in USD as reported by OpenRouter's usage accounting
         public decimal ActualCostUsd { get; set; }
 
+        // The AI's full response text (for displaying reasoning)
+        public string RawResponse { get; set; } = "";
+
         // Raw API data for detailed logging
         public string RequestJson { get; set; } = "";
         public string ResponseJson { get; set; } = "";

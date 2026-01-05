@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using DemoMazeGame.Models;
 using DemoMazeGame.Services;
 
@@ -17,6 +18,9 @@ namespace DemoMazeGame
 
         // Logger for errors and events
         private readonly IAppLogger _logger;
+
+        // System prompt loaded from file - explains the MOVE: X format
+        private readonly string _systemPrompt;
 
         // List of available AI models we can test
         // Each model has a display name and the actual model ID used by OpenRouter
@@ -44,6 +48,20 @@ namespace DemoMazeGame
             apiKey = openRouterApiKey;
             _logger = logger;
 
+            // Load system prompt from file
+            string systemPromptPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "system_prompt.txt");
+            if (File.Exists(systemPromptPath))
+            {
+                _systemPrompt = File.ReadAllText(systemPromptPath);
+                _logger.LogInfo("System prompt loaded from file");
+            }
+            else
+            {
+                // Fallback if file not found
+                _systemPrompt = "You are navigating a maze. When you decide on a direction, respond with MOVE: followed by N, S, E, or W.";
+                _logger.LogWarning($"System prompt file not found at {systemPromptPath}, using fallback");
+            }
+
             // Create the HTTP client and set up the headers
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri("https://openrouter.ai/api/v1/");
@@ -62,8 +80,12 @@ namespace DemoMazeGame
 
             try
             {
-                // Build the messages array - just one user message with our self-contained prompt
-                var messages = new[] { new { role = "user", content = prompt } };
+                // Build the messages array with system prompt + user message
+                var messages = new object[]
+                {
+                    new { role = "system", content = _systemPrompt },
+                    new { role = "user", content = prompt }
+                };
 
                 // Build the request body as a JSON object
                 // OpenRouter uses the same format as OpenAI's chat API
@@ -72,7 +94,7 @@ namespace DemoMazeGame
                 {
                     model = modelId,
                     messages = messages,
-                    max_tokens = 10,  // We only need one letter (N, S, E, or W)
+                    max_tokens = 500,  // Allow reasoning models to think (they must end with "MOVE: X")
                     temperature = 0.1,  // Low temperature = more consistent responses
                     usage = new { include = true }  // Request actual cost from OpenRouter
                 };
@@ -105,6 +127,9 @@ namespace DemoMazeGame
 
                 // Parse the JSON response to get the AI's answer, usage, and actual cost
                 var (aiResponse, promptTokens, completionTokens, actualCost) = ParseResponseWithUsage(jsonResponse);
+
+                // Store the raw AI response for display
+                result.RawResponse = aiResponse;
 
                 // Extract just the direction letter from the response
                 string direction = ExtractDirection(aiResponse);
@@ -180,54 +205,23 @@ namespace DemoMazeGame
             return (content, promptTokens, completionTokens, cost);
         }
 
-        // Look through the AI's response and find a direction letter
-        // The AI might respond with "N" or "I'll go North" or "N - going north"
-        // We need to find just the direction letter
+        // Extract direction from AI response using the required "MOVE: X" format
+        // Returns the direction letter (N, S, E, W) or "ERROR" if format not found
         private string ExtractDirection(string response)
         {
-            // Convert to uppercase for easier checking
-            string upper = response.ToUpper();
+            // Look for the required format: "MOVE: N" (or S, E, W)
+            // The regex is case-insensitive and allows for some whitespace flexibility
+            var match = Regex.Match(response, @"MOVE:\s*([NSEW])", RegexOptions.IgnoreCase);
 
-            // First, check if the response starts with a direction
-            // This handles responses like "N" or "N - I think north is best"
-            if (upper.Length > 0)
+            if (match.Success)
             {
-                char firstChar = upper[0];
-                if (firstChar == 'N' || firstChar == 'S' || firstChar == 'E' || firstChar == 'W')
-                {
-                    return firstChar.ToString();
-                }
+                // Return the captured direction letter in uppercase
+                return match.Groups[1].Value.ToUpper();
             }
 
-            // If not at the start, look for direction words
-            if (upper.Contains("NORTH"))
-            {
-                return "N";
-            }
-            if (upper.Contains("SOUTH"))
-            {
-                return "S";
-            }
-            if (upper.Contains("EAST"))
-            {
-                return "E";
-            }
-            if (upper.Contains("WEST"))
-            {
-                return "W";
-            }
+            // Format not found - log for debugging
+            _logger.LogWarning($"Could not find 'MOVE: X' format in AI response: {response.Substring(0, Math.Min(100, response.Length))}...");
 
-            // Last resort: find any N, S, E, or W in the response
-            for (int i = 0; i < upper.Length; i++)
-            {
-                char c = upper[i];
-                if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-                {
-                    return c.ToString();
-                }
-            }
-
-            // Couldn't find a direction
             return "ERROR";
         }
 
@@ -337,9 +331,9 @@ namespace DemoMazeGame
                 }
             }
 
-            // Final instruction
+            // Final instruction - remind about the required format
             prompt.AppendLine();
-            prompt.AppendLine("Respond with ONLY a single letter: N, S, E, or W");
+            prompt.AppendLine("Choose your next move. Remember to end your response with: MOVE: N, S, E, or W");
 
             return prompt.ToString();
         }

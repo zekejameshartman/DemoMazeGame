@@ -164,6 +164,9 @@ namespace DemoMazeGame
             // Start session logging
             _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs);
 
+            // Track the last AI response to display on next iteration
+            string? lastAiResponse = null;
+
             // Main game loop
             while (moveCount < maxMoves)
             {
@@ -176,7 +179,7 @@ namespace DemoMazeGame
                 // Draw game output - either normal or two-column layout
                 if (showAiPrompt)
                 {
-                    DrawTwoColumnLayout(modelName, prompt);
+                    DrawTwoColumnLayout(modelName, prompt, lastAiResponse);
                 }
                 else
                 {
@@ -191,13 +194,14 @@ namespace DemoMazeGame
                 // Get the AI's move with metrics
                 var moveResult = await ai.GetAiMove(prompt, modelId);
 
+                // Store the AI response for next display
+                lastAiResponse = moveResult.RawResponse;
+
                 // Update running totals
                 runningCost += moveResult.ActualCostUsd;
                 totalTokens += moveResult.TotalTokens;
 
-                AnsiConsole.MarkupLine($"[green]→[/] AI chose: [bold cyan]{moveResult.Direction}[/]");
-
-                // Check for errors
+                // Check for API errors
                 if (moveResult.IsError)
                 {
                     AnsiConsole.MarkupLine("[red]AI returned an error. Stopping game.[/]");
@@ -208,11 +212,37 @@ namespace DemoMazeGame
                     break;
                 }
 
+                // Handle parse errors (couldn't find "MOVE: X" in response) - retry once
+                if (moveResult.Direction == "ERROR")
+                {
+                    AnsiConsole.MarkupLine("[yellow]⚠️ AI response didn't include 'MOVE: X' format. Retrying...[/]");
+
+                    // Retry once
+                    var retryResult = await ai.GetAiMove(prompt, modelId);
+                    lastAiResponse = retryResult.RawResponse;
+                    runningCost += retryResult.ActualCostUsd;
+                    totalTokens += retryResult.TotalTokens;
+
+                    if (retryResult.Direction == "ERROR")
+                    {
+                        AnsiConsole.MarkupLine("[red]❌ Retry also failed. Counting as wasted move.[/]");
+                        moveResult = retryResult;
+                        // Continue with ERROR direction - TryMove will fail and count it as a wall hit
+                    }
+                    else
+                    {
+                        moveResult = retryResult;
+                        AnsiConsole.MarkupLine($"[green]✓ Retry succeeded![/]");
+                    }
+                }
+
+                AnsiConsole.MarkupLine($"[green]→[/] AI chose: [bold cyan]{moveResult.Direction}[/]");
+
                 // Store previous position for logging
                 int fromRow = playerRow;
                 int fromCol = playerCol;
 
-                // Try to move
+                // Try to move (ERROR directions will fail and count as wall hits)
                 bool moved = TryMove(moveResult.Direction);
                 moveCount++;
 
@@ -325,9 +355,9 @@ namespace DemoMazeGame
             AnsiConsole.WriteLine();
         }
 
-        // Draw a two-column layout: game on left, AI prompt on right
+        // Draw a two-column layout: game on left, AI prompt + response on right
         // Uses Spectre.Console Columns for stable layout
-        private void DrawTwoColumnLayout(string modelName, string prompt)
+        private void DrawTwoColumnLayout(string modelName, string prompt, string? aiResponse = null)
         {
             DrawAiHeader(modelName);
 
@@ -357,30 +387,55 @@ namespace DemoMazeGame
             leftBuilder.AppendLine($"[grey]Pos:[/] [cyan]({playerCol},{playerRow})[/] [grey]Moves:[/] {moveCount}/{maxMoves}");
             leftBuilder.AppendLine($"[grey]Cost:[/] [green]${runningCost:F6}[/]");
 
-            // Build the right column content (prompt - truncated for display)
+            // Build the right column content
             var rightBuilder = new System.Text.StringBuilder();
+
+            // Show AI response if available (this is what the AI said)
+            if (!string.IsNullOrEmpty(aiResponse))
+            {
+                rightBuilder.AppendLine("[cyan]── AI Response ──[/]");
+                var responseLines = aiResponse.Split('\n');
+                int maxResponseLines = 15;
+                int showResponseLines = Math.Min(responseLines.Length, maxResponseLines);
+
+                for (int i = 0; i < showResponseLines; i++)
+                {
+                    string line = responseLines[i].TrimEnd();
+                    line = line.Replace("[", "[[").Replace("]", "]]");
+                    if (line.Length > 50)
+                    {
+                        line = line.Substring(0, 47) + "...";
+                    }
+                    rightBuilder.AppendLine("[white]" + line + "[/]");
+                }
+
+                if (responseLines.Length > maxResponseLines)
+                {
+                    rightBuilder.AppendLine($"[grey]... ({responseLines.Length - maxResponseLines} more lines)[/]");
+                }
+                rightBuilder.AppendLine();
+            }
+
+            // Show prompt (truncated)
             rightBuilder.AppendLine("[yellow]── AI Prompt ──[/]");
-
             var promptLines = prompt.Split('\n');
-            int maxLines = 25;  // Limit display lines
-            int showLines = Math.Min(promptLines.Length, maxLines);
+            int maxPromptLines = aiResponse != null ? 10 : 20;  // Less room if showing response
+            int showPromptLines = Math.Min(promptLines.Length, maxPromptLines);
 
-            for (int i = 0; i < showLines; i++)
+            for (int i = 0; i < showPromptLines; i++)
             {
                 string line = promptLines[i].TrimEnd();
-                // Escape any Spectre markup characters in the prompt
                 line = line.Replace("[", "[[").Replace("]", "]]");
-                // Truncate long lines
-                if (line.Length > 45)
+                if (line.Length > 50)
                 {
-                    line = line.Substring(0, 42) + "...";
+                    line = line.Substring(0, 47) + "...";
                 }
                 rightBuilder.AppendLine("[grey]" + line + "[/]");
             }
 
-            if (promptLines.Length > maxLines)
+            if (promptLines.Length > maxPromptLines)
             {
-                rightBuilder.AppendLine($"[grey]... ({promptLines.Length - maxLines} more lines)[/]");
+                rightBuilder.AppendLine($"[grey]... ({promptLines.Length - maxPromptLines} more lines)[/]");
             }
 
             // Use Spectre Columns for side-by-side display
@@ -388,7 +443,7 @@ namespace DemoMazeGame
                 .Border(TableBorder.None)
                 .HideHeaders()
                 .AddColumn(new TableColumn("Left").Width(30))
-                .AddColumn(new TableColumn("Right").Width(50));
+                .AddColumn(new TableColumn("Right").Width(55));
 
             table.AddRow(
                 new Markup(leftBuilder.ToString()),
