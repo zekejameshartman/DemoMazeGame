@@ -29,6 +29,9 @@ namespace DemoMazeGame.Models
         public bool ShowCoordinates { get; set; }
         public bool ShowAsciiMap { get; set; }
         public int DelayBetweenMoves { get; set; }
+        public bool ReasoningEnabled { get; set; }
+        public string ReasoningEffort { get; set; } = "";
+        public int? ReasoningMaxTokens { get; set; }
     }
 
     public class SessionOutcome
@@ -54,6 +57,7 @@ namespace DemoMazeGame.Models
         public int TotalPromptTokens { get; set; }
         public int TotalCompletionTokens { get; set; }
         public int TotalTokens { get; set; }
+        public int TotalReasoningTokens { get; set; }
     }
 
     public class CostInfo
@@ -73,7 +77,9 @@ namespace DemoMazeGame.Models
         public bool WasSuccessful { get; set; }
         public int PromptTokens { get; set; }
         public int CompletionTokens { get; set; }
+        public int ReasoningTokens { get; set; }
         public decimal CostUsd { get; set; }
+        public string? Reasoning { get; set; }
     }
 
     public class Position

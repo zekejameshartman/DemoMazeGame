@@ -13,6 +13,11 @@ namespace DemoMazeGame
         public bool ShowAiPrompt = false;       // Whether to show the prompt sent to AI
         public bool Breadcrumbs = false;        // Whether to add breadcrumb hints about revisited spots
 
+        // Reasoning token settings
+        public bool ReasoningEnabled = true;    // Whether to enable reasoning tokens
+        public string ReasoningEffort = "medium"; // Effort level: xhigh, high, medium, low, minimal, none
+        public int? ReasoningMaxTokens = null;  // Max tokens for reasoning (null = use effort instead)
+
         // Show the main menu and get the user's choice
         public string ShowMainMenu()
         {
@@ -138,6 +143,15 @@ namespace DemoMazeGame
                 table.AddRow(
                     "Delay between moves",
                     $"[cyan]{DelayBetweenMoves}[/] ms");
+                table.AddRow(
+                    "Reasoning tokens",
+                    ReasoningEnabled ? "[green]ENABLED[/]" : "[red]DISABLED[/]");
+                table.AddRow(
+                    "Reasoning effort",
+                    $"[cyan]{ReasoningEffort}[/]");
+                table.AddRow(
+                    "Reasoning max tokens",
+                    ReasoningMaxTokens.HasValue ? $"[cyan]{ReasoningMaxTokens.Value}[/]" : "[grey]auto (use effort)[/]");
 
                 AnsiConsole.Write(table);
                 AnsiConsole.WriteLine();
@@ -153,6 +167,9 @@ namespace DemoMazeGame
                             "[bold]3[/] Toggle show AI prompt",
                             "[bold]4[/] Toggle breadcrumbs",
                             "[bold]5[/] Change delay",
+                            "[bold]6[/] Toggle reasoning tokens",
+                            "[bold]7[/] Change reasoning effort",
+                            "[bold]8[/] Set reasoning max tokens",
                             "[grey]← Back to Main Menu[/]"
                         }));
 
@@ -188,6 +205,74 @@ namespace DemoMazeGame
                                 };
                             }));
                     DelayBetweenMoves = newDelay;
+                }
+                else if (choice.Contains("6"))
+                {
+                    ReasoningEnabled = !ReasoningEnabled;
+                }
+                else if (choice.Contains("7"))
+                {
+                    var effortChoice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                            .Title("[yellow]Select reasoning effort level:[/]")
+                            .HighlightStyle(new Style(Color.Cyan1))
+                            .AddChoices(new[]
+                            {
+                                "xhigh - Maximum reasoning (95% of max_tokens)",
+                                "high - High reasoning (80% of max_tokens)",
+                                "medium - Medium reasoning (50% of max_tokens) [default]",
+                                "low - Low reasoning (20% of max_tokens)",
+                                "minimal - Minimal reasoning (10% of max_tokens)",
+                                "none - No reasoning"
+                            }));
+
+                    ReasoningEffort = effortChoice.Split(' ')[0]; // Extract just the effort level
+                }
+                else if (choice.Contains("8"))
+                {
+                    var maxTokensChoice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                            .Title("[yellow]Set max tokens for reasoning:[/]")
+                            .HighlightStyle(new Style(Color.Cyan1))
+                            .AddChoices(new[]
+                            {
+                                "Auto (use effort level instead)",
+                                "1024 tokens",
+                                "2000 tokens",
+                                "4000 tokens",
+                                "8000 tokens",
+                                "16000 tokens",
+                                "32000 tokens (max for Anthropic)",
+                                "Custom value..."
+                            }));
+
+                    if (maxTokensChoice.Contains("Auto"))
+                    {
+                        ReasoningMaxTokens = null;
+                    }
+                    else if (maxTokensChoice.Contains("Custom"))
+                    {
+                        var customValue = AnsiConsole.Prompt(
+                            new TextPrompt<int>("[yellow]Enter max tokens[/] [grey](1024-32000)[/]:")
+                                .DefaultValue(2000)
+                                .ValidationErrorMessage("[red]Please enter a valid number[/]")
+                                .Validate(tokens =>
+                                {
+                                    return tokens switch
+                                    {
+                                        < 1024 => ValidationResult.Error("[red]Must be at least 1024[/]"),
+                                        > 32000 => ValidationResult.Error("[red]Must be at most 32000[/]"),
+                                        _ => ValidationResult.Success()
+                                    };
+                                }));
+                        ReasoningMaxTokens = customValue;
+                    }
+                    else
+                    {
+                        // Extract the number from choices like "1024 tokens"
+                        var numberStr = maxTokensChoice.Split(' ')[0];
+                        ReasoningMaxTokens = int.Parse(numberStr);
+                    }
                 }
                 else if (choice.Contains("Back"))
                 {

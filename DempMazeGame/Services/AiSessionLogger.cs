@@ -30,7 +30,7 @@ namespace DemoMazeGame.Services
             Directory.CreateDirectory(_sessionsDir);
         }
 
-        public void StartSession(string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayBetweenMoves)
+        public void StartSession(string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayBetweenMoves, bool reasoningEnabled = true, string reasoningEffort = "medium", int? reasoningMaxTokens = null)
         {
             _currentSession = new AiSessionLog
             {
@@ -40,7 +40,10 @@ namespace DemoMazeGame.Services
                 {
                     ShowCoordinates = showCoordinates,
                     ShowAsciiMap = showAsciiMap,
-                    DelayBetweenMoves = delayBetweenMoves
+                    DelayBetweenMoves = delayBetweenMoves,
+                    ReasoningEnabled = reasoningEnabled,
+                    ReasoningEffort = reasoningEffort,
+                    ReasoningMaxTokens = reasoningMaxTokens
                 }
             };
 
@@ -58,7 +61,7 @@ namespace DemoMazeGame.Services
             _appLogger.LogInfo($"AI session started: {modelName}");
         }
 
-        public void LogMove(int moveNumber, string direction, int fromRow, int fromCol, int toRow, int toCol, bool wasSuccessful, int promptTokens, int completionTokens, decimal costUsd)
+        public void LogMove(int moveNumber, string direction, int fromRow, int fromCol, int toRow, int toCol, bool wasSuccessful, int promptTokens, int completionTokens, decimal costUsd, int reasoningTokens = 0, string? reasoning = null)
         {
             if (_currentSession == null) return;
 
@@ -71,7 +74,9 @@ namespace DemoMazeGame.Services
                 WasSuccessful = wasSuccessful,
                 PromptTokens = promptTokens,
                 CompletionTokens = completionTokens,
-                CostUsd = costUsd
+                ReasoningTokens = reasoningTokens,
+                CostUsd = costUsd,
+                Reasoning = reasoning
             };
 
             _currentSession.Moves.Add(move);
@@ -105,6 +110,7 @@ namespace DemoMazeGame.Services
             _currentSession.TokenUsage.TotalPromptTokens += promptTokens;
             _currentSession.TokenUsage.TotalCompletionTokens += completionTokens;
             _currentSession.TokenUsage.TotalTokens += promptTokens + completionTokens;
+            _currentSession.TokenUsage.TotalReasoningTokens += reasoningTokens;
 
             // Update cost
             _currentSession.Cost.TotalCostUsd += costUsd;

@@ -15,6 +15,10 @@ namespace DemoMazeGame.Models
         // The AI's full response text (for displaying reasoning)
         public string RawResponse { get; set; } = "";
 
+        // Reasoning tokens (if available from the model)
+        public string? Reasoning { get; set; }
+        public int ReasoningTokens { get; set; }
+
         // Raw API data for detailed logging
         public string RequestJson { get; set; } = "";
         public string ResponseJson { get; set; } = "";

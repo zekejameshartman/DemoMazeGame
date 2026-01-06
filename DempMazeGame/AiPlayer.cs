@@ -1,7 +1,6 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using DemoMazeGame.Models;
 using DemoMazeGame.Services;
 
@@ -73,7 +72,7 @@ namespace DemoMazeGame
         // This method asks the AI which direction to move
         // Returns AiMoveResult with direction and token/cost metrics
         // Each call sends only the single prompt - no conversation history
-        public async Task<AiMoveResult> GetAiMove(string prompt, string modelId)
+        public async Task<AiMoveResult> GetAiMove(string prompt, string modelId, bool reasoningEnabled = true, string reasoningEffort = "medium", int? reasoningMaxTokens = null)
         {
             var result = new AiMoveResult();
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
@@ -87,17 +86,98 @@ namespace DemoMazeGame
                     new { role = "user", content = prompt }
                 };
 
-                // Build the request body as a JSON object
-                // OpenRouter uses the same format as OpenAI's chat API
-                // We include usage.include = true to get actual cost from OpenRouter
-                var requestBody = new
+                // Try tool calling first, with JSON-mode fallback
+                // Most modern models (Claude, GPT, Gemini) support tool calling
+                bool usingToolCalling = true;
+                object requestBody;
+
+                try
                 {
-                    model = modelId,
-                    messages = messages,
-                    max_tokens = 500,  // Allow reasoning models to think (they must end with "MOVE: X")
-                    temperature = 0.1,  // Low temperature = more consistent responses
-                    usage = new { include = true }  // Request actual cost from OpenRouter
-                };
+                    // Define the "move" tool with direction enum parameter
+                    var tools = new object[]
+                    {
+                        new
+                        {
+                            type = "function",
+                            function = new
+                            {
+                                name = "move",
+                                description = "Make a move in the specified direction",
+                                parameters = new
+                                {
+                                    type = "object",
+                                    properties = new
+                                    {
+                                        direction = new
+                                        {
+                                            type = "string",
+                                            @enum = new[] { "north", "south", "east", "west" },
+                                            description = "The direction to move"
+                                        }
+                                    },
+                                    required = new[] { "direction" }
+                                }
+                            }
+                        }
+                    };
+
+                    // Build reasoning configuration if enabled
+                    object? reasoningConfig = null;
+                    if (reasoningEnabled)
+                    {
+                        if (reasoningMaxTokens.HasValue)
+                        {
+                            reasoningConfig = new { max_tokens = reasoningMaxTokens.Value };
+                        }
+                        else
+                        {
+                            reasoningConfig = new { effort = reasoningEffort };
+                        }
+                    }
+
+                    // Build request with tool calling
+                    if (reasoningConfig != null)
+                    {
+                        requestBody = new
+                        {
+                            model = modelId,
+                            messages = messages,
+                            max_tokens = 500,  // Allow reasoning models to think
+                            temperature = 0.1,  // Low temperature = more consistent responses
+                            tools = tools,
+                            tool_choice = new { type = "function", function = new { name = "move" } },  // Force tool call
+                            reasoning = reasoningConfig,  // Add reasoning configuration
+                            usage = new { include = true }  // Request actual cost from OpenRouter
+                        };
+                    }
+                    else
+                    {
+                        requestBody = new
+                        {
+                            model = modelId,
+                            messages = messages,
+                            max_tokens = 500,
+                            temperature = 0.1,
+                            tools = tools,
+                            tool_choice = new { type = "function", function = new { name = "move" } },
+                            usage = new { include = true }
+                        };
+                    }
+                }
+                catch
+                {
+                    // If tool construction fails, fall back to JSON mode
+                    usingToolCalling = false;
+                    requestBody = new
+                    {
+                        model = modelId,
+                        messages = messages,
+                        max_tokens = 500,
+                        temperature = 0.1,
+                        response_format = new { type = "json_object" },
+                        usage = new { include = true }
+                    };
+                }
 
                 // Convert the request to JSON
                 string jsonRequest = JsonSerializer.Serialize(requestBody);
@@ -117,6 +197,13 @@ namespace DemoMazeGame
                 // Check if the request was successful
                 if (!response.IsSuccessStatusCode)
                 {
+                    // If tool calling failed, try JSON mode fallback
+                    if (usingToolCalling && jsonResponse.Contains("tool"))
+                    {
+                        _logger.LogInfo($"Tool calling not supported by {modelId}, falling back to JSON mode");
+                        return await GetAiMoveJsonMode(prompt, modelId);
+                    }
+
                     _logger.LogError($"API Error: {jsonResponse}");
                     Console.WriteLine("API Error: " + jsonResponse);
                     result.IsError = true;
@@ -125,21 +212,34 @@ namespace DemoMazeGame
                     return result;
                 }
 
-                // Parse the JSON response to get the AI's answer, usage, and actual cost
-                var (aiResponse, promptTokens, completionTokens, actualCost) = ParseResponseWithUsage(jsonResponse);
-
-                // Store the raw AI response for display
-                result.RawResponse = aiResponse;
-
-                // Extract just the direction letter from the response
-                string direction = ExtractDirection(aiResponse);
+                // Parse the response based on mode
+                string direction;
+                if (usingToolCalling)
+                {
+                    var (aiResponse, dir, promptTokens, completionTokens, actualCost, reasoning, reasoningTokens) = ParseToolCallResponse(jsonResponse);
+                    result.RawResponse = aiResponse;
+                    direction = dir;
+                    result.PromptTokens = promptTokens;
+                    result.CompletionTokens = completionTokens;
+                    result.TotalTokens = promptTokens + completionTokens;
+                    result.ActualCostUsd = actualCost;
+                    result.Reasoning = reasoning;
+                    result.ReasoningTokens = reasoningTokens;
+                }
+                else
+                {
+                    var (aiResponse, dir, promptTokens, completionTokens, actualCost, reasoning, reasoningTokens) = ParseJsonModeResponse(jsonResponse);
+                    result.RawResponse = aiResponse;
+                    direction = dir;
+                    result.PromptTokens = promptTokens;
+                    result.CompletionTokens = completionTokens;
+                    result.TotalTokens = promptTokens + completionTokens;
+                    result.ActualCostUsd = actualCost;
+                    result.Reasoning = reasoning;
+                    result.ReasoningTokens = reasoningTokens;
+                }
 
                 result.Direction = direction;
-                result.PromptTokens = promptTokens;
-                result.CompletionTokens = completionTokens;
-                result.TotalTokens = promptTokens + completionTokens;
-                result.ActualCostUsd = actualCost;
-
                 return result;
             }
             catch (Exception ex)
@@ -155,23 +255,181 @@ namespace DemoMazeGame
             }
         }
 
-        // Parse the JSON response from OpenRouter to get the message content, usage, and actual cost
-        private (string content, int promptTokens, int completionTokens, decimal cost) ParseResponseWithUsage(string jsonResponse)
+        // JSON mode fallback when tool calling is not supported
+        private async Task<AiMoveResult> GetAiMoveJsonMode(string prompt, string modelId)
+        {
+            var result = new AiMoveResult();
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+            try
+            {
+                // Build the messages array with system prompt + user message
+                // Modify system prompt to request JSON output
+                string jsonSystemPrompt = _systemPrompt + "\n\nRespond with JSON in this format: {\"direction\": \"north|south|east|west\"}";
+                var messages = new object[]
+                {
+                    new { role = "system", content = jsonSystemPrompt },
+                    new { role = "user", content = prompt }
+                };
+
+                var requestBody = new
+                {
+                    model = modelId,
+                    messages = messages,
+                    max_tokens = 500,
+                    temperature = 0.1,
+                    response_format = new { type = "json_object" },
+                    usage = new { include = true }
+                };
+
+                string jsonRequest = JsonSerializer.Serialize(requestBody);
+                result.RequestJson = jsonRequest;
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await httpClient.PostAsync("chat/completions", content);
+                stopwatch.Stop();
+                result.LatencyMs = stopwatch.Elapsed.TotalMilliseconds;
+                result.HttpStatusCode = (int)response.StatusCode;
+
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                result.ResponseJson = jsonResponse;
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"API Error: {jsonResponse}");
+                    Console.WriteLine("API Error: " + jsonResponse);
+                    result.IsError = true;
+                    result.ErrorMessage = jsonResponse;
+                    result.Direction = "ERROR";
+                    return result;
+                }
+
+                var (aiResponse, direction, promptTokens, completionTokens, actualCost, reasoning, reasoningTokens) = ParseJsonModeResponse(jsonResponse);
+                result.RawResponse = aiResponse;
+                result.Direction = direction;
+                result.PromptTokens = promptTokens;
+                result.CompletionTokens = completionTokens;
+                result.TotalTokens = promptTokens + completionTokens;
+                result.ActualCostUsd = actualCost;
+                result.Reasoning = reasoning;
+                result.ReasoningTokens = reasoningTokens;
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+                result.LatencyMs = stopwatch.Elapsed.TotalMilliseconds;
+                _logger.LogError("Error calling AI in JSON mode", ex);
+                Console.WriteLine("Error calling AI: " + ex.Message);
+                result.IsError = true;
+                result.ErrorMessage = ex.Message;
+                result.Direction = "ERROR";
+                return result;
+            }
+        }
+
+        // Parse tool call response - extracts reasoning from content and direction from tool_calls
+        private (string content, string direction, int promptTokens, int completionTokens, decimal cost, string? reasoning, int reasoningTokens) ParseToolCallResponse(string jsonResponse)
         {
             string content = "";
+            string direction = "ERROR";
             int promptTokens = 0;
             int completionTokens = 0;
             decimal cost = 0m;
+            string? reasoning = null;
+            int reasoningTokens = 0;
 
-            // Use JsonDocument to parse the response
-            using JsonDocument doc = JsonDocument.Parse(jsonResponse);
-            JsonElement root = doc.RootElement;
-
-            // Navigate through the JSON structure:
-            // { "choices": [ { "message": { "content": "..." } } ], "usage": { "prompt_tokens": N, "completion_tokens": N, "cost": N } }
-            if (root.TryGetProperty("choices", out JsonElement choices))
+            try
             {
-                if (choices.GetArrayLength() > 0)
+                using JsonDocument doc = JsonDocument.Parse(jsonResponse);
+                JsonElement root = doc.RootElement;
+
+                // Navigate: { "choices": [ { "message": { "content": "...", "tool_calls": [...] } } ] }
+                if (root.TryGetProperty("choices", out JsonElement choices) && choices.GetArrayLength() > 0)
+                {
+                    JsonElement firstChoice = choices[0];
+                    if (firstChoice.TryGetProperty("message", out JsonElement message))
+                    {
+                        // Get reasoning content (chain-of-thought)
+                        if (message.TryGetProperty("content", out JsonElement contentElement))
+                        {
+                            content = contentElement.GetString() ?? "";
+                        }
+
+                        // Extract reasoning field if present
+                        if (message.TryGetProperty("reasoning", out JsonElement reasoningElement))
+                        {
+                            reasoning = reasoningElement.GetString();
+                        }
+
+                        // Extract direction from tool_calls
+                        if (message.TryGetProperty("tool_calls", out JsonElement toolCalls) && toolCalls.GetArrayLength() > 0)
+                        {
+                            JsonElement firstToolCall = toolCalls[0];
+                            if (firstToolCall.TryGetProperty("function", out JsonElement function))
+                            {
+                                if (function.TryGetProperty("arguments", out JsonElement arguments))
+                                {
+                                    string argsJson = arguments.GetString() ?? "{}";
+                                    using JsonDocument argsDoc = JsonDocument.Parse(argsJson);
+                                    if (argsDoc.RootElement.TryGetProperty("direction", out JsonElement dirElement))
+                                    {
+                                        string dir = dirElement.GetString() ?? "";
+                                        direction = ConvertDirectionToLetter(dir);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Extract usage information including reasoning_tokens
+                if (root.TryGetProperty("usage", out JsonElement usage))
+                {
+                    if (usage.TryGetProperty("prompt_tokens", out JsonElement promptTokensElement))
+                        promptTokens = promptTokensElement.GetInt32();
+                    if (usage.TryGetProperty("completion_tokens", out JsonElement completionTokensElement))
+                        completionTokens = completionTokensElement.GetInt32();
+                    if (usage.TryGetProperty("cost", out JsonElement costElement))
+                        cost = costElement.GetDecimal();
+
+                    // Extract reasoning_tokens from completion_tokens_details
+                    if (usage.TryGetProperty("completion_tokens_details", out JsonElement completionDetails))
+                    {
+                        if (completionDetails.TryGetProperty("reasoning_tokens", out JsonElement reasoningTokensElement))
+                        {
+                            reasoningTokens = reasoningTokensElement.GetInt32();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error parsing tool call response", ex);
+            }
+
+            return (content, direction, promptTokens, completionTokens, cost, reasoning, reasoningTokens);
+        }
+
+        // Parse JSON mode response - extracts direction from JSON object in content
+        private (string content, string direction, int promptTokens, int completionTokens, decimal cost, string? reasoning, int reasoningTokens) ParseJsonModeResponse(string jsonResponse)
+        {
+            string content = "";
+            string direction = "ERROR";
+            int promptTokens = 0;
+            int completionTokens = 0;
+            decimal cost = 0m;
+            string? reasoning = null;
+            int reasoningTokens = 0;
+
+            try
+            {
+                using JsonDocument doc = JsonDocument.Parse(jsonResponse);
+                JsonElement root = doc.RootElement;
+
+                // Navigate: { "choices": [ { "message": { "content": "{\"direction\": \"north\"}" } } ] }
+                if (root.TryGetProperty("choices", out JsonElement choices) && choices.GetArrayLength() > 0)
                 {
                     JsonElement firstChoice = choices[0];
                     if (firstChoice.TryGetProperty("message", out JsonElement message))
@@ -179,50 +437,70 @@ namespace DemoMazeGame
                         if (message.TryGetProperty("content", out JsonElement contentElement))
                         {
                             content = contentElement.GetString() ?? "";
+
+                            // Parse the JSON content to extract direction
+                            try
+                            {
+                                using JsonDocument contentDoc = JsonDocument.Parse(content);
+                                if (contentDoc.RootElement.TryGetProperty("direction", out JsonElement dirElement))
+                                {
+                                    string dir = dirElement.GetString() ?? "";
+                                    direction = ConvertDirectionToLetter(dir);
+                                }
+                            }
+                            catch
+                            {
+                                _logger.LogWarning($"Could not parse JSON from content: {content.Substring(0, Math.Min(100, content.Length))}");
+                            }
+                        }
+
+                        // Extract reasoning field if present
+                        if (message.TryGetProperty("reasoning", out JsonElement reasoningElement))
+                        {
+                            reasoning = reasoningElement.GetString();
+                        }
+                    }
+                }
+
+                // Extract usage information including reasoning_tokens
+                if (root.TryGetProperty("usage", out JsonElement usage))
+                {
+                    if (usage.TryGetProperty("prompt_tokens", out JsonElement promptTokensElement))
+                        promptTokens = promptTokensElement.GetInt32();
+                    if (usage.TryGetProperty("completion_tokens", out JsonElement completionTokensElement))
+                        completionTokens = completionTokensElement.GetInt32();
+                    if (usage.TryGetProperty("cost", out JsonElement costElement))
+                        cost = costElement.GetDecimal();
+
+                    // Extract reasoning_tokens from completion_tokens_details
+                    if (usage.TryGetProperty("completion_tokens_details", out JsonElement completionDetails))
+                    {
+                        if (completionDetails.TryGetProperty("reasoning_tokens", out JsonElement reasoningTokensElement))
+                        {
+                            reasoningTokens = reasoningTokensElement.GetInt32();
                         }
                     }
                 }
             }
-
-            // Extract usage information including actual cost from OpenRouter
-            if (root.TryGetProperty("usage", out JsonElement usage))
+            catch (Exception ex)
             {
-                if (usage.TryGetProperty("prompt_tokens", out JsonElement promptTokensElement))
-                {
-                    promptTokens = promptTokensElement.GetInt32();
-                }
-                if (usage.TryGetProperty("completion_tokens", out JsonElement completionTokensElement))
-                {
-                    completionTokens = completionTokensElement.GetInt32();
-                }
-                // Extract actual cost as reported by OpenRouter (in credits/USD)
-                if (usage.TryGetProperty("cost", out JsonElement costElement))
-                {
-                    cost = costElement.GetDecimal();
-                }
+                _logger.LogError("Error parsing JSON mode response", ex);
             }
 
-            return (content, promptTokens, completionTokens, cost);
+            return (content, direction, promptTokens, completionTokens, cost, reasoning, reasoningTokens);
         }
 
-        // Extract direction from AI response using the required "MOVE: X" format
-        // Returns the direction letter (N, S, E, W) or "ERROR" if format not found
-        private string ExtractDirection(string response)
+        // Convert direction string (north/south/east/west) to letter (N/S/E/W)
+        private string ConvertDirectionToLetter(string direction)
         {
-            // Look for the required format: "MOVE: N" (or S, E, W)
-            // The regex is case-insensitive and allows for some whitespace flexibility
-            var match = Regex.Match(response, @"MOVE:\s*([NSEW])", RegexOptions.IgnoreCase);
-
-            if (match.Success)
+            return direction.ToLower() switch
             {
-                // Return the captured direction letter in uppercase
-                return match.Groups[1].Value.ToUpper();
-            }
-
-            // Format not found - log for debugging
-            _logger.LogWarning($"Could not find 'MOVE: X' format in AI response: {response.Substring(0, Math.Min(100, response.Length))}...");
-
-            return "ERROR";
+                "north" => "N",
+                "south" => "S",
+                "east" => "E",
+                "west" => "W",
+                _ => "ERROR"
+            };
         }
 
         // Build the prompt that describes the current maze situation to the AI
@@ -331,9 +609,9 @@ namespace DemoMazeGame
                 }
             }
 
-            // Final instruction - remind about the required format
+            // Final instruction - remind about tool calling
             prompt.AppendLine();
-            prompt.AppendLine("Choose your next move. Remember to end your response with: MOVE: N, S, E, or W");
+            prompt.AppendLine("Choose your next move and call the 'move' tool with your chosen direction (north, south, east, or west).");
 
             return prompt.ToString();
         }

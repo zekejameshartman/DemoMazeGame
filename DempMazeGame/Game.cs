@@ -134,7 +134,10 @@ namespace DemoMazeGame
             bool showAsciiMap,
             int delayMs,
             bool showAiPrompt,
-            bool breadcrumbs)
+            bool breadcrumbs,
+            bool reasoningEnabled,
+            string reasoningEffort,
+            int? reasoningMaxTokens)
         {
             AnsiConsole.Clear();
 
@@ -161,8 +164,8 @@ namespace DemoMazeGame
             bool errorOccurred = false;
             string? errorMessage = null;
 
-            // Start session logging
-            _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs);
+            // Start session logging with reasoning settings
+            _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs, reasoningEnabled, reasoningEffort, reasoningMaxTokens);
 
             // Track the last AI response to display on next iteration
             string? lastAiResponse = null;
@@ -191,8 +194,8 @@ namespace DemoMazeGame
                 // Show thinking indicator
                 AnsiConsole.MarkupLine("[yellow]🤔 Asking AI for next move...[/]");
 
-                // Get the AI's move with metrics
-                var moveResult = await ai.GetAiMove(prompt, modelId);
+                // Get the AI's move with metrics (pass reasoning settings)
+                var moveResult = await ai.GetAiMove(prompt, modelId, reasoningEnabled, reasoningEffort, reasoningMaxTokens);
 
                 // Store the AI response for next display
                 lastAiResponse = moveResult.RawResponse;
@@ -212,13 +215,13 @@ namespace DemoMazeGame
                     break;
                 }
 
-                // Handle parse errors (couldn't find "MOVE: X" in response) - retry once
+                // Handle parse errors (couldn't extract direction from tool call) - retry once
                 if (moveResult.Direction == "ERROR")
                 {
-                    AnsiConsole.MarkupLine("[yellow]⚠️ AI response didn't include 'MOVE: X' format. Retrying...[/]");
+                    AnsiConsole.MarkupLine("[yellow]⚠️ AI response didn't include valid direction. Retrying...[/]");
 
                     // Retry once
-                    var retryResult = await ai.GetAiMove(prompt, modelId);
+                    var retryResult = await ai.GetAiMove(prompt, modelId, reasoningEnabled, reasoningEffort, reasoningMaxTokens);
                     lastAiResponse = retryResult.RawResponse;
                     runningCost += retryResult.ActualCostUsd;
                     totalTokens += retryResult.TotalTokens;
@@ -258,7 +261,7 @@ namespace DemoMazeGame
                     HitWall = !moved
                 });
 
-                // Log the move to session file
+                // Log the move to session file with reasoning data
                 _sessionLogger.LogMove(
                     moveCount,
                     moveResult.Direction,
@@ -267,7 +270,9 @@ namespace DemoMazeGame
                     moved,
                     moveResult.PromptTokens,
                     moveResult.CompletionTokens,
-                    moveResult.ActualCostUsd
+                    moveResult.ActualCostUsd,
+                    moveResult.ReasoningTokens,
+                    moveResult.Reasoning
                 );
 
                 // Log the raw API request/response for debugging
