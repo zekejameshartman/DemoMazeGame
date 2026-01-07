@@ -13,6 +13,12 @@ namespace DemoMazeGame
         public bool ShowAiPrompt = false;       // Whether to show the prompt sent to AI
         public bool Breadcrumbs = false;        // Whether to add breadcrumb hints about revisited spots
 
+        // New prompt optimization settings
+        public bool DistanceToWall = true;      // Whether to show distance to walls in each direction
+        public bool ShowGoalCoordinates = true; // Whether to show goal position to AI
+        public int MaxRevisitsPerCell = 10;     // Max times AI can revisit same cell before failure
+        public int MaxMoves = 200;              // Max total moves before failure
+
         // Reasoning token settings
         public bool ReasoningEnabled = true;    // Whether to enable reasoning tokens
         public string ReasoningEffort = "medium"; // Effort level: xhigh, high, medium, low, minimal, none
@@ -141,6 +147,18 @@ namespace DemoMazeGame
                     "Breadcrumbs",
                     Breadcrumbs ? "[green]YES[/]" : "[red]NO[/]");
                 table.AddRow(
+                    "Distance to walls",
+                    DistanceToWall ? "[green]YES[/]" : "[red]NO[/]");
+                table.AddRow(
+                    "Show goal coordinates",
+                    ShowGoalCoordinates ? "[green]YES[/]" : "[red]NO[/]");
+                table.AddRow(
+                    "Max revisits per cell",
+                    $"[cyan]{MaxRevisitsPerCell}[/]");
+                table.AddRow(
+                    "Max moves",
+                    $"[cyan]{MaxMoves}[/]");
+                table.AddRow(
                     "Delay between moves",
                     $"[cyan]{DelayBetweenMoves}[/] ms");
                 table.AddRow(
@@ -159,6 +177,7 @@ namespace DemoMazeGame
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("[green]Select a setting to change:[/]")
+                        .PageSize(15)
                         .HighlightStyle(new Style(Color.Cyan1, decoration: Decoration.Bold))
                         .AddChoices(new[]
                         {
@@ -166,18 +185,22 @@ namespace DemoMazeGame
                             "[bold]2[/] Toggle ASCII map",
                             "[bold]3[/] Toggle show AI prompt",
                             "[bold]4[/] Toggle breadcrumbs",
-                            "[bold]5[/] Change delay",
-                            "[bold]6[/] Toggle reasoning tokens",
-                            "[bold]7[/] Change reasoning effort",
-                            "[bold]8[/] Set reasoning max tokens",
+                            "[bold]5[/] Toggle distance to walls",
+                            "[bold]6[/] Toggle show goal coordinates",
+                            "[bold]7[/] Change max revisits per cell",
+                            "[bold]8[/] Change max moves",
+                            "[bold]9[/] Change delay",
+                            "[bold]10[/] Toggle reasoning tokens",
+                            "[bold]11[/] Change reasoning effort",
+                            "[bold]12[/] Set reasoning max tokens",
                             "[grey]← Back to Main Menu[/]"
                         }));
 
-                if (choice.Contains("1"))
+                if (choice.Contains("1") && !choice.Contains("10") && !choice.Contains("11") && !choice.Contains("12"))
                 {
                     ShowCoordinates = !ShowCoordinates;
                 }
-                else if (choice.Contains("2"))
+                else if (choice.Contains("2") && !choice.Contains("12"))
                 {
                     ShowAsciiMap = !ShowAsciiMap;
                 }
@@ -190,6 +213,48 @@ namespace DemoMazeGame
                     Breadcrumbs = !Breadcrumbs;
                 }
                 else if (choice.Contains("5"))
+                {
+                    DistanceToWall = !DistanceToWall;
+                }
+                else if (choice.Contains("6"))
+                {
+                    ShowGoalCoordinates = !ShowGoalCoordinates;
+                }
+                else if (choice.Contains("7"))
+                {
+                    var newMaxRevisits = AnsiConsole.Prompt(
+                        new TextPrompt<int>("[yellow]Enter max revisits per cell[/] [grey](1-100)[/]:")
+                            .DefaultValue(MaxRevisitsPerCell)
+                            .ValidationErrorMessage("[red]Please enter a valid number[/]")
+                            .Validate(revisits =>
+                            {
+                                return revisits switch
+                                {
+                                    < 1 => ValidationResult.Error("[red]Must be at least 1[/]"),
+                                    > 100 => ValidationResult.Error("[red]Must be at most 100[/]"),
+                                    _ => ValidationResult.Success()
+                                };
+                            }));
+                    MaxRevisitsPerCell = newMaxRevisits;
+                }
+                else if (choice.Contains("8") && !choice.Contains("18"))
+                {
+                    var newMaxMoves = AnsiConsole.Prompt(
+                        new TextPrompt<int>("[yellow]Enter max total moves[/] [grey](10-1000)[/]:")
+                            .DefaultValue(MaxMoves)
+                            .ValidationErrorMessage("[red]Please enter a valid number[/]")
+                            .Validate(moves =>
+                            {
+                                return moves switch
+                                {
+                                    < 10 => ValidationResult.Error("[red]Must be at least 10[/]"),
+                                    > 1000 => ValidationResult.Error("[red]Must be at most 1000[/]"),
+                                    _ => ValidationResult.Success()
+                                };
+                            }));
+                    MaxMoves = newMaxMoves;
+                }
+                else if (choice.Contains("9"))
                 {
                     var newDelay = AnsiConsole.Prompt(
                         new TextPrompt<int>("[yellow]Enter delay in milliseconds[/] [grey](100-2000)[/]:")
@@ -206,11 +271,11 @@ namespace DemoMazeGame
                             }));
                     DelayBetweenMoves = newDelay;
                 }
-                else if (choice.Contains("6"))
+                else if (choice.Contains("10"))
                 {
                     ReasoningEnabled = !ReasoningEnabled;
                 }
-                else if (choice.Contains("7"))
+                else if (choice.Contains("11"))
                 {
                     var effortChoice = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
@@ -228,7 +293,7 @@ namespace DemoMazeGame
 
                     ReasoningEffort = effortChoice.Split(' ')[0]; // Extract just the effort level
                 }
-                else if (choice.Contains("8"))
+                else if (choice.Contains("12"))
                 {
                     var maxTokensChoice = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()

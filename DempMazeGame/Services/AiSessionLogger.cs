@@ -30,7 +30,7 @@ namespace DemoMazeGame.Services
             Directory.CreateDirectory(_sessionsDir);
         }
 
-        public void StartSession(string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayBetweenMoves, bool reasoningEnabled = true, string reasoningEffort = "medium", int? reasoningMaxTokens = null)
+        public void StartSession(string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayBetweenMoves, bool distanceToWall, bool showGoalCoordinates, int maxRevisitsPerCell, int maxMoves, bool reasoningEnabled = true, string reasoningEffort = "medium", int? reasoningMaxTokens = null)
         {
             _currentSession = new AiSessionLog
             {
@@ -41,6 +41,10 @@ namespace DemoMazeGame.Services
                     ShowCoordinates = showCoordinates,
                     ShowAsciiMap = showAsciiMap,
                     DelayBetweenMoves = delayBetweenMoves,
+                    DistanceToWall = distanceToWall,
+                    ShowGoalCoordinates = showGoalCoordinates,
+                    MaxRevisitsPerCell = maxRevisitsPerCell,
+                    MaxMoves = maxMoves,
                     ReasoningEnabled = reasoningEnabled,
                     ReasoningEffort = reasoningEffort,
                     ReasoningMaxTokens = reasoningMaxTokens
@@ -120,18 +124,40 @@ namespace DemoMazeGame.Services
         {
             if (_currentApiLog == null) return;
 
+            // Parse JSON strings into objects for readable logging
+            object? requestObj = null;
+            object? responseObj = null;
+
+            try
+            {
+                requestObj = JsonSerializer.Deserialize<object>(requestJson);
+            }
+            catch
+            {
+                requestObj = requestJson; // Fallback to raw string if parse fails
+            }
+
+            try
+            {
+                responseObj = JsonSerializer.Deserialize<object>(responseJson);
+            }
+            catch
+            {
+                responseObj = responseJson; // Fallback to raw string if parse fails
+            }
+
             _currentApiLog.Calls.Add(new ApiCallEntry
             {
                 MoveNumber = moveNumber,
                 Timestamp = DateTime.UtcNow,
-                RequestJson = requestJson,
-                ResponseJson = responseJson,
+                Request = requestObj,
+                Response = responseObj,
                 HttpStatusCode = httpStatusCode,
                 LatencyMs = latencyMs
             });
         }
 
-        public void EndSession(bool won, bool stoppedByUser, bool reachedMaxMoves, bool errorOccurred, string? errorMessage = null)
+        public void EndSession(bool won, bool stoppedByUser, bool reachedMaxMoves, bool tooManyRevisits, bool errorOccurred, string? errorMessage = null)
         {
             if (_currentSession == null) return;
 
@@ -143,6 +169,7 @@ namespace DemoMazeGame.Services
                 Won = won,
                 StoppedByUser = stoppedByUser,
                 ReachedMaxMoves = reachedMaxMoves,
+                TooManyRevisits = tooManyRevisits,
                 ErrorOccurred = errorOccurred,
                 ErrorMessage = errorMessage
             };
@@ -159,7 +186,7 @@ namespace DemoMazeGame.Services
             SaveSession();
             SaveApiLog();
 
-            string outcome = won ? "WON" : stoppedByUser ? "STOPPED" : reachedMaxMoves ? "MAX_MOVES" : errorOccurred ? "ERROR" : "UNKNOWN";
+            string outcome = won ? "WON" : stoppedByUser ? "STOPPED" : reachedMaxMoves ? "MAX_MOVES" : tooManyRevisits ? "TOO_MANY_REVISITS" : errorOccurred ? "ERROR" : "UNKNOWN";
             _appLogger.LogInfo($"AI session ended: {_currentSession.Model.Name} - {outcome} in {_currentSession.Metrics.TotalMoves} moves");
 
             _currentSession = null;

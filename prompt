@@ -1,0 +1,8 @@
+I want to edit how we prompt the ai a little. First of all, we need a new setting to toggle how we give the ai information about wall data. We can either send it binary (whether or not the imeediate space in all directions is a wall or not, this is how the app currently fucntions), or distance_to_wall data. distance_to_wall will be a new function which calculates how much empty space there is until the AI can "see" a wall. For example:
+"You can see how many cels you can move in each direction before you see a wall:
+- North: 2 cells
+- South: 3 cells
+- East: 0 cells
+- West: 0 cells"
+
+I also want to modify the travel history we give the ai when we give this distance_to_wall data, it should look like this so taht the ai can get a better mental map of things:

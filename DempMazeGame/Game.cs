@@ -44,11 +44,14 @@ namespace DemoMazeGame
         private decimal runningCost = 0m;  // Running total of API costs
         private int totalTokens = 0;       // Running total of tokens used
 
-        // Maximum moves before giving up (prevents infinite loops)
-        private int maxMoves = 200;
-
         // Move history for AI prompting
         private List<GameMoveRecord> moveHistory = new List<GameMoveRecord>();
+
+        // Cell visit tracking (for revisit limits)
+        private Dictionary<(int row, int col), int> cellVisitCount = new Dictionary<(int, int), int>();
+
+        // Current max moves limit (set per AI game session)
+        private int maxMoves = 200;
 
         // Run the game with a human player
         public void PlayAsHuman()
@@ -135,6 +138,10 @@ namespace DemoMazeGame
             int delayMs,
             bool showAiPrompt,
             bool breadcrumbs,
+            bool distanceToWall,
+            bool showGoalCoordinates,
+            int maxRevisitsPerCell,
+            int maxMoves,
             bool reasoningEnabled,
             string reasoningEffort,
             int? reasoningMaxTokens)
@@ -158,14 +165,19 @@ namespace DemoMazeGame
             runningCost = 0m;
             totalTokens = 0;
             moveHistory.Clear();
+            cellVisitCount.Clear();
+            this.maxMoves = maxMoves;  // Set the max moves limit for this session
 
             // Track session outcome
             bool stoppedByUser = false;
             bool errorOccurred = false;
+            bool tooManyRevisits = false;
             string? errorMessage = null;
 
-            // Start session logging with reasoning settings
-            _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs, reasoningEnabled, reasoningEffort, reasoningMaxTokens);
+            // Start session logging with new settings
+            _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs,
+                distanceToWall, showGoalCoordinates, maxRevisitsPerCell, maxMoves,
+                reasoningEnabled, reasoningEffort, reasoningMaxTokens);
 
             // Track the last AI response to display on next iteration
             string? lastAiResponse = null;
@@ -177,7 +189,8 @@ namespace DemoMazeGame
 
                 // Build the prompt for the AI (we need it before drawing if showing prompt)
                 string prompt = AiPlayer.BuildPrompt(
-                    map, playerRow, playerCol, showCoordinates, showAsciiMap, moveHistory, breadcrumbs);
+                    map, playerRow, playerCol, showCoordinates, showAsciiMap, moveHistory, breadcrumbs,
+                    distanceToWall, showGoalCoordinates, maxRevisitsPerCell);
 
                 // Draw game output - either normal or two-column layout
                 if (showAiPrompt)
@@ -286,6 +299,30 @@ namespace DemoMazeGame
 
                 if (moved)
                 {
+                    // Track cell visits
+                    var cellKey = (playerRow, playerCol);
+                    if (!cellVisitCount.ContainsKey(cellKey))
+                    {
+                        cellVisitCount[cellKey] = 1;
+                    }
+                    else
+                    {
+                        cellVisitCount[cellKey]++;
+                    }
+
+                    // Check if exceeded revisit limit
+                    if (cellVisitCount[cellKey] > maxRevisitsPerCell)
+                    {
+                        AnsiConsole.Clear();
+                        DrawAiHeader(modelName);
+                        DrawMaze();
+                        DrawAiStats();
+                        AnsiConsole.MarkupLine($"[red]🔄 AI visited the same cell ({playerCol}, {playerRow}) {cellVisitCount[cellKey]} times![/]");
+                        AnsiConsole.MarkupLine($"[yellow]Exceeded max revisits per cell ({maxRevisitsPerCell}). Terminating game.[/]");
+                        tooManyRevisits = true;
+                        break;
+                    }
+
                     // Check for win
                     if (map[playerRow, playerCol] == 2)
                     {
@@ -326,7 +363,7 @@ namespace DemoMazeGame
             }
 
             // End session logging
-            _sessionLogger.EndSession(gameWon, stoppedByUser, reachedMaxMoves, errorOccurred, errorMessage);
+            _sessionLogger.EndSession(gameWon, stoppedByUser, reachedMaxMoves, tooManyRevisits, errorOccurred, errorMessage);
         }
 
         // Draw the AI mode header with model info
@@ -366,6 +403,23 @@ namespace DemoMazeGame
         {
             DrawAiHeader(modelName);
 
+            // Get terminal dimensions for dynamic sizing
+            int terminalWidth = Console.WindowWidth;
+            int terminalHeight = Console.WindowHeight;
+
+            // Left column is fixed for the maze (maze is 12 cols * 2 chars = 24, plus some padding)
+            int leftColumnWidth = 32;
+            // Right column gets remaining space minus some padding for borders
+            int rightColumnWidth = Math.Max(60, terminalWidth - leftColumnWidth - 5);
+            // Max line width for text in right column (leave room for markup)
+            int maxLineWidth = rightColumnWidth - 5;
+
+            // Calculate available lines for right panel
+            // Reserve: 1 for header, maze height (11 rows), 3 for stats, 2 for "Asking AI...", 2 buffer
+            int mazeRows = map.GetLength(0);
+            int reservedLines = 1 + mazeRows + 5;
+            int availableLines = Math.Max(20, terminalHeight - reservedLines);
+
             // Build the left column content (maze + stats)
             var leftBuilder = new System.Text.StringBuilder();
             leftBuilder.AppendLine();
@@ -394,46 +448,56 @@ namespace DemoMazeGame
 
             // Build the right column content
             var rightBuilder = new System.Text.StringBuilder();
+            int linesUsed = 0;
 
             // Show AI response if available (this is what the AI said)
             if (!string.IsNullOrEmpty(aiResponse))
             {
                 rightBuilder.AppendLine("[cyan]── AI Response ──[/]");
+                linesUsed++;
+
                 var responseLines = aiResponse.Split('\n');
-                int maxResponseLines = 15;
+                // Give response about 40% of available space, prompt gets 60%
+                int maxResponseLines = Math.Max(10, (int)(availableLines * 0.4));
                 int showResponseLines = Math.Min(responseLines.Length, maxResponseLines);
 
                 for (int i = 0; i < showResponseLines; i++)
                 {
                     string line = responseLines[i].TrimEnd();
                     line = line.Replace("[", "[[").Replace("]", "]]");
-                    if (line.Length > 50)
+                    if (line.Length > maxLineWidth)
                     {
-                        line = line.Substring(0, 47) + "...";
+                        line = line.Substring(0, maxLineWidth - 3) + "...";
                     }
                     rightBuilder.AppendLine("[white]" + line + "[/]");
+                    linesUsed++;
                 }
 
                 if (responseLines.Length > maxResponseLines)
                 {
                     rightBuilder.AppendLine($"[grey]... ({responseLines.Length - maxResponseLines} more lines)[/]");
+                    linesUsed++;
                 }
                 rightBuilder.AppendLine();
+                linesUsed++;
             }
 
-            // Show prompt (truncated)
+            // Show prompt with remaining space
             rightBuilder.AppendLine("[yellow]── AI Prompt ──[/]");
+            linesUsed++;
+
             var promptLines = prompt.Split('\n');
-            int maxPromptLines = aiResponse != null ? 10 : 20;  // Less room if showing response
+            // Prompt gets remaining available lines
+            int maxPromptLines = Math.Max(10, availableLines - linesUsed - 1);
             int showPromptLines = Math.Min(promptLines.Length, maxPromptLines);
 
             for (int i = 0; i < showPromptLines; i++)
             {
                 string line = promptLines[i].TrimEnd();
                 line = line.Replace("[", "[[").Replace("]", "]]");
-                if (line.Length > 50)
+                if (line.Length > maxLineWidth)
                 {
-                    line = line.Substring(0, 47) + "...";
+                    line = line.Substring(0, maxLineWidth - 3) + "...";
                 }
                 rightBuilder.AppendLine("[grey]" + line + "[/]");
             }
@@ -447,8 +511,8 @@ namespace DemoMazeGame
             var table = new Table()
                 .Border(TableBorder.None)
                 .HideHeaders()
-                .AddColumn(new TableColumn("Left").Width(30))
-                .AddColumn(new TableColumn("Right").Width(55));
+                .AddColumn(new TableColumn("Left").Width(leftColumnWidth))
+                .AddColumn(new TableColumn("Right").Width(rightColumnWidth));
 
             table.AddRow(
                 new Markup(leftBuilder.ToString()),

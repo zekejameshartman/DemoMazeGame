@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace DemoMazeGame.Models
 {
     // Represents a single API call to OpenRouter
@@ -5,8 +7,8 @@ namespace DemoMazeGame.Models
     {
         public int MoveNumber { get; set; }
         public DateTime Timestamp { get; set; }
-        public string RequestJson { get; set; } = "";
-        public string ResponseJson { get; set; } = "";
+        public object? Request { get; set; }  // Stores parsed JSON object instead of string
+        public object? Response { get; set; }  // Stores parsed JSON object instead of string
         public int HttpStatusCode { get; set; }
         public double LatencyMs { get; set; }
     }

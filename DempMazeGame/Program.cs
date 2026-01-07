@@ -99,6 +99,10 @@ namespace DemoMazeGame
                                 menu.DelayBetweenMoves,
                                 menu.ShowAiPrompt,
                                 menu.Breadcrumbs,
+                                menu.DistanceToWall,
+                                menu.ShowGoalCoordinates,
+                                menu.MaxRevisitsPerCell,
+                                menu.MaxMoves,
                                 menu.ReasoningEnabled,
                                 menu.ReasoningEffort,
                                 menu.ReasoningMaxTokens

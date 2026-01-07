@@ -29,6 +29,10 @@ namespace DemoMazeGame.Models
         public bool ShowCoordinates { get; set; }
         public bool ShowAsciiMap { get; set; }
         public int DelayBetweenMoves { get; set; }
+        public bool DistanceToWall { get; set; }
+        public bool ShowGoalCoordinates { get; set; }
+        public int MaxRevisitsPerCell { get; set; }
+        public int MaxMoves { get; set; }
         public bool ReasoningEnabled { get; set; }
         public string ReasoningEffort { get; set; } = "";
         public int? ReasoningMaxTokens { get; set; }
@@ -39,6 +43,7 @@ namespace DemoMazeGame.Models
         public bool Won { get; set; }
         public bool StoppedByUser { get; set; }
         public bool ReachedMaxMoves { get; set; }
+        public bool TooManyRevisits { get; set; }
         public bool ErrorOccurred { get; set; }
         public string? ErrorMessage { get; set; }
     }

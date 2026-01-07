@@ -26,7 +26,9 @@ namespace DemoMazeGame
         public static readonly string[] ModelNames =
         {
             "Claude Haiku 4.5",
+            "Claude Sonnet 3.7 (Thinking)",
             "GPT-4o Mini",
+            "O3 Mini",
             "Gemini 2.0 Flash",
             "DeepSeek R1-0528:free",
             "Llama 4 Scout"
@@ -35,7 +37,9 @@ namespace DemoMazeGame
         public static readonly string[] ModelIds =
         {
             "anthropic/claude-haiku-4.5",
+            "anthropic/claude-3.7-sonnet:thinking",
             "openai/gpt-4o-mini",
+            "openai/o3-mini",
             "google/gemini-2.0-flash-001",
             "deepseek/deepseek-r1-0528:free",
             "meta-llama/llama-4-scout"
@@ -122,16 +126,54 @@ namespace DemoMazeGame
                     };
 
                     // Build reasoning configuration if enabled
+                    // OpenRouter requires EITHER effort OR max_tokens, never both
+                    // Anthropic models use max_tokens, OpenAI/others use effort
                     object? reasoningConfig = null;
                     if (reasoningEnabled)
                     {
+                        bool isAnthropicModel = modelId.StartsWith("anthropic/", StringComparison.OrdinalIgnoreCase);
+
                         if (reasoningMaxTokens.HasValue)
                         {
-                            reasoningConfig = new { max_tokens = reasoningMaxTokens.Value };
+                            // User specified explicit reasoning budget - use max_tokens
+                            reasoningConfig = new
+                            {
+                                enabled = true,
+                                max_tokens = reasoningMaxTokens.Value,
+                                exclude = false
+                            };
+                        }
+                        else if (isAnthropicModel)
+                        {
+                            // Anthropic models require max_tokens instead of effort
+                            // Convert effort level to approximate max_tokens value
+                            int maxTokensFromEffort = reasoningEffort.ToLower() switch
+                            {
+                                "xhigh" => 32000,   // 95% of typical Anthropic max
+                                "high" => 16000,    // 80%
+                                "medium" => 8000,   // 50% (default)
+                                "low" => 4000,      // 20%
+                                "minimal" => 2000,  // 10%
+                                "none" => 1024,     // minimum
+                                _ => 8000           // default to medium
+                            };
+
+                            reasoningConfig = new
+                            {
+                                enabled = true,
+                                max_tokens = 2000, // just hard code it to test for now
+                                exclude = false
+                            };
                         }
                         else
                         {
-                            reasoningConfig = new { effort = reasoningEffort };
+                            // OpenAI, Gemini, and other models use effort
+                            reasoningConfig = new
+                            {
+                                enabled = true,
+                                effort = reasoningEffort,
+                                exclude = false
+                            };
                         }
                     }
 
@@ -142,10 +184,10 @@ namespace DemoMazeGame
                         {
                             model = modelId,
                             messages = messages,
-                            max_tokens = 500,  // Allow reasoning models to think
+                            max_tokens = 5000,  // Allow reasoning models to think
                             temperature = 0.1,  // Low temperature = more consistent responses
                             tools = tools,
-                            tool_choice = new { type = "function", function = new { name = "move" } },  // Force tool call
+                            tool_choice = "auto",  // let the model decide when to use the tool
                             reasoning = reasoningConfig,  // Add reasoning configuration
                             usage = new { include = true }  // Request actual cost from OpenRouter
                         };
@@ -156,10 +198,10 @@ namespace DemoMazeGame
                         {
                             model = modelId,
                             messages = messages,
-                            max_tokens = 500,
+                            max_tokens = 5000,
                             temperature = 0.1,
                             tools = tools,
-                            tool_choice = new { type = "function", function = new { name = "move" } },
+                            tool_choice = "auto",
                             usage = new { include = true }
                         };
                     }
@@ -512,11 +554,24 @@ namespace DemoMazeGame
             bool includeCoordinates,
             bool includeAsciiMap,
             List<GameMoveRecord> moveHistory,
-            bool breadcrumbs)
+            bool breadcrumbs,
+            bool distanceToWall = true,
+            bool showGoalCoordinates = true,
+            int maxRevisitsPerCell = 10)
         {
             var prompt = new StringBuilder();
-            prompt.AppendLine("You are navigating a maze. Your goal is to find the exit.");
+            prompt.AppendLine("You are navigating a maze. Your goal is to reach the end position.");
             prompt.AppendLine();
+
+            // Coordinate system explanation (if coordinates or goal position shown)
+            if (includeCoordinates || showGoalCoordinates)
+            {
+                prompt.AppendLine("The coordinate system works as follows:");
+                prompt.AppendLine("- X-axis (first number): 0 is leftmost, higher values move right (east)");
+                prompt.AppendLine("- Y-axis (second number): 0 is topmost, higher values move down (south)");
+                prompt.AppendLine("- North decreases Y, south increases Y, east increases X, west decreases X");
+                prompt.AppendLine();
+            }
 
             // Optionally include the ASCII map
             if (includeAsciiMap)
@@ -526,80 +581,101 @@ namespace DemoMazeGame
                 prompt.AppendLine(BuildAsciiMap(map, row, col));
             }
 
-            // Show current position
-            if (includeCoordinates)
+            // Distance to walls in each direction (new feature)
+            if (distanceToWall)
             {
-                prompt.AppendLine($"Your current position: ({col},{row})");
+                var distances = CalculateDistancesToWalls(map, row, col);
+                prompt.AppendLine("You can see how many cells you can move in each direction:");
+                prompt.AppendLine($"- North: {distances.North} cells{(distances.North > 0 ? $" (to cell ({col}, {row - distances.North}))" : "")}");
+                prompt.AppendLine($"- South: {distances.South} cells{(distances.South > 0 ? $" (to cell ({col}, {row + distances.South}))" : "")}");
+                prompt.AppendLine($"- East: {distances.East} cells{(distances.East > 0 ? $" (to cell ({col + distances.East}, {row}))" : "")}");
+                prompt.AppendLine($"- West: {distances.West} cells{(distances.West > 0 ? $" (to cell ({col - distances.West}, {row}))" : "")}");
                 prompt.AppendLine();
             }
 
-            // Describe what the player can see in each direction
-            prompt.AppendLine("From your current position, here is what you see:");
-            prompt.AppendLine();
+            // Show current position and goal (if enabled)
+            if (includeCoordinates)
+            {
+                prompt.AppendLine($"Your current position is ({col}, {row}).");
+            }
 
-            // Check each direction
-            int northCell = map[row - 1, col];
-            prompt.AppendLine("  NORTH: " + DescribeCell(northCell));
+            if (showGoalCoordinates)
+            {
+                // Find the goal position in the map
+                var goalPos = FindGoalPosition(map);
+                if (goalPos.HasValue)
+                {
+                    prompt.AppendLine($"The goal is at position ({goalPos.Value.col}, {goalPos.Value.row}).");
+                }
+            }
 
-            int southCell = map[row + 1, col];
-            prompt.AppendLine("  SOUTH: " + DescribeCell(southCell));
-
-            int eastCell = map[row, col + 1];
-            prompt.AppendLine("  EAST: " + DescribeCell(eastCell));
-
-            int westCell = map[row, col - 1];
-            prompt.AppendLine("  WEST: " + DescribeCell(westCell));
-
-            // Include full move history - AI needs all context to make good decisions
-            if (moveHistory.Count > 0)
+            if (includeCoordinates || showGoalCoordinates)
             {
                 prompt.AppendLine();
+            }
 
-                // Count how many times we've visited each position
-                var visitCounts = new Dictionary<string, int>();
-                foreach (var move in moveHistory)
+            // Include move history with distance observations (condensed format)
+            if (moveHistory.Count > 0)
+            {
+                if (distanceToWall && !breadcrumbs)
                 {
-                    if (!move.HitWall)
+                    // New condensed format with distance data
+                    prompt.AppendLine("Your travel history (with what you observed at each position):");
+                    prompt.AppendLine("Note: Numbers show how many cells you could see in each direction (e.g., 2E means 2 cells east)");
+
+                    for (int i = 0; i < moveHistory.Count; i++)
                     {
-                        string posKey = $"{move.ToCol},{move.ToRow}";
-                        if (visitCounts.ContainsKey(posKey))
-                            visitCounts[posKey]++;
+                        var move = moveHistory[i];
+                        if (!move.HitWall)
+                        {
+                            // Calculate distances at the FROM position
+                            var distances = CalculateDistancesToWalls(map, move.FromRow, move.FromCol);
+                            string distanceStr = $"[saw: {distances.East}E, {distances.West}W, {distances.South}S, {distances.North}N]";
+                            prompt.AppendLine($"{i + 1}. At ({move.FromCol}, {move.FromRow}) {distanceStr} - Moved {DirectionToWord(move.Direction).ToLower()} to position ({move.ToCol}, {move.ToRow})");
+                        }
                         else
-                            visitCounts[posKey] = 1;
+                        {
+                            prompt.AppendLine($"{i + 1}. At ({move.FromCol}, {move.FromRow}) - Tried to move {DirectionToWord(move.Direction).ToLower()} but hit a wall");
+                        }
                     }
                 }
-
-                if (breadcrumbs)
+                else if (breadcrumbs)
                 {
-                    prompt.AppendLine("You have been leaving breadcrumbs as you travel.");
-                    prompt.AppendLine("Your journey so far:");
-                }
-                else
-                {
-                    prompt.AppendLine("Move history:");
-                }
-
-                // Display all moves
-                foreach (var move in moveHistory)
-                {
-                    string moveStr = move.ToCompactString();
-
-                    // If breadcrumbs is on, mark revisited spots
-                    if (breadcrumbs && !move.HitWall)
+                    // Breadcrumbs mode - count visits
+                    var visitCounts = new Dictionary<string, int>();
+                    foreach (var move in moveHistory)
                     {
-                        string posKey = $"{move.ToCol},{move.ToRow}";
-                        if (visitCounts.ContainsKey(posKey) && visitCounts[posKey] > 1)
+                        if (!move.HitWall)
                         {
-                            moveStr += " [crumbs]";
+                            string posKey = $"{move.ToCol},{move.ToRow}";
+                            if (visitCounts.ContainsKey(posKey))
+                                visitCounts[posKey]++;
+                            else
+                                visitCounts[posKey] = 1;
                         }
                     }
 
-                    prompt.AppendLine("  " + moveStr);
-                }
+                    prompt.AppendLine("You have been leaving breadcrumbs as you travel.");
+                    prompt.AppendLine("Your journey so far:");
 
-                // If breadcrumbs is on and we're revisiting a lot, add a hint
-                if (breadcrumbs)
-                {
+                    foreach (var move in moveHistory)
+                    {
+                        string moveStr = move.ToCompactString();
+
+                        // Mark revisited spots
+                        if (breadcrumbs && !move.HitWall)
+                        {
+                            string posKey = $"{move.ToCol},{move.ToRow}";
+                            if (visitCounts.ContainsKey(posKey) && visitCounts[posKey] > 1)
+                            {
+                                moveStr += " [crumbs]";
+                            }
+                        }
+
+                        prompt.AppendLine("  " + moveStr);
+                    }
+
+                    // Warn about circles
                     string currentPosKey = $"{col},{row}";
                     if (visitCounts.ContainsKey(currentPosKey) && visitCounts[currentPosKey] >= 2)
                     {
@@ -607,11 +683,28 @@ namespace DemoMazeGame
                         prompt.AppendLine("WARNING: Lots of breadcrumbs here - you're going in circles!");
                     }
                 }
+                else
+                {
+                    // Simple move history
+                    prompt.AppendLine("Move history:");
+                    foreach (var move in moveHistory)
+                    {
+                        prompt.AppendLine("  " + move.ToCompactString());
+                    }
+                }
+
+                prompt.AppendLine();
             }
 
-            // Final instruction - remind about tool calling
-            prompt.AppendLine();
-            prompt.AppendLine("Choose your next move and call the 'move' tool with your chosen direction (north, south, east, or west).");
+            // Final instruction
+            prompt.AppendLine("Use the move function to navigate. Choose a direction: north, south, east, or west.");
+
+            // Warning about revisit limit
+            if (maxRevisitsPerCell > 0)
+            {
+                prompt.AppendLine();
+                prompt.AppendLine($"WARNING: If you visit the same cell {maxRevisitsPerCell} times, the evaluation will be terminated. Avoid getting stuck in loops!");
+            }
 
             return prompt.ToString();
         }
@@ -667,6 +760,75 @@ namespace DemoMazeGame
             {
                 return "Unknown";
             }
+        }
+
+        // Calculate how many cells can be seen in each direction until hitting a wall
+        private static (int North, int South, int East, int West) CalculateDistancesToWalls(int[,] map, int row, int col)
+        {
+            int north = 0, south = 0, east = 0, west = 0;
+
+            // North - decrease row
+            for (int r = row - 1; r >= 0; r--)
+            {
+                if (map[r, col] == 1) break;  // Hit a wall
+                north++;
+            }
+
+            // South - increase row
+            for (int r = row + 1; r < map.GetLength(0); r++)
+            {
+                if (map[r, col] == 1) break;  // Hit a wall
+                south++;
+            }
+
+            // East - increase col
+            for (int c = col + 1; c < map.GetLength(1); c++)
+            {
+                if (map[row, c] == 1) break;  // Hit a wall
+                east++;
+            }
+
+            // West - decrease col
+            for (int c = col - 1; c >= 0; c--)
+            {
+                if (map[row, c] == 1) break;  // Hit a wall
+                west++;
+            }
+
+            return (north, south, east, west);
+        }
+
+        // Find the goal position (cell with value 2) in the map
+        private static (int row, int col)? FindGoalPosition(int[,] map)
+        {
+            int rows = map.GetLength(0);
+            int cols = map.GetLength(1);
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    if (map[row, col] == 2)
+                    {
+                        return (row, col);
+                    }
+                }
+            }
+
+            return null;  // No goal found
+        }
+
+        // Convert direction letter to full word
+        private static string DirectionToWord(string direction)
+        {
+            return direction.ToUpper() switch
+            {
+                "N" => "North",
+                "S" => "South",
+                "E" => "East",
+                "W" => "West",
+                _ => direction
+            };
         }
     }
 }
