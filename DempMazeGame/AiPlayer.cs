@@ -23,26 +23,46 @@ namespace DemoMazeGame
 
         // List of available AI models we can test
         // Each model has a display name and the actual model ID used by OpenRouter
+        // Top models from OpenRouter by usage
         public static readonly string[] ModelNames =
         {
+            // Top 10 most popular on OpenRouter
+            "Claude Sonnet 4.5",
+            "Grok 4",
+            "MiMo-V2-Flash (free)",
+            "Gemini 3 Flash Preview",
+            "Claude Opus 4.5",
+            "Gemini 2.5 Flash",
+            "DeepSeek V3.2",
+            "Gemini 2.5 Flash Lite",
+            "Grok 4.1 Fast",
+            "GLM 4.7",
             "Claude Haiku 4.5",
-            "Claude Sonnet 3.7 (Thinking)",
             "GPT-4o Mini",
             "O3 Mini",
-            "Gemini 2.0 Flash",
-            "DeepSeek R1-0528:free",
-            "Llama 4 Scout"
+            "DeepSeek R1-0528 (free)",
+            "Llama 4 Scout",
+            "GPT-5.2"
         };
 
         public static readonly string[] ModelIds =
         {
-            "anthropic/claude-haiku-4.5",
-            "anthropic/claude-3.7-sonnet:thinking",
+            "anthropic/claude-sonnet-4.5",
+            "x-ai/grok-4",
+            "xiaomi/mimo-v2-flash:free",
+            "google/gemini-3-flash-preview",
+            "anthropic/claude-opus-4.5",
+            "google/gemini-2.5-flash",
+            "deepseek/deepseek-v3.2",
+            "google/gemini-2.5-flash-lite",
+            "x-ai/grok-4.1-fast",
+            "zhipu/glm-4.7",
+            "anthropic/claude-haiku-4-5-20250514",
             "openai/gpt-4o-mini",
             "openai/o3-mini",
-            "google/gemini-2.0-flash-001",
             "deepseek/deepseek-r1-0528:free",
-            "meta-llama/llama-4-scout"
+            "meta-llama/llama-4-scout",
+            "openai/gpt-5.2"
         };
 
         // Constructor - runs when we create a new AiPlayer
@@ -586,10 +606,18 @@ namespace DemoMazeGame
             {
                 var distances = CalculateDistancesToWalls(map, row, col);
                 prompt.AppendLine("You can see how many cells you can move in each direction:");
-                prompt.AppendLine($"- North: {distances.North} cells{(distances.North > 0 ? $" (to cell ({col}, {row - distances.North}))" : "")}");
-                prompt.AppendLine($"- South: {distances.South} cells{(distances.South > 0 ? $" (to cell ({col}, {row + distances.South}))" : "")}");
-                prompt.AppendLine($"- East: {distances.East} cells{(distances.East > 0 ? $" (to cell ({col + distances.East}, {row}))" : "")}");
-                prompt.AppendLine($"- West: {distances.West} cells{(distances.West > 0 ? $" (to cell ({col - distances.West}, {row}))" : "")}");
+                prompt.AppendLine($"- North: {distances.North} cells{(distances.North > 0 ? $" (to cell ({col}, {row - distances.North}))" : "")}{(distances.ExitNorth ? " [EXIT VISIBLE!]" : "")}");
+                prompt.AppendLine($"- South: {distances.South} cells{(distances.South > 0 ? $" (to cell ({col}, {row + distances.South}))" : "")}{(distances.ExitSouth ? " [EXIT VISIBLE!]" : "")}");
+                prompt.AppendLine($"- East: {distances.East} cells{(distances.East > 0 ? $" (to cell ({col + distances.East}, {row}))" : "")}{(distances.ExitEast ? " [EXIT VISIBLE!]" : "")}");
+                prompt.AppendLine($"- West: {distances.West} cells{(distances.West > 0 ? $" (to cell ({col - distances.West}, {row}))" : "")}{(distances.ExitWest ? " [EXIT VISIBLE!]" : "")}");
+
+                // Add explicit call-to-action if exit is visible
+                if (distances.ExitNorth || distances.ExitSouth || distances.ExitEast || distances.ExitWest)
+                {
+                    string exitDirection = distances.ExitNorth ? "north" : distances.ExitSouth ? "south" : distances.ExitEast ? "east" : "west";
+                    prompt.AppendLine();
+                    prompt.AppendLine($"*** THE EXIT IS VISIBLE TO THE {exitDirection.ToUpper()}! Go {exitDirection} to reach it! ***");
+                }
                 prompt.AppendLine();
             }
 
@@ -631,7 +659,13 @@ namespace DemoMazeGame
                             // Calculate distances at the FROM position
                             var distances = CalculateDistancesToWalls(map, move.FromRow, move.FromCol);
                             string distanceStr = $"[saw: {distances.East}E, {distances.West}W, {distances.South}S, {distances.North}N]";
-                            prompt.AppendLine($"{i + 1}. At ({move.FromCol}, {move.FromRow}) {distanceStr} - Moved {DirectionToWord(move.Direction).ToLower()} to position ({move.ToCol}, {move.ToRow})");
+                            // Note if exit was visible from that position
+                            string exitNote = "";
+                            if (distances.ExitNorth) exitNote = " [EXIT was visible N!]";
+                            else if (distances.ExitSouth) exitNote = " [EXIT was visible S!]";
+                            else if (distances.ExitEast) exitNote = " [EXIT was visible E!]";
+                            else if (distances.ExitWest) exitNote = " [EXIT was visible W!]";
+                            prompt.AppendLine($"{i + 1}. At ({move.FromCol}, {move.FromRow}) {distanceStr}{exitNote} - Moved {DirectionToWord(move.Direction).ToLower()} to position ({move.ToCol}, {move.ToRow})");
                         }
                         else
                         {
@@ -763,15 +797,18 @@ namespace DemoMazeGame
         }
 
         // Calculate how many cells can be seen in each direction until hitting a wall
-        private static (int North, int South, int East, int West) CalculateDistancesToWalls(int[,] map, int row, int col)
+        // Also returns whether the exit is visible in each direction
+        private static (int North, int South, int East, int West, bool ExitNorth, bool ExitSouth, bool ExitEast, bool ExitWest) CalculateDistancesToWalls(int[,] map, int row, int col)
         {
             int north = 0, south = 0, east = 0, west = 0;
+            bool exitNorth = false, exitSouth = false, exitEast = false, exitWest = false;
 
             // North - decrease row
             for (int r = row - 1; r >= 0; r--)
             {
                 if (map[r, col] == 1) break;  // Hit a wall
                 north++;
+                if (map[r, col] == 2) exitNorth = true;  // Found the exit
             }
 
             // South - increase row
@@ -779,6 +816,7 @@ namespace DemoMazeGame
             {
                 if (map[r, col] == 1) break;  // Hit a wall
                 south++;
+                if (map[r, col] == 2) exitSouth = true;  // Found the exit
             }
 
             // East - increase col
@@ -786,6 +824,7 @@ namespace DemoMazeGame
             {
                 if (map[row, c] == 1) break;  // Hit a wall
                 east++;
+                if (map[row, c] == 2) exitEast = true;  // Found the exit
             }
 
             // West - decrease col
@@ -793,9 +832,10 @@ namespace DemoMazeGame
             {
                 if (map[row, c] == 1) break;  // Hit a wall
                 west++;
+                if (map[row, c] == 2) exitWest = true;  // Found the exit
             }
 
-            return (north, south, east, west);
+            return (north, south, east, west, exitNorth, exitSouth, exitEast, exitWest);
         }
 
         // Find the goal position (cell with value 2) in the map

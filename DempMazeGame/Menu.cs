@@ -7,11 +7,11 @@ namespace DemoMazeGame
     {
         // Settings that can be changed from the menu
         public int SelectedModelIndex = 0;      // Which AI model is selected
-        public bool ShowCoordinates = false;    // Whether to show coordinates to AI
+        public bool ShowCoordinates = true;     // Whether to show coordinates to AI
         public bool ShowAsciiMap = false;       // Whether to show ASCII map to AI
-        public int DelayBetweenMoves = 500;     // Milliseconds to wait between AI moves
-        public bool ShowAiPrompt = false;       // Whether to show the prompt sent to AI
-        public bool Breadcrumbs = false;        // Whether to add breadcrumb hints about revisited spots
+        public int DelayBetweenMoves = 0;       // Milliseconds to wait between AI moves
+        public bool ShowAiPrompt = true;        // Whether to show the prompt sent to AI
+        public bool Breadcrumbs = true;         // Whether to add breadcrumb hints about revisited spots
 
         // New prompt optimization settings
         public bool DistanceToWall = true;      // Whether to show distance to walls in each direction
@@ -58,7 +58,8 @@ namespace DemoMazeGame
                         "[bold]2[/] Watch AI Play",
                         "[bold]3[/] Select AI Model",
                         "[bold]4[/] Settings",
-                        "[bold]5[/] Quit"
+                        "[bold]5[/] View Session Logs",
+                        "[bold]6[/] Quit"
                     }));
 
             // Extract the number from the choice
@@ -67,6 +68,7 @@ namespace DemoMazeGame
             if (choice.Contains("3")) return "3";
             if (choice.Contains("4")) return "4";
             if (choice.Contains("5")) return "5";
+            if (choice.Contains("6")) return "6";
             return "";
         }
 
@@ -257,14 +259,14 @@ namespace DemoMazeGame
                 else if (choice.Contains("9"))
                 {
                     var newDelay = AnsiConsole.Prompt(
-                        new TextPrompt<int>("[yellow]Enter delay in milliseconds[/] [grey](100-2000)[/]:")
+                        new TextPrompt<int>("[yellow]Enter delay in milliseconds[/] [grey](0-2000)[/]:")
                             .DefaultValue(DelayBetweenMoves)
                             .ValidationErrorMessage("[red]Please enter a valid number[/]")
                             .Validate(delay =>
                             {
                                 return delay switch
                                 {
-                                    < 100 => ValidationResult.Error("[red]Delay must be at least 100ms[/]"),
+                                    < 0 => ValidationResult.Error("[red]Delay cannot be negative[/]"),
                                     > 2000 => ValidationResult.Error("[red]Delay must be at most 2000ms[/]"),
                                     _ => ValidationResult.Success()
                                 };

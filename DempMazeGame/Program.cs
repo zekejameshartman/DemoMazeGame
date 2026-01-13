@@ -122,6 +122,12 @@ namespace DemoMazeGame
                     }
                     else if (choice == "5")
                     {
+                        // View Session Logs
+                        var logViewer = new LogViewer();
+                        logViewer.ShowLogSelector();
+                    }
+                    else if (choice == "6")
+                    {
                         // Quit
                         keepRunning = false;
                     }

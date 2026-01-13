@@ -451,14 +451,15 @@ namespace DemoMazeGame
             int linesUsed = 0;
 
             // Show AI response if available (this is what the AI said)
+            // Give response most of the space since that's what the user wants to see
             if (!string.IsNullOrEmpty(aiResponse))
             {
                 rightBuilder.AppendLine("[cyan]── AI Response ──[/]");
                 linesUsed++;
 
                 var responseLines = aiResponse.Split('\n');
-                // Give response about 40% of available space, prompt gets 60%
-                int maxResponseLines = Math.Max(10, (int)(availableLines * 0.4));
+                // Give response 85% of available space - user wants to see more
+                int maxResponseLines = Math.Max(20, (int)(availableLines * 0.85));
                 int showResponseLines = Math.Min(responseLines.Length, maxResponseLines);
 
                 for (int i = 0; i < showResponseLines; i++)
@@ -482,29 +483,33 @@ namespace DemoMazeGame
                 linesUsed++;
             }
 
-            // Show prompt with remaining space
-            rightBuilder.AppendLine("[yellow]── AI Prompt ──[/]");
-            linesUsed++;
+            // Show condensed prompt - just the key directional/visibility data (compact)
+            rightBuilder.AppendLine("[yellow]── Vision ──[/]");
 
+            // Extract just the important parts of the prompt for display
             var promptLines = prompt.Split('\n');
-            // Prompt gets remaining available lines
-            int maxPromptLines = Math.Max(10, availableLines - linesUsed - 1);
-            int showPromptLines = Math.Min(promptLines.Length, maxPromptLines);
+            int promptLinesShown = 0;
 
-            for (int i = 0; i < showPromptLines; i++)
+            foreach (var rawLine in promptLines)
             {
-                string line = promptLines[i].TrimEnd();
-                line = line.Replace("[", "[[").Replace("]", "]]");
-                if (line.Length > maxLineWidth)
+                if (promptLinesShown >= 6) break;  // Keep prompt section very compact
+
+                string line = rawLine.TrimEnd();
+                // Only show lines with key data: directions, positions, exit visibility
+                bool isKeyLine = line.StartsWith("- North:") || line.StartsWith("- South:") ||
+                                 line.StartsWith("- East:") || line.StartsWith("- West:") ||
+                                 line.Contains("EXIT VISIBLE") || line.Contains("THE EXIT IS");
+
+                if (isKeyLine)
                 {
-                    line = line.Substring(0, maxLineWidth - 3) + "...";
+                    line = line.Replace("[", "[[").Replace("]", "]]");
+                    if (line.Length > maxLineWidth)
+                    {
+                        line = line.Substring(0, maxLineWidth - 3) + "...";
+                    }
+                    rightBuilder.AppendLine("[grey]" + line + "[/]");
+                    promptLinesShown++;
                 }
-                rightBuilder.AppendLine("[grey]" + line + "[/]");
-            }
-
-            if (promptLines.Length > maxPromptLines)
-            {
-                rightBuilder.AppendLine($"[grey]... ({promptLines.Length - maxPromptLines} more lines)[/]");
             }
 
             // Use Spectre Columns for side-by-side display
