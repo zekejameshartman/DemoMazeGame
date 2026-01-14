@@ -17,7 +17,7 @@ namespace DemoMazeGame
         public bool DistanceToWall = true;      // Whether to show distance to walls in each direction
         public bool ShowGoalCoordinates = true; // Whether to show goal position to AI
         public int MaxRevisitsPerCell = 10;     // Max times AI can revisit same cell before failure
-        public int MaxMoves = 200;              // Max total moves before failure
+        public int MaxMoves = 50;               // Max total moves before failure
 
         // Reasoning token settings
         public bool ReasoningEnabled = true;    // Whether to enable reasoning tokens
@@ -59,7 +59,8 @@ namespace DemoMazeGame
                         "[bold]3[/] Select AI Model",
                         "[bold]4[/] Settings",
                         "[bold]5[/] View Session Logs",
-                        "[bold]6[/] Quit"
+                        "[bold cyan]6[/] [cyan]Batch Runner[/] - Run multiple AI sessions",
+                        "[bold]7[/] Quit"
                     }));
 
             // Extract the number from the choice
@@ -68,7 +69,8 @@ namespace DemoMazeGame
             if (choice.Contains("3")) return "3";
             if (choice.Contains("4")) return "4";
             if (choice.Contains("5")) return "5";
-            if (choice.Contains("6")) return "6";
+            if (choice.Contains("6") || choice.Contains("Batch")) return "6";
+            if (choice.Contains("7") || choice.Contains("Quit")) return "7";
             return "";
         }
 

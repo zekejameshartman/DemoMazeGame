@@ -128,6 +128,36 @@ namespace DemoMazeGame
                     }
                     else if (choice == "6")
                     {
+                        // Batch Runner
+                        // First, make sure we have an API key
+                        if (string.IsNullOrEmpty(apiKey))
+                        {
+                            apiKey = menu.AskForApiKey();
+                            if (!string.IsNullOrEmpty(apiKey))
+                            {
+                                SaveApiKeyToEnvFile(apiKey);
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(apiKey))
+                        {
+                            appLogger.LogWarning("No API key provided for batch runner");
+                            AnsiConsole.MarkupLine("[red]No API key provided. Cannot run batch runner.[/]");
+                            AnsiConsole.MarkupLine("[grey]Press any key to continue...[/]");
+                            Console.ReadKey(true);
+                        }
+                        else
+                        {
+                            var batchRunner = new BatchRunner(apiKey, appLogger);
+                            var result = await batchRunner.ConfigureAndRun(menu);
+                            if (!result.Cancelled || result.Results.Count > 0)
+                            {
+                                batchRunner.ShowSummary(result);
+                            }
+                        }
+                    }
+                    else if (choice == "7")
+                    {
                         // Quit
                         keepRunning = false;
                     }

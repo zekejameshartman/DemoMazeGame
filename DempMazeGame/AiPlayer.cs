@@ -57,7 +57,7 @@ namespace DemoMazeGame
             "google/gemini-2.5-flash-lite",
             "x-ai/grok-4.1-fast",
             "zhipu/glm-4.7",
-            "anthropic/claude-haiku-4-5-20250514",
+            "anthropic/claude-haiku-4.5",
             "openai/gpt-4o-mini",
             "openai/o3-mini",
             "deepseek/deepseek-r1-0528:free",

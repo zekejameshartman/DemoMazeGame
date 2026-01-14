@@ -199,10 +199,11 @@ namespace DemoMazeGame.Services
 
             try
             {
-                // Filename: timestamp_modelname.json
-                string timestamp = _currentSession.StartTime.ToString("yyyy-MM-dd_HHmmss");
+                // Filename: timestamp_shortid_modelname.json (with ms precision + session ID for uniqueness)
+                string timestamp = _currentSession.StartTime.ToString("yyyy-MM-dd_HHmmss_fff");
+                string shortId = _currentSession.SessionId.Substring(0, 4);
                 string safeModelName = _currentSession.Model.Name.Replace(" ", "-").Replace("/", "-").Replace(":", "").ToLower();
-                string fileName = $"{timestamp}_{safeModelName}.json";
+                string fileName = $"{timestamp}_{shortId}_{safeModelName}.json";
                 string filePath = Path.Combine(_sessionsDir, fileName);
 
                 string json = JsonSerializer.Serialize(_currentSession, _jsonOptions);
@@ -222,10 +223,11 @@ namespace DemoMazeGame.Services
 
             try
             {
-                // Filename: timestamp_modelname_api.json (paired with session log)
-                string timestamp = _currentApiLog.StartTime.ToString("yyyy-MM-dd_HHmmss");
+                // Filename: timestamp_shortid_modelname_api.json (paired with session log)
+                string timestamp = _currentApiLog.StartTime.ToString("yyyy-MM-dd_HHmmss_fff");
+                string shortId = _currentSession?.SessionId.Substring(0, 4) ?? "0000";
                 string safeModelName = _currentApiLog.ModelName.Replace(" ", "-").Replace("/", "-").Replace(":", "").ToLower();
-                string fileName = $"{timestamp}_{safeModelName}_api.json";
+                string fileName = $"{timestamp}_{shortId}_{safeModelName}_api.json";
                 string filePath = Path.Combine(_sessionsDir, fileName);
 
                 string json = JsonSerializer.Serialize(_currentApiLog, _jsonOptions);

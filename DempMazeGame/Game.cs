@@ -4,6 +4,30 @@ using Spectre.Console;
 
 namespace DemoMazeGame
 {
+    // Progress update for batch runner display
+    public class ProgressUpdate
+    {
+        public int MoveNumber { get; set; }
+        public int MaxMoves { get; set; }
+        public int DistanceToExit { get; set; }  // Manhattan distance to exit
+        public int MaxBreadcrumbs { get; set; }  // Most visits to any single cell
+        public int PlayerRow { get; set; }
+        public int PlayerCol { get; set; }
+    }
+
+    // Result from a headless AI game session (for batch running)
+    public class SessionResult
+    {
+        public bool Won { get; set; }
+        public string FailureReason { get; set; } = "";  // "max_moves", "revisit_limit", "error", "cancelled"
+        public int TotalMoves { get; set; }
+        public int UniquePositions { get; set; }
+        public int Backtracks { get; set; }
+        public int WallCollisions { get; set; }
+        public decimal Cost { get; set; }
+        public int TotalTokens { get; set; }
+    }
+
     // This class contains the main game logic
     // It handles both human players and AI players
     public class Game
@@ -51,7 +75,7 @@ namespace DemoMazeGame
         private Dictionary<(int row, int col), int> cellVisitCount = new Dictionary<(int, int), int>();
 
         // Current max moves limit (set per AI game session)
-        private int maxMoves = 200;
+        private int maxMoves = 50;
 
         // Run the game with a human player
         public void PlayAsHuman()
@@ -364,6 +388,233 @@ namespace DemoMazeGame
 
             // End session logging
             _sessionLogger.EndSession(gameWon, stoppedByUser, reachedMaxMoves, tooManyRevisits, errorOccurred, errorMessage);
+        }
+
+        // Run a headless AI session (no console output) for batch processing
+        // Returns session result for aggregation
+        public async Task<SessionResult> RunHeadlessSession(
+            AiPlayer ai,
+            string modelId,
+            string modelName,
+            bool showCoordinates,
+            bool showAsciiMap,
+            bool breadcrumbs,
+            bool distanceToWall,
+            bool showGoalCoordinates,
+            int maxRevisitsPerCell,
+            int maxMoves,
+            bool reasoningEnabled,
+            string reasoningEffort,
+            int? reasoningMaxTokens,
+            Action<ProgressUpdate> progressCallback,
+            CancellationToken cancellationToken = default)
+        {
+            // Exit position (hardcoded for this maze)
+            const int exitRow = 9;
+            const int exitCol = 11;
+
+            // Reset game state for this session
+            playerRow = 1;
+            playerCol = 1;
+            moveCount = 0;
+            gameWon = false;
+            runningCost = 0m;
+            totalTokens = 0;
+            moveHistory.Clear();
+            cellVisitCount.Clear();
+            this.maxMoves = maxMoves;
+
+            // Track unique positions and backtracks locally
+            var visitedPositions = new HashSet<(int, int)>();
+            int backtracks = 0;
+            int wallCollisions = 0;
+
+            // Track session outcome
+            bool errorOccurred = false;
+            bool tooManyRevisits = false;
+            string failureReason = "";
+
+            // Start session logging
+            _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, 0,
+                distanceToWall, showGoalCoordinates, maxRevisitsPerCell, maxMoves,
+                reasoningEnabled, reasoningEffort, reasoningMaxTokens);
+
+            // Helper to calculate Manhattan distance to exit
+            int GetDistanceToExit() => Math.Abs(playerRow - exitRow) + Math.Abs(playerCol - exitCol);
+
+            // Helper to get max breadcrumbs (highest visit count to any cell)
+            int GetMaxBreadcrumbs() => cellVisitCount.Count > 0 ? cellVisitCount.Values.Max() : 0;
+
+            // Report initial progress
+            progressCallback(new ProgressUpdate
+            {
+                MoveNumber = 0,
+                MaxMoves = maxMoves,
+                DistanceToExit = GetDistanceToExit(),
+                MaxBreadcrumbs = 0,
+                PlayerRow = playerRow,
+                PlayerCol = playerCol
+            });
+
+            // Main game loop
+            while (moveCount < maxMoves)
+            {
+                // Check for cancellation
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    failureReason = "cancelled";
+                    break;
+                }
+
+                // Build the prompt for the AI
+                string prompt = AiPlayer.BuildPrompt(
+                    map, playerRow, playerCol, showCoordinates, showAsciiMap, moveHistory, breadcrumbs,
+                    distanceToWall, showGoalCoordinates, maxRevisitsPerCell);
+
+                // Get the AI's move
+                var moveResult = await ai.GetAiMove(prompt, modelId, reasoningEnabled, reasoningEffort, reasoningMaxTokens);
+
+                // Update running totals
+                runningCost += moveResult.ActualCostUsd;
+                totalTokens += moveResult.TotalTokens;
+
+                // Check for API errors
+                if (moveResult.IsError)
+                {
+                    errorOccurred = true;
+                    failureReason = "error";
+                    break;
+                }
+
+                // Handle parse errors - retry once
+                if (moveResult.Direction == "ERROR")
+                {
+                    var retryResult = await ai.GetAiMove(prompt, modelId, reasoningEnabled, reasoningEffort, reasoningMaxTokens);
+                    runningCost += retryResult.ActualCostUsd;
+                    totalTokens += retryResult.TotalTokens;
+                    moveResult = retryResult;
+                }
+
+                // Store previous position for logging
+                int fromRow = playerRow;
+                int fromCol = playerCol;
+
+                // Try to move
+                bool moved = TryMove(moveResult.Direction);
+                moveCount++;
+
+                // Report progress with detailed info
+                progressCallback(new ProgressUpdate
+                {
+                    MoveNumber = moveCount,
+                    MaxMoves = maxMoves,
+                    DistanceToExit = GetDistanceToExit(),
+                    MaxBreadcrumbs = GetMaxBreadcrumbs(),
+                    PlayerRow = playerRow,
+                    PlayerCol = playerCol
+                });
+
+                // Add to move history
+                moveHistory.Add(new GameMoveRecord
+                {
+                    MoveNumber = moveCount,
+                    Direction = moveResult.Direction,
+                    FromRow = fromRow,
+                    FromCol = fromCol,
+                    ToRow = playerRow,
+                    ToCol = playerCol,
+                    HitWall = !moved
+                });
+
+                // Log the move
+                _sessionLogger.LogMove(
+                    moveCount,
+                    moveResult.Direction,
+                    fromRow, fromCol,
+                    playerRow, playerCol,
+                    moved,
+                    moveResult.PromptTokens,
+                    moveResult.CompletionTokens,
+                    moveResult.ActualCostUsd,
+                    moveResult.ReasoningTokens,
+                    moveResult.Reasoning
+                );
+
+                // Log API call
+                _sessionLogger.LogApiCall(
+                    moveCount,
+                    moveResult.RequestJson,
+                    moveResult.ResponseJson,
+                    moveResult.HttpStatusCode,
+                    moveResult.LatencyMs
+                );
+
+                if (moved)
+                {
+                    // Track unique positions and backtracks
+                    var pos = (playerRow, playerCol);
+                    if (!visitedPositions.Contains(pos))
+                    {
+                        visitedPositions.Add(pos);
+                    }
+                    else
+                    {
+                        backtracks++;
+                    }
+
+                    // Track cell visits for revisit limit
+                    var cellKey = (playerRow, playerCol);
+                    if (!cellVisitCount.ContainsKey(cellKey))
+                    {
+                        cellVisitCount[cellKey] = 1;
+                    }
+                    else
+                    {
+                        cellVisitCount[cellKey]++;
+                    }
+
+                    // Check if exceeded revisit limit
+                    if (cellVisitCount[cellKey] > maxRevisitsPerCell)
+                    {
+                        tooManyRevisits = true;
+                        failureReason = "revisit_limit";
+                        break;
+                    }
+
+                    // Check for win
+                    if (map[playerRow, playerCol] == 2)
+                    {
+                        gameWon = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    wallCollisions++;
+                }
+            }
+
+            // Check if we hit max moves
+            bool reachedMaxMoves = moveCount >= maxMoves && !gameWon && failureReason == "";
+            if (reachedMaxMoves)
+            {
+                failureReason = "max_moves";
+            }
+
+            // End session logging
+            _sessionLogger.EndSession(gameWon, false, reachedMaxMoves, tooManyRevisits, errorOccurred, null);
+
+            return new SessionResult
+            {
+                Won = gameWon,
+                FailureReason = failureReason,
+                TotalMoves = moveCount,
+                UniquePositions = visitedPositions.Count,
+                Backtracks = backtracks,
+                WallCollisions = wallCollisions,
+                Cost = runningCost,
+                TotalTokens = totalTokens
+            };
         }
 
         // Draw the AI mode header with model info
