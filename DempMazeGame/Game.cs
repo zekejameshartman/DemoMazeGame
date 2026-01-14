@@ -42,7 +42,6 @@ namespace DemoMazeGame
         }
 
         // The maze map - 1 = wall, 0 = open path, 2 = exit
-        // This is a more interesting maze for testing AI spatial reasoning
         private int[,] map =
         {
             {1,1,1,1,1,1,1,1,1,1,1,1},
