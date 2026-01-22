@@ -225,7 +225,7 @@ awk -F'\t' -v OFS='\t' '
 
   END {
     # Detailed table header (keep it narrow to avoid wrapping)
-    print "Model","Goal","Runs","Won","Lost","Win%","AvgMv","Coll/M","Tok/M","$/Win","Stop","Max","Err"
+    print "Model","Goal","Runs","Won","Lost","Win%","AvgMv","Coll/M","Tok/M","Cost$","$/Win","Stop","Max","Err"
 
     for (k in n) {
       split(k, a, OFS)
@@ -243,12 +243,13 @@ awk -F'\t' -v OFS='\t' '
       print model,goal,
             runs,won,lost,pct(won,runs),
             f1(avgMoves),f3(collPerMove),f1(tokPerMove),
+            f2(sumCost[k]),
             (won>0 ? f2(sumCost[k]/won) : "-"),
             stops[k],maxes[k],errs[k]
     }
 
     print "---MODEL_TOTALS---"
-    print "Model","Runs","Won","Lost","Win%","AvgMv","Coll/M","Tok/M","$/Win","Stop","Max","Err"
+    print "Model","Runs","Won","Lost","Win%","AvgMv","Coll/M","Tok/M","Cost$","$/Win","Stop","Max","Err"
 
     for (m in mn) {
       runs=mn[m]
@@ -262,6 +263,7 @@ awk -F'\t' -v OFS='\t' '
       print m,
             runs,won,lost,pct(won,runs),
             f1(avgMoves),f3(collPerMove),f1(tokPerMove),
+            f2(msumCost[m]),
             (won>0 ? f2(msumCost[m]/won) : "-"),
             mstop[m],mmax[m],merr[m]
     }
