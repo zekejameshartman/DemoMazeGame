@@ -31,6 +31,7 @@ namespace DemoMazeGame.Models
         public int DelayBetweenMoves { get; set; }
         public bool DistanceToWall { get; set; }
         public bool ShowGoalCoordinates { get; set; }
+        public bool Breadcrumbs { get; set; }
         public int MaxRevisitsPerCell { get; set; }
         public int MaxMoves { get; set; }
         public bool ReasoningEnabled { get; set; }

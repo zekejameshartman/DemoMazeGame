@@ -1,0 +1,221 @@
+:root {
+  --bg0: #0b1020;
+  --bg1: #0e1630;
+  --card: rgba(255, 255, 255, 0.06);
+  --card2: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.66);
+  --accent: #73d2ff;
+  --accent2: #7bffb5;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(115, 210, 255, 0.20), transparent 55%),
+    radial-gradient(1000px 800px at 75% 30%, rgba(123, 255, 181, 0.14), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(11, 16, 32, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.brand-title {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.brand-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  padding: 14px;
+}
+
+.panel-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--text);
+  padding: 10px;
+  outline: none;
+}
+
+.hint {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.checks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.kpi {
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card2);
+}
+
+.kpi-label {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.kpi-value {
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  padding: 14px;
+  min-height: 320px;
+}
+
+.card-wide {
+  grid-column: 1 / -1;
+  min-height: 420px;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Tabulator theme tweaks */
+.tabulator {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.tabulator .tabulator-header {
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabulator .tabulator-header .tabulator-col {
+  background: transparent;
+  color: var(--text);
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.tabulator .tabulator-row {
+  background: rgba(0, 0, 0, 0.14);
+  color: var(--text);
+}
+
+.tabulator .tabulator-row:nth-child(even) {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.tabulator .tabulator-row.tabulator-selected {
+  background: rgba(115, 210, 255, 0.22);
+}
+
+.tabulator .tabulator-cell {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

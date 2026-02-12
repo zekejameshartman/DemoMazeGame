@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using DemoMazeGame.Analytics;
 using DemoMazeGame.Services;
 using Spectre.Console;
 
@@ -157,6 +158,12 @@ namespace DemoMazeGame
                         }
                     }
                     else if (choice == "7")
+                    {
+                        // Analytics Dashboard
+                        var server = new AnalyticsServer();
+                        await server.RunUntilKeypressAsync();
+                    }
+                    else if (choice == "8")
                     {
                         // Quit
                         keepRunning = false;

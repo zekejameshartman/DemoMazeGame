@@ -199,7 +199,7 @@ namespace DemoMazeGame
 
             // Start session logging with new settings
             _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, delayMs,
-                distanceToWall, showGoalCoordinates, maxRevisitsPerCell, maxMoves,
+                distanceToWall, showGoalCoordinates, breadcrumbs, maxRevisitsPerCell, maxMoves,
                 reasoningEnabled, reasoningEffort, reasoningMaxTokens);
 
             // Track the last AI response to display on next iteration
@@ -435,7 +435,7 @@ namespace DemoMazeGame
 
             // Start session logging
             _sessionLogger.StartSession(modelId, modelName, showCoordinates, showAsciiMap, 0,
-                distanceToWall, showGoalCoordinates, maxRevisitsPerCell, maxMoves,
+                distanceToWall, showGoalCoordinates, breadcrumbs, maxRevisitsPerCell, maxMoves,
                 reasoningEnabled, reasoningEffort, reasoningMaxTokens);
 
             // Helper to calculate Manhattan distance to exit

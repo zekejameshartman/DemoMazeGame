@@ -57,22 +57,24 @@ namespace DemoMazeGame
                         "[bold]1[/] Play as Human",
                         "[bold]2[/] Watch AI Play",
                         "[bold]3[/] Select AI Model",
-                        "[bold]4[/] Settings",
-                        "[bold]5[/] View Session Logs",
-                        "[bold cyan]6[/] [cyan]Batch Runner[/] - Run multiple AI sessions",
-                        "[bold]7[/] Quit"
-                    }));
+                         "[bold]4[/] Settings",
+                         "[bold]5[/] View Session Logs",
+                         "[bold cyan]6[/] [cyan]Batch Runner[/] - Run multiple AI sessions",
+                         "[bold]7[/] Analytics Dashboard",
+                         "[bold]8[/] Quit"
+                     }));
 
             // Extract the number from the choice
             if (choice.Contains("1")) return "1";
             if (choice.Contains("2")) return "2";
             if (choice.Contains("3")) return "3";
             if (choice.Contains("4")) return "4";
-            if (choice.Contains("5")) return "5";
-            if (choice.Contains("6") || choice.Contains("Batch")) return "6";
-            if (choice.Contains("7") || choice.Contains("Quit")) return "7";
-            return "";
-        }
+             if (choice.Contains("5")) return "5";
+             if (choice.Contains("6") || choice.Contains("Batch")) return "6";
+             if (choice.Contains("7") || choice.Contains("Analytics")) return "7";
+             if (choice.Contains("8") || choice.Contains("Quit")) return "8";
+             return "";
+         }
 
         // Show the AI model selection menu
         public void ShowModelSelectionMenu()

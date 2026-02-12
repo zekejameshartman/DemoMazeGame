@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DemoMazeGame Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-title">DemoMazeGame</div>
+        <div class="brand-subtitle">AI Session Analytics</div>
+      </div>
+      <div class="topbar-actions">
+        <button id="refreshBtn" class="btn">Refresh</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel">
+        <div class="panel-title">Filters</div>
+
+        <label class="field">
+          <div class="field-label">Models</div>
+          <select id="modelSelect" multiple size="8"></select>
+          <div class="hint">Tip: Ctrl/Shift for multi-select</div>
+        </label>
+
+        <label class="field">
+          <div class="field-label">Goal Coords</div>
+          <select id="goalSelect">
+            <option value="all" selected>All</option>
+            <option value="on">On</option>
+            <option value="off">Off</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </label>
+
+        <div class="field">
+          <div class="field-label">Outcomes</div>
+          <div class="checks" id="outcomeChecks"></div>
+        </div>
+
+        <div class="panel-title" style="margin-top: 18px;">Totals</div>
+        <div class="kpis">
+          <div class="kpi">
+            <div class="kpi-label">Runs</div>
+            <div class="kpi-value" id="kpiRuns">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Wins</div>
+            <div class="kpi-value" id="kpiWins">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Win Rate</div>
+            <div class="kpi-value" id="kpiWinRate">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Moves</div>
+            <div class="kpi-value" id="kpiAvgMoves">-</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Cost</div>
+            <div class="kpi-value" id="kpiAvgCost">-</div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="grid">
+          <div class="card">
+            <div class="card-title">Win Rate by Model</div>
+            <canvas id="winRateChart"></canvas>
+          </div>
+          <div class="card">
+            <div class="card-title">Outcome Breakdown by Model</div>
+            <canvas id="outcomeChart"></canvas>
+          </div>
+          <div class="card card-wide">
+            <div class="card-title">Sessions</div>
+            <div id="sessionsTable"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

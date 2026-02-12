@@ -30,7 +30,7 @@ namespace DemoMazeGame.Services
             Directory.CreateDirectory(_sessionsDir);
         }
 
-        public void StartSession(string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayBetweenMoves, bool distanceToWall, bool showGoalCoordinates, int maxRevisitsPerCell, int maxMoves, bool reasoningEnabled = true, string reasoningEffort = "medium", int? reasoningMaxTokens = null)
+        public void StartSession(string modelId, string modelName, bool showCoordinates, bool showAsciiMap, int delayBetweenMoves, bool distanceToWall, bool showGoalCoordinates, bool breadcrumbs, int maxRevisitsPerCell, int maxMoves, bool reasoningEnabled = true, string reasoningEffort = "medium", int? reasoningMaxTokens = null)
         {
             _currentSession = new AiSessionLog
             {
@@ -43,6 +43,7 @@ namespace DemoMazeGame.Services
                     DelayBetweenMoves = delayBetweenMoves,
                     DistanceToWall = distanceToWall,
                     ShowGoalCoordinates = showGoalCoordinates,
+                    Breadcrumbs = breadcrumbs,
                     MaxRevisitsPerCell = maxRevisitsPerCell,
                     MaxMoves = maxMoves,
                     ReasoningEnabled = reasoningEnabled,
