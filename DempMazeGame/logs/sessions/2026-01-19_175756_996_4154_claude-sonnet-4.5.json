@@ -1,0 +1,624 @@
+{
+  "sessionId": "4154b87f-dc71-4b29-a871-29f4b7bfcee4",
+  "startTime": "2026-01-19T17:57:56.9969807Z",
+  "endTime": "2026-01-19T18:01:31.5605834Z",
+  "durationSeconds": 214.5636027,
+  "model": {
+    "id": "anthropic/claude-sonnet-4.5",
+    "name": "Claude Sonnet 4.5"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": false,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": true,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 32,
+    "successfulMoves": 32,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 32,
+    "backtrackCount": 0
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 36114,
+    "totalCompletionTokens": 11130,
+    "totalTokens": 47244,
+    "totalReasoningTokens": 5244
+  },
+  "cost": {
+    "totalCostUsd": 0.275292,
+    "costPerMove": 0.008602875,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 838,
+      "completionTokens": 292,
+      "reasoningTokens": 147,
+      "costUsd": 0.006894,
+      "reasoning": "Let me understand the situation:\n- I\u0027m at position (1, 1)\n- I need to reach an end position (not specified yet, but I\u0027ll navigate to find it)\n- The coordinate system: X increases east, Y increases south\n- From my current position (1, 1), I can move:\n  - North: 0 cells (blocked)\n  - South: 4 cells (can reach (1, 5))\n  - East: 2 cells (can reach (3, 1))\n  - West: 0 cells (blocked)\n\nSo I have two options: go south or go east. Since I\u0027m exploring a maze and want to find the exit, I should start moving. Let me try going east first to explore that direction."
+    },
+    {
+      "moveNumber": 2,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 874,
+      "completionTokens": 310,
+      "reasoningTokens": 134,
+      "costUsd": 0.007272,
+      "reasoning": "Let me analyze the situation:\n- Current position: (2, 1)\n- I came from (1, 1) by moving East\n- Available moves:\n  - North: 0 cells (blocked)\n  - South: 0 cells (blocked)\n  - East: 1 cell to (3, 1)\n  - West: 1 cell to (1, 1) (but I just came from there)\n\nSince I just came from the west (from position (1,1)), I should avoid going back there immediately as that would just retrace my steps. The only other option is to go East to (3, 1), which is a new cell I haven\u0027t visited yet.\n\nI should move East."
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 891,
+      "completionTokens": 311,
+      "reasoningTokens": 130,
+      "costUsd": 0.007338,
+      "reasoning": "Let me understand my current situation:\n- Current position: (3, 1)\n- Goal: Find the exit of the maze\n- I\u0027ve been moving east: (1,1)\u2192(2,1)\u2192(3,1)\n\nAvailable moves from (3, 1):\n- North: 0 cells (blocked)\n- South: 2 cells (can reach (3, 3))\n- East: 0 cells (blocked)\n- West: 2 cells (can reach (1, 1))\n\nI can\u0027t go north or east. Going west would take me back to where I started (1, 1). The only forward progress option is to go south.\n\nLet me move south to explore new territory."
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 908,
+      "completionTokens": 392,
+      "reasoningTokens": 195,
+      "costUsd": 0.008604,
+      "reasoning": "Let me analyze the situation:\n\nCurrent position: (3, 2)\nAvailable moves:\n- North: 1 cell to (3, 1)\n- South: 1 cell to (3, 3)\n- East: 0 cells (blocked)\n- West: 0 cells (blocked)\n\nJourney so far:\n1. E: (1,1)\u2192(2,1)\n2. E: (2,1)\u2192(3,1)\n3. S: (3,1)\u2192(3,2)\n\nI need to avoid revisiting cells too many times. Looking at my path:\n- (1,1) - visited once\n- (2,1) - visited once\n- (3,1) - visited once\n- (3,2) - currently here (visited once)\n\nI can only go North back to (3,1) or South to (3,3) which is a new cell.\n\nSince I just came from (3,1) by going South, going back North would be backtracking. It\u0027s better to explore new territory by going South to (3,3).\n\nLet me go South to explore the new cell (3,3)."
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 925,
+      "completionTokens": 428,
+      "reasoningTokens": 196,
+      "costUsd": 0.009195,
+      "reasoning": "Let me analyze the current situation:\n\nCurrent position: (3, 3)\nGoal: Find the exit\n\nAvailable moves:\n- North: 2 cells (to cell (3, 1))\n- South: 0 cells (blocked)\n- East: 5 cells (to cell (8, 3))\n- West: 0 cells (blocked)\n\nJourney so far:\n1. E: (1,1)\u2192(2,1)\n2. E: (2,1)\u2192(3,1)\n3. S: (3,1)\u2192(3,2)\n4. S: (3,2)\u2192(3,3)\n\nSo I\u0027ve visited: (1,1), (2,1), (3,1), (3,2), (3,3)\n\nI can move either:\n- North back to (3,1) - but I\u0027ve already been there\n- East to (8,3) - new territory\n\nMoving east seems like the better choice since:\n1. I haven\u0027t explored that direction yet\n2. Going north would take me back to a cell I\u0027ve already visited\n3. I should explore new areas to find the exit\n\nLet me move east."
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 942,
+      "completionTokens": 482,
+      "reasoningTokens": 200,
+      "costUsd": 0.010056,
+      "reasoning": "Let me analyze the current situation:\n- Current position: (4, 3)\n- I can move:\n  - North: 0 cells (blocked)\n  - South: 0 cells (blocked)\n  - East: 4 cells (to cell (8, 3))\n  - West: 1 cell (to cell (3, 3))\n\nMy journey so far:\n1. (1,1)\u2192(2,1) - East\n2. (2,1)\u2192(3,1) - East\n3. (3,1)\u2192(3,2) - South\n4. (3,2)\u2192(3,3) - South\n5. (3,3)\u2192(4,3) - East\n\nI\u0027ve visited:\n- (1,1) - starting position\n- (2,1) - 1 time\n- (3,1) - 1 time\n- (3,2) - 1 time\n- (3,3) - 1 time\n- (4,3) - current position (1 time)\n\nSince I can\u0027t go north or south, and going west would take me back to (3,3) which I\u0027ve already visited, I should go east to explore new territory. I can move 4 cells east to (8, 3), which is a new area.\n\nLet me move east."
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 968,
+      "completionTokens": 570,
+      "reasoningTokens": 280,
+      "costUsd": 0.011454,
+      "reasoning": "Let me understand my current situation:\n- Current position: (5, 3)\n- I\u0027ve been traveling and my path so far has been:\n  1. (1,1)\u2192(2,1) East\n  2. (2,1)\u2192(3,1) East\n  3. (3,1)\u2192(3,2) South\n  4. (3,2)\u2192(3,3) South\n  5. (3,3)\u2192(4,3) East\n  6. (4,3)\u2192(5,3) East\n\n- Available moves from (5,3):\n  - North: 2 cells to (5,1)\n  - South: 0 cells (blocked)\n  - East: 3 cells to (8,3)\n  - West: 2 cells to (3,3)\n\nI need to explore new areas to find the exit. Looking at my journey:\n- I started at (1,1)\n- I\u0027ve visited: (1,1), (2,1), (3,1), (3,2), (3,3), (4,3), (5,3)\n\nSince I can\u0027t go south (0 cells available), I should consider:\n1. Going east to explore new territory (3 cells to (8,3)) - this seems promising as it\u0027s unexplored\n2. Going north to (5,1) - this would be a new cell\n3. Going west to (3,3) - I\u0027ve already been there\n\nI should prioritize exploring new areas. Going east would take me to (8,3), which is completely new territory and gives me 3 cells of movement. This seems like a good exploration direction.\n\nLet me go east."
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 976,
+      "completionTokens": 393,
+      "reasoningTokens": 171,
+      "costUsd": 0.008823,
+      "reasoning": "Let me analyze the situation:\n\nCurrent position: (6, 3)\nI can move:\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 2 cells (to cell (8, 3))\n- West: 3 cells (to cell (3, 3))\n\nJourney so far shows I\u0027ve been moving from (1,1) and have progressed to (6,3). I\u0027ve visited:\n- (1,1)\n- (2,1)\n- (3,1)\n- (3,2)\n- (3,3)\n- (4,3)\n- (5,3)\n- (6,3) - current position\n\nSince I can only move East or West from here, and:\n- Moving West would take me back to (3,3) which I\u0027ve already visited\n- Moving East would take me to (8,3) which is a new cell\n\nI should move East to explore new territory and avoid going in circles."
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 993,
+      "completionTokens": 323,
+      "reasoningTokens": 139,
+      "costUsd": 0.007824,
+      "reasoning": "Let me analyze my current situation:\n- Current position: (7, 3)\n- I can move:\n  - North: 0 cells (blocked)\n  - South: 0 cells (blocked)\n  - East: 1 cell to (8, 3)\n  - West: 4 cells to (3, 3)\n\nMy journey so far shows I\u0027ve been moving mostly east from (1,1) to my current position (7,3), with a couple of south moves at (3,1) to (3,3).\n\nSince I can only move east or west, and going west would take me back to (3,3) which I\u0027ve already visited, I should try going east to explore new territory at (8, 3).\n\nLet me move east."
+    },
+    {
+      "moveNumber": 10,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1010,
+      "completionTokens": 476,
+      "reasoningTokens": 239,
+      "costUsd": 0.01017,
+      "reasoning": "Let me analyze the current situation:\n\nCurrent position: (8, 3)\n- North: 0 cells (blocked)\n- South: 4 cells available (can go to (8, 7))\n- East: 0 cells (blocked)\n- West: 5 cells available (can go to (3, 3))\n\nJourney so far shows I\u0027ve been moving:\n1. East from (1,1) to (2,1)\n2. East from (2,1) to (3,1)\n3. South from (3,1) to (3,2)\n4. South from (3,2) to (3,3)\n5. East from (3,3) to (4,3)\n6. East from (4,3) to (5,3)\n7. East from (5,3) to (6,3)\n8. East from (6,3) to (7,3)\n9. East from (7,3) to (8,3)\n\nI\u0027ve been exploring eastward and now I\u0027m at (8,3). I can\u0027t go north or east (blocked), so my options are:\n- South: 4 cells available\n- West: 5 cells would take me back to (3,3) which I\u0027ve already visited\n\nSince going west would take me back to a previously visited location (3,3), and I should avoid loops, I should try going south to explore new territory.\n\nLet me go south."
+    },
+    {
+      "moveNumber": 11,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1027,
+      "completionTokens": 433,
+      "reasoningTokens": 207,
+      "costUsd": 0.009576,
+      "reasoning": "Let me analyze the current situation:\n- Current position: (8, 4)\n- I can move:\n  - North: 1 cell to (8, 3)\n  - South: 3 cells to (8, 7)\n  - East: 0 cells (blocked)\n  - West: 0 cells (blocked)\n\nLooking at my journey:\n- I just moved from (8, 3) to (8, 4)\n- Before that, I was moving east along row 3 from (3, 3) to (8, 3)\n\nSince I can\u0027t go east or west from here, my options are:\n1. Go north back to (8, 3) - but I just came from there, so this would be backtracking\n2. Go south to explore new territory at (8, 7)\n\nGoing back north to (8, 3) would be backtracking and might lead to a loop. Since I can go south 3 cells to (8, 7), which is a new position I haven\u0027t visited yet, that seems like the better choice to explore the maze.\n\nLet me move south to continue exploring."
+    },
+    {
+      "moveNumber": 12,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1053,
+      "completionTokens": 512,
+      "reasoningTokens": 251,
+      "costUsd": 0.010839,
+      "reasoning": "Let me analyze the situation:\n\nCurrent position: (8, 5)\nAvailable moves:\n- North: 2 cells to (8, 3)\n- South: 2 cells to (8, 7)\n- East: 0 cells (blocked)\n- West: 7 cells to (1, 5)\n\nMy journey so far shows I\u0027ve been moving:\n1. Started at (1,1), moved east to (2,1)\n2. East to (3,1)\n3. South to (3,2)\n4. South to (3,3)\n5. East to (4,3)\n6. East to (5,3)\n7. East to (6,3)\n8. East to (7,3)\n9. East to (8,3)\n10. South to (8,4)\n11. South to (8,5) - current position\n\nI can\u0027t go east (blocked). Going north would take me back to (8,3) which I\u0027ve already visited. I should explore new territory. \n\nGoing south to (8,7) would be new territory - I haven\u0027t been there yet.\nGoing west would also be new territory at y=5.\n\nSince I\u0027m at the eastern edge and can\u0027t go further east, and going north would be backtracking, I should either go south or west to explore new areas.\n\nLet me try going south to (8,7) to continue exploring."
+    },
+    {
+      "moveNumber": 13,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1061,
+      "completionTokens": 372,
+      "reasoningTokens": 183,
+      "costUsd": 0.008763,
+      "reasoning": "Let me analyze the current situation:\n- Current position: (8, 6)\n- I can move:\n  - North: 3 cells to (8, 3)\n  - South: 1 cell to (8, 7)\n  - East: 0 cells (blocked)\n  - West: 0 cells (blocked)\n\nLooking at my journey:\n1. Started at (1,1), moved east to (3,1)\n2. Moved south to (3,3)\n3. Moved east to (8,3)\n4. Moved south to current position (8,6)\n\nI\u0027ve been moving in a general pattern: east, then south, then east, then south again.\n\nSince I can only move north or south from here (east and west are blocked), and I\u0027ve just come from the north (positions (8,3), (8,4), (8,5)), going back north would be retracing my steps.\n\nLet me move south to explore new territory at (8, 7)."
+    },
+    {
+      "moveNumber": 14,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1078,
+      "completionTokens": 363,
+      "reasoningTokens": 165,
+      "costUsd": 0.008679,
+      "reasoning": "Let me analyze the situation:\n- Current position: (8, 7)\n- Available moves:\n  - North: 4 cells to (8, 3)\n  - South: 0 cells (blocked)\n  - East: 0 cells (blocked)\n  - West: 7 cells to (1, 7)\n\nLooking at my journey so far, I\u0027ve been moving:\n1. Started at (1,1), moved east to (3,1)\n2. Moved south to (3,3)\n3. Moved east to (8,3)\n4. Moved south to (8,7) - my current position\n\nI\u0027m now at (8,7) and can only go north or west. Since I just came from the north (from (8,3)), going back north would just retrace my steps. However, I haven\u0027t explored west yet.\n\nLet me go west to explore new territory and find the exit."
+    },
+    {
+      "moveNumber": 15,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1095,
+      "completionTokens": 445,
+      "reasoningTokens": 218,
+      "costUsd": 0.00996,
+      "reasoning": "Let me analyze the situation:\n\nCurrent position: (7, 7)\n- I can move East 1 cell to (8, 7)\n- I can move West 6 cells to (1, 7)\n- I cannot move North or South (0 cells available)\n\nLooking at my journey:\n- I started at (1,1)\n- Moved to (8,7) via a path going east and south\n- Then moved west once to (7,7)\n\nThe most recent move was from (8,7) to (7,7), which means I just came from the east.\n\nSince I can\u0027t move north or south from here, and I just came from the east, I should explore west. I can move 6 cells west to (1,7), which is a new area I haven\u0027t explored yet.\n\nLet me check which cells I\u0027ve visited:\n- (1,1), (2,1), (3,1), (3,2), (3,3), (4,3), (5,3), (6,3), (7,3), (8,3), (8,4), (8,5), (8,6), (8,7), (7,7)\n\nGoing west would take me to new territory, which is good for exploring the maze. Let me move west."
+    },
+    {
+      "moveNumber": 16,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1112,
+      "completionTokens": 393,
+      "reasoningTokens": 181,
+      "costUsd": 0.009231,
+      "reasoning": "Let me analyze the situation:\n- Current position: (6, 7)\n- I can move:\n  - North: 0 cells (blocked)\n  - South: 0 cells (blocked)\n  - East: 2 cells (to cell (8, 7))\n  - West: 5 cells (to cell (1, 7))\n\nLooking at my journey:\n- I started at (1,1)\n- Moved east to (8,3)\n- Then south to (8,7)\n- Then west back to (6,7) where I am now\n\nI\u0027ve already been to (8,7) in step 13, and I just came from (7,7) in step 15. Going east would take me back to places I\u0027ve already been.\n\nI should try going west to explore new territory. Going west 5 cells would take me to (1,7), which I haven\u0027t visited yet. This seems like a good option to explore new areas of the maze.\n\nLet me go west."
+    },
+    {
+      "moveNumber": 17,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1129,
+      "completionTokens": 415,
+      "reasoningTokens": 196,
+      "costUsd": 0.009612,
+      "reasoning": "Let me analyze the situation:\n\nCurrent position: (5, 7)\nI can move:\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 3 cells (to cell (8, 7))\n- West: 4 cells (to cell (1, 7))\n\nLooking at my journey so far:\n1-2. Started at (1,1), moved east to (3,1)\n3-4. Moved south to (3,3)\n5-9. Moved east to (8,3)\n10-13. Moved south to (8,7)\n14-16. Moved west to (5,7) - where I am now\n\nI\u0027ve been to (8,7) once before (step 13), and I\u0027m now at (5,7).\n\nSince I can\u0027t go north or south, I can only go east or west. Going east would take me back towards (8,7) which I\u0027ve already visited. Going west would take me to (1,7) which I haven\u0027t visited yet.\n\nLet me go west to explore new territory and avoid getting stuck in a loop."
+    },
+    {
+      "moveNumber": 18,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1146,
+      "completionTokens": 457,
+      "reasoningTokens": 247,
+      "costUsd": 0.010293,
+      "reasoning": "Let me analyze the current situation:\n\nCurrent position: (4, 7)\nAvailable moves:\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 4 cells (to cell (8, 7))\n- West: 3 cells (to cell (1, 7))\n\nLooking at my journey so far, I can see:\n1. Started at (1,1)\n2. Moved east to (8,3)\n3. Moved south to (8,7)\n4. Now moving west - currently at (4,7)\n\nI\u0027ve already been to (8,7) in step 13, and I just came from (5,7) in step 16.\n\nSince I can only move East or West from here (North and South are blocked), and I just came from the East (from position 5,7), I should avoid going back east immediately as that would just retrace my steps.\n\nLet me check if I\u0027ve visited (1,7) before - looking at the journey, I haven\u0027t been to (1,7) yet.\n\nSo my options:\n- East: Would go back to (8,7) which I\u0027ve already visited\n- West: Would go to (1,7) which is new territory\n\nI should go West to explore new areas and avoid loops."
+    },
+    {
+      "moveNumber": 19,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1163,
+      "completionTokens": 412,
+      "reasoningTokens": 192,
+      "costUsd": 0.009669,
+      "reasoning": "Let me analyze the situation:\n\nCurrent position: (3, 7)\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 5 cells (to cell (8, 7))\n- West: 2 cells (to cell (1, 7))\n\nLooking at my journey:\n- Started at (1,1)\n- Moved east to (3,1)\n- Moved south to (3,3)\n- Moved east all the way to (8,3)\n- Moved south to (8,7)\n- Now moving west back to (3,7)\n\nI\u0027ve been at position (3,7) only once (just arrived here on move 18).\n\nSince I can\u0027t go north or south from here, my options are:\n- East: back to (8,7) - but I just came from that direction\n- West: to (1,7) - this is unexplored territory\n\nI should go west to explore new areas. I haven\u0027t been to (2,7) or (1,7) yet according to my journey history."
+    },
+    {
+      "moveNumber": 20,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1180,
+      "completionTokens": 465,
+      "reasoningTokens": 238,
+      "costUsd": 0.010515,
+      "reasoning": "Let me analyze the current situation:\n\nCurrent position: (2, 7)\nAvailable moves:\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 6 cells (to cell (8, 7))\n- West: 1 cell (to cell (1, 7))\n\nLooking at my journey so far, I can see:\n1. Started at (1,1)\n2. Moved east to (3,1)\n3. Moved south to (3,3)\n4. Moved east all the way to (8,3)\n5. Moved south to (8,7)\n6. Now moving west back from (8,7) to (2,7)\n\nI\u0027ve been at position (8,7) once (move 13).\nI\u0027ve been at position (2,7) once (current position, move 19).\n\nSince I can only go east (back to where I came from) or west (to a new cell at (1,7)), and I want to explore new areas to find the exit, I should go west to (1,7) which I haven\u0027t visited yet.\n\nLet me check if I\u0027ve been to (1,7) before by looking at the journey - no, I haven\u0027t been to (1,7) yet.\n\nGoing west seems like the best option to explore new territory."
+    },
+    {
+      "moveNumber": 21,
+      "direction": "S",
+      "fromPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1197,
+      "completionTokens": 489,
+      "reasoningTokens": 253,
+      "costUsd": 0.010926,
+      "reasoning": "Let me analyze the current situation:\n\nCurrent position: (1, 7)\nAvailable moves:\n- North: 0 cells (blocked)\n- South: 2 cells (can go to (1, 9))\n- East: 7 cells (can go to (8, 7))\n- West: 0 cells (blocked)\n\nLooking at my journey so far, I can see I\u0027ve been exploring the maze. Let me trace the path:\n- Started at around (1,1) area\n- Moved east to (8,3)\n- Moved south to (8,7)\n- Moved west back to (1,7) where I am now\n\nI haven\u0027t explored south from my current position yet. I can move south up to 2 cells to reach (1, 9). This seems like a new area I haven\u0027t visited before based on my journey.\n\nLet me check if I\u0027ve visited (1, 8) or (1, 9) before:\n- Looking through the journey, I don\u0027t see any visits to y=8 or y=9 at x=1.\n\nSince I can only go south or east from here, and going east would just take me back along a path I\u0027ve already explored (to (8,7) which I\u0027ve visited), I should try going south to explore new territory.\n\nLet me move south."
+    },
+    {
+      "moveNumber": 22,
+      "direction": "S",
+      "fromPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1214,
+      "completionTokens": 383,
+      "reasoningTokens": 203,
+      "costUsd": 0.009387,
+      "reasoning": "Let me analyze the current situation:\n- Current position: (1, 8)\n- Can move: North 1 cell to (1, 7) or South 1 cell to (1, 9)\n- Cannot move East or West (0 cells available)\n\nLooking at my journey history, I can see:\n- I started somewhere and have been exploring the maze\n- Recently moved from (1, 7) to (1, 8) (move 21)\n- Before that, I was moving west from (8, 7) all the way to (1, 7)\n\nNow I\u0027m at (1, 8) and can only move North back to (1, 7) or South to (1, 9).\n\nGoing North would take me back to (1, 7) which I just came from. That would be backtracking.\n\nGoing South to (1, 9) would be exploring a new cell that I haven\u0027t visited yet according to my journey history.\n\nI should move South to continue exploring new territory and avoid getting stuck in a loop."
+    },
+    {
+      "moveNumber": 23,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1256,
+      "completionTokens": 187,
+      "reasoningTokens": 94,
+      "costUsd": 0.006573,
+      "reasoning": "The user is telling me that I\u0027m in a maze at position (1, 9) and the exit is visible to the EAST at position (11, 9). I can move 10 cells east to reach the exit directly!\n\nThis is perfect - I should immediately move east to reach the exit. The message even says \u0022*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\u0022\n\nLet me move east to reach the exit."
+    },
+    {
+      "moveNumber": 24,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1273,
+      "completionTokens": 160,
+      "reasoningTokens": 73,
+      "costUsd": 0.006219,
+      "reasoning": "The user is telling me that I\u0027m in a maze at position (2, 9) and the exit is visible to the EAST at position (11, 9). I can move 9 cells east to reach (11, 9) where the exit is.\n\nThis is perfect! I should move east to reach the exit.\n\nLet me move east to get closer to the exit."
+    },
+    {
+      "moveNumber": 25,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1290,
+      "completionTokens": 248,
+      "reasoningTokens": 124,
+      "costUsd": 0.00759,
+      "reasoning": "The user is telling me that I\u0027m at position (3, 9) and the EXIT is VISIBLE to the EAST at position (11, 9). I can move 8 cells east to reach (11, 9) which is the exit.\n\nThis is straightforward - I should move east to reach the exit!\n\nLet me verify:\n- Current position: (3, 9)\n- Can move east 8 cells to (11, 9)\n- The exit is at (11, 9)\n\nSo I need to move east 8 times to reach the exit, or the system might allow me to reach it in fewer moves. Let me start moving east."
+    },
+    {
+      "moveNumber": 26,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1307,
+      "completionTokens": 179,
+      "reasoningTokens": 64,
+      "costUsd": 0.006606,
+      "reasoning": "The exit is visible to the east! I\u0027m currently at position (4, 9) and I can move 7 cells east to reach (11, 9) where the exit is located. This is perfect - I should move east to reach the exit.\n\nLet me move east to get closer to the exit at (11, 9)."
+    },
+    {
+      "moveNumber": 27,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1324,
+      "completionTokens": 169,
+      "reasoningTokens": 62,
+      "costUsd": 0.006507,
+      "reasoning": "Perfect! The exit is visible to the east! I can see 6 cells to the east, reaching cell (11, 9), and the exit is visible there.\n\nMy current position is (5, 9), and I need to go east to reach (11, 9).\n\nLet me move east to reach the exit!"
+    },
+    {
+      "moveNumber": 28,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1341,
+      "completionTokens": 221,
+      "reasoningTokens": 98,
+      "costUsd": 0.007338,
+      "reasoning": "The exit is visible to the east! I\u0027m at position (6, 9) and I can move east 5 cells to reach (11, 9) which is marked as the EXIT. This is perfect - I should move east to reach the exit.\n\nLooking at the situation:\n- Current position: (6, 9)\n- Exit visible to the east at (11, 9)\n- I can move east 5 cells to reach it\n\nI should move east to get closer to or reach the exit."
+    },
+    {
+      "moveNumber": 29,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1358,
+      "completionTokens": 250,
+      "reasoningTokens": 117,
+      "costUsd": 0.007824,
+      "reasoning": "The user is telling me I\u0027m navigating a maze and I can see the exit to the east! \n\nCurrent position: (7, 9)\nExit location: (11, 9) - which is 4 cells to the east\n\nThe message clearly states:\n- East: 4 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- *** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nSo I need to move east to reach the exit. I should move east 4 times to get from (7, 9) to (11, 9).\n\nLet me start by moving east."
+    },
+    {
+      "moveNumber": 30,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1375,
+      "completionTokens": 261,
+      "reasoningTokens": 123,
+      "costUsd": 0.00804,
+      "reasoning": "The exit is visible to the east! I can move 3 cells east to reach cell (11, 9) which is the exit. My current position is (8, 9).\n\nI should move east to reach the exit. The message clearly states \u0022THE EXIT IS VISIBLE TO THE EAST! Go east to reach it!\u0022\n\nI need to move east 3 times to get from (8, 9) to (11, 9).\n- First move east: (8, 9) \u2192 (9, 9)\n- Second move east: (9, 9) \u2192 (10, 9)\n- Third move east: (10, 9) \u2192 (11, 9) [EXIT]\n\nLet me start by moving east."
+    },
+    {
+      "moveNumber": 31,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1392,
+      "completionTokens": 173,
+      "reasoningTokens": 68,
+      "costUsd": 0.006771,
+      "reasoning": "The user is telling me that I\u0027m at position (9, 9) and the exit is visible to the east at position (11, 9). I can move 2 cells east to reach (11, 9) where the exit is located.\n\nThis is straightforward - I should move east to reach the exit!\n\nLet me move east."
+    },
+    {
+      "moveNumber": 32,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 11
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1418,
+      "completionTokens": 166,
+      "reasoningTokens": 56,
+      "costUsd": 0.006744,
+      "reasoning": "Perfect! The exit is visible to the east! I\u0027m currently at position (10, 9) and I can see that moving east 1 cell will take me to (11, 9) which is marked as the EXIT.\n\nI should move east immediately to reach the exit!"
+    }
+  ]
+}

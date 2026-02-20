@@ -2,7 +2,7 @@ AI Spatial Navigation Test
 
 Question: Can AI models navigate a maze using only spatial text data without visual cues?
 
-Research Problem: I've been interested in learning to code, and I've heard a lot about AI lately. I wanted to choose a project to learn coding, and thought that this would be agood way to explore both coding and AI. I knew that were different AI "models" and wanted to see how they performed against each other. I chose a maze program as the benchmar because it seemed like a good way to test an AI's spatial reasoning. 
+Research Problem: I've been interested in learning to code, and I've heard a lot about AI lately. I wanted to choose a project to learn coding, and thought that this would be agood way to explore both coding and AI. I knew that were different AI "models" and wanted to see how they performed against each other. I chose a maze program as the benchmark because it seemed like a good way to test an AI's spatial reasoning. 
 
 Hypothesis: I predict that larger more expensive AI models will perform better at maze navigation than smaller, cheaper models on average. 
 
@@ -37,5 +37,5 @@ Phase 3: The code for the AI was too complex for a beginner, so my dad wired up 
 
 Phase 4: My dad helped a lot during this phase because we realized we needed to give the AI more information. We started adding details to it's prompt including the ability to see how far in each direction it could move, a full history of it's past moves, and we figured out how to tell the API to allow the AI to use reasoning, meaning the AI could 'think' beore answering. We also added settings to change what we would tell the AI. For example, we could now tell the AI what grid position it's in plus what grid position the exit node is in. We found the AI started doing better, but we discovered something suprising. When we tell the AI where the exit is, it actually does worse! It gets fixated on trying to move in the direction the exit is in, but our map includes a tricky path in the middle that requies going away from the exit. The AI is more focused in going towards the exit than it is in finding a valid path.
 
-Phase 5: We needed to record and get more data, we created code to log everything so that we can analyze it afterward.
+Phase 5: We needed to record and get more data, we created code to log everything so that we can analyze it afterward. Then we ran lots of different ai models through the maze, so that we could compare the data. 
 

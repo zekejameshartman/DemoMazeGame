@@ -1,0 +1,3895 @@
+{
+  "startTime": "2026-01-21T19:28:26.0140525Z",
+  "modelId": "openai/o3-mini",
+  "modelName": "O3 Mini",
+  "calls": [
+    {
+      "moveNumber": 1,
+      "timestamp": "2026-01-21T19:28:30.1619123Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 4 cells (to cell (1, 5))\n- East: 2 cells (to cell (3, 1))\n- West: 0 cells\n\nYour current position is (1, 1).\nThe goal is at position (11, 9).\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023706-q0VR4OkRhLT9NmLV8enP",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023706,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_UqRzBvam1WZfTtG7HyKJvlue",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 278,
+          "completion_tokens": 335,
+          "total_tokens": 613,
+          "cost": 0.0017798,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0017798,
+            "upstream_inference_prompt_cost": 0.0003058,
+            "upstream_inference_completions_cost": 0.001474
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 320,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4147.7667
+    },
+    {
+      "moveNumber": 2,
+      "timestamp": "2026-01-21T19:28:33.1582258Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 1 cells (to cell (3, 1))\n- West: 1 cells (to cell (1, 1))\n\nYour current position is (2, 1).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023710-cVJgp8UyqYHVkar6MwTE",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023710,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_vXSDgbqKugoJTc00sDdDb40Y",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 309,
+          "completion_tokens": 143,
+          "total_tokens": 452,
+          "cost": 0.0009691,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0009691,
+            "upstream_inference_prompt_cost": 0.0003399,
+            "upstream_inference_completions_cost": 0.0006292
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 128,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 2996.2356
+    },
+    {
+      "moveNumber": 3,
+      "timestamp": "2026-01-21T19:28:37.1686075Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 2 cells (to cell (3, 3))\n- East: 0 cells\n- West: 2 cells (to cell (1, 1))\n\nYour current position is (3, 1).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023713-qsF6tC2PFPEdedZA2J01",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023713,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_Aku8aK4Pp8EpBIhR6WEmLUlW",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 326,
+          "completion_tokens": 143,
+          "total_tokens": 469,
+          "cost": 0.0009878,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0009878,
+            "upstream_inference_prompt_cost": 0.0003586,
+            "upstream_inference_completions_cost": 0.0006292
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 128,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4010.295
+    },
+    {
+      "moveNumber": 4,
+      "timestamp": "2026-01-21T19:28:42.3578263Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 1 cells (to cell (3, 1))\n- South: 1 cells (to cell (3, 3))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (3, 2).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023717-vsveY8LLvNSA9TnIxPRd",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023717,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_jdIqKvf6aOT74Jh4Bk0mEcLd",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 343,
+          "completion_tokens": 207,
+          "total_tokens": 550,
+          "cost": 0.0012881,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0012881,
+            "upstream_inference_prompt_cost": 0.0003773,
+            "upstream_inference_completions_cost": 0.0009108
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 192,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 5189.1261
+    },
+    {
+      "moveNumber": 5,
+      "timestamp": "2026-01-21T19:28:46.2071473Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (3, 1))\n- South: 0 cells\n- East: 5 cells (to cell (8, 3))\n- West: 0 cells\n\nYour current position is (3, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023722-RwCp9DdQFZysWkwwY3W4",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023722,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_1L5gZofBr4y42Bw0YFdvwAb2",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 360,
+          "completion_tokens": 271,
+          "total_tokens": 631,
+          "cost": 0.0015884,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0015884,
+            "upstream_inference_prompt_cost": 0.000396,
+            "upstream_inference_completions_cost": 0.0011924
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 256,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3849.2361
+    },
+    {
+      "moveNumber": 6,
+      "timestamp": "2026-01-21T19:28:48.797277Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 4 cells (to cell (8, 3))\n- West: 1 cells (to cell (3, 3))\n\nYour current position is (4, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023726-FJWzz1Vvm919ZuHy1xds",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023726,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_ApnYMmftJpY2TSo3oJb9qB1P",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 377,
+          "completion_tokens": 207,
+          "total_tokens": 584,
+          "cost": 0.0013255,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0013255,
+            "upstream_inference_prompt_cost": 0.0004147,
+            "upstream_inference_completions_cost": 0.0009108
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 192,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 2590.0546
+    },
+    {
+      "moveNumber": 7,
+      "timestamp": "2026-01-21T19:28:53.0323026Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (5, 1))\n- South: 0 cells\n- East: 3 cells (to cell (8, 3))\n- West: 2 cells (to cell (3, 3))\n\nYour current position is (5, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023728-weZ6EkUubEIytTifEsu5",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023728,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_7dKbsv8lZCDvJ32DAOSmU3a8",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 402,
+          "completion_tokens": 335,
+          "total_tokens": 737,
+          "cost": 0.0019162,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0019162,
+            "upstream_inference_prompt_cost": 0.0004422,
+            "upstream_inference_completions_cost": 0.001474
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 320,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4234.9344
+    },
+    {
+      "moveNumber": 8,
+      "timestamp": "2026-01-21T19:28:56.1843785Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 2 cells (to cell (8, 3))\n- West: 3 cells (to cell (3, 3))\n\nYour current position is (6, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023733-KoSe1R3OrTr5N7cXx1hY",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023733,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_mzTOXwZHg28nNZe4cByjElcx",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 411,
+          "completion_tokens": 207,
+          "total_tokens": 618,
+          "cost": 0.0013629,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0013629,
+            "upstream_inference_prompt_cost": 0.0004521,
+            "upstream_inference_completions_cost": 0.0009108
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 192,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3151.9897
+    },
+    {
+      "moveNumber": 9,
+      "timestamp": "2026-01-21T19:28:59.4263007Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 1 cells (to cell (8, 3))\n- West: 4 cells (to cell (3, 3))\n\nYour current position is (7, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023736-JtdHuecMwb8Oy26z7ZRP",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023736,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_HQWgurFYhTV5VOeOeGiQKEoS",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 428,
+          "completion_tokens": 207,
+          "total_tokens": 635,
+          "cost": 0.0013816,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0013816,
+            "upstream_inference_prompt_cost": 0.0004708,
+            "upstream_inference_completions_cost": 0.0009108
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 192,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3241.8429
+    },
+    {
+      "moveNumber": 10,
+      "timestamp": "2026-01-21T19:29:07.9255391Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 4 cells (to cell (8, 7))\n- East: 0 cells\n- West: 5 cells (to cell (3, 3))\n\nYour current position is (8, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023739-OzCh51AVfqDbzqN1Kt08",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023739,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_ZNTQGUwlInBEKHkRO02CTOtZ",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 445,
+          "completion_tokens": 591,
+          "total_tokens": 1036,
+          "cost": 0.0030899,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0030899,
+            "upstream_inference_prompt_cost": 0.0004895,
+            "upstream_inference_completions_cost": 0.0026004
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 576,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8499.1068
+    },
+    {
+      "moveNumber": 11,
+      "timestamp": "2026-01-21T19:29:11.9675294Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 1 cells (to cell (8, 3))\n- South: 3 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 4).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023748-477XXIxKjIhiYLmFzzlj",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023748,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_c4buS7ofgueIiiDiOajBSkmV",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 462,
+          "completion_tokens": 207,
+          "total_tokens": 669,
+          "cost": 0.001419,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001419,
+            "upstream_inference_prompt_cost": 0.0005082,
+            "upstream_inference_completions_cost": 0.0009108
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 192,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4041.8854
+    },
+    {
+      "moveNumber": 12,
+      "timestamp": "2026-01-21T19:29:20.0088096Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023752-asmoswXblWl6eFLgJzOq",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023752,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_Y3BQM8tUEUQBiWGsAJr6nZYD",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 487,
+          "completion_tokens": 847,
+          "total_tokens": 1334,
+          "cost": 0.0042625,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0042625,
+            "upstream_inference_prompt_cost": 0.0005357,
+            "upstream_inference_completions_cost": 0.0037268
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 832,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8041.184
+    },
+    {
+      "moveNumber": 13,
+      "timestamp": "2026-01-21T19:29:27.0459602Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023760-Hy7OZQidllEYALyv8CaL",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023760,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_drmhPcA7A2BrOFriIPhD9M1s",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 496,
+          "completion_tokens": 527,
+          "total_tokens": 1023,
+          "cost": 0.0028644,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0028644,
+            "upstream_inference_prompt_cost": 0.0005456,
+            "upstream_inference_completions_cost": 0.0023188
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 512,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 7037.0745
+    },
+    {
+      "moveNumber": 14,
+      "timestamp": "2026-01-21T19:29:42.9599007Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (8, 3))\n- South: 0 cells\n- East: 0 cells\n- West: 7 cells (to cell (1, 7))\n\nYour current position is (8, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023767-SFdVvRiCdz00XfVltTgN",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023767,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_mFWWp4bpJ2HfMApZQKfva8bw",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 513,
+          "completion_tokens": 1423,
+          "total_tokens": 1936,
+          "cost": 0.0068255,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0068255,
+            "upstream_inference_prompt_cost": 0.0005643,
+            "upstream_inference_completions_cost": 0.0062612
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1408,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 15913.8478
+    },
+    {
+      "moveNumber": 15,
+      "timestamp": "2026-01-21T19:29:49.5374417Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7)\n  14. N: (8,7)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023783-msJRUa0hygv20hDXW0BI",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023783,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_9YooetJRGCECNm3oA0FW9WVa",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 550,
+          "completion_tokens": 655,
+          "total_tokens": 1205,
+          "cost": 0.003487,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.003487,
+            "upstream_inference_prompt_cost": 0.000605,
+            "upstream_inference_completions_cost": 0.002882
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 640,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 6577.439
+    },
+    {
+      "moveNumber": 16,
+      "timestamp": "2026-01-21T19:29:57.7049649Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7)\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023789-Brmy4Wd0xqp9vSU1dzAy",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023789,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_mphJQeAlW594SLTZ4qVZbj2Q",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 583,
+          "completion_tokens": 783,
+          "total_tokens": 1366,
+          "cost": 0.0040865,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0040865,
+            "upstream_inference_prompt_cost": 0.0006413,
+            "upstream_inference_completions_cost": 0.0034452
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 768,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8167.4176
+    },
+    {
+      "moveNumber": 17,
+      "timestamp": "2026-01-21T19:30:11.6983286Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7)\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023797-Ol5hndYAu4w72H1GIZPK",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023797,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_h8qtHCtMiU6nUzqlRqBFdwWi",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 596,
+          "completion_tokens": 1359,
+          "total_tokens": 1955,
+          "cost": 0.0066352,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0066352,
+            "upstream_inference_prompt_cost": 0.0006556,
+            "upstream_inference_completions_cost": 0.0059796
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1344,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 13993.2546
+    },
+    {
+      "moveNumber": 18,
+      "timestamp": "2026-01-21T19:30:19.0405317Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (8, 3))\n- South: 0 cells\n- East: 0 cells\n- West: 7 cells (to cell (1, 7))\n\nYour current position is (8, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023811-tfFi5mYranU6uCjto52i",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023811,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_NEXqM7fCH12imsQkwiGCqTsu",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 621,
+          "completion_tokens": 719,
+          "total_tokens": 1340,
+          "cost": 0.0038467,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0038467,
+            "upstream_inference_prompt_cost": 0.0006831,
+            "upstream_inference_completions_cost": 0.0031636
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 704,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 7342.0983
+    },
+    {
+      "moveNumber": 19,
+      "timestamp": "2026-01-21T19:30:25.6863244Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023819-5Ofl0SuCaL7FBQ4jre1u",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023819,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_ZZdPjQEEVQKV56vttIOBXO6Q",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 642,
+          "completion_tokens": 591,
+          "total_tokens": 1233,
+          "cost": 0.0033066,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0033066,
+            "upstream_inference_prompt_cost": 0.0007062,
+            "upstream_inference_completions_cost": 0.0026004
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 576,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 6645.6906
+    },
+    {
+      "moveNumber": 20,
+      "timestamp": "2026-01-21T19:30:33.8067406Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023825-ImlJRUSdJLX4VgCuQJJf",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023825,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_RiF3gx9S04LSrjajbQ7UceVf",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 671,
+          "completion_tokens": 719,
+          "total_tokens": 1390,
+          "cost": 0.0039017,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0039017,
+            "upstream_inference_prompt_cost": 0.0007381,
+            "upstream_inference_completions_cost": 0.0031636
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 704,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8120.3108
+    },
+    {
+      "moveNumber": 21,
+      "timestamp": "2026-01-21T19:30:40.8952703Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023833-CWWiEGzQeuFrXm2aCSYI",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023833,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_0ogmYWMwpEkE8NRv4DrGtccF",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 684,
+          "completion_tokens": 591,
+          "total_tokens": 1275,
+          "cost": 0.0033528,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0033528,
+            "upstream_inference_prompt_cost": 0.0007524,
+            "upstream_inference_completions_cost": 0.0026004
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 576,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 7088.4364
+    },
+    {
+      "moveNumber": 22,
+      "timestamp": "2026-01-21T19:30:52.2198709Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023840-6EPIlD5mxpXsXPLtGiZf",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023840,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_clO5pOARqYR6jCPTnmq9Rmnj",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 713,
+          "completion_tokens": 783,
+          "total_tokens": 1496,
+          "cost": 0.0042295,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0042295,
+            "upstream_inference_prompt_cost": 0.0007843,
+            "upstream_inference_completions_cost": 0.0034452
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 768,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 11324.5071
+    },
+    {
+      "moveNumber": 23,
+      "timestamp": "2026-01-21T19:31:01.8216216Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023852-F26xQUCMVCw6pNz5Hp5Y",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023852,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_ZHYV21wDI3qlHlJDanQULY50",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 726,
+          "completion_tokens": 1039,
+          "total_tokens": 1765,
+          "cost": 0.0053702,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0053702,
+            "upstream_inference_prompt_cost": 0.0007986,
+            "upstream_inference_completions_cost": 0.0045716
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1024,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9601.6485
+    },
+    {
+      "moveNumber": 24,
+      "timestamp": "2026-01-21T19:31:12.5962576Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (8, 3))\n- South: 0 cells\n- East: 0 cells\n- West: 7 cells (to cell (1, 7))\n\nYour current position is (8, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023861-j3zYHIDAuRoqEtgNbeXc",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023861,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_F8TESjfSdBZ28WzWyWTL00do",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 747,
+          "completion_tokens": 719,
+          "total_tokens": 1466,
+          "cost": 0.0039853,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0039853,
+            "upstream_inference_prompt_cost": 0.0008217,
+            "upstream_inference_completions_cost": 0.0031636
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 704,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 10774.525
+    },
+    {
+      "moveNumber": 25,
+      "timestamp": "2026-01-21T19:31:30.4680733Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023872-ZhxOL8HLIF3M7NY6qUyd",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023872,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_wEjjWJPuLTc4dSOa0OjIt51g",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 768,
+          "completion_tokens": 1487,
+          "total_tokens": 2255,
+          "cost": 0.0073876,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0073876,
+            "upstream_inference_prompt_cost": 0.0008448,
+            "upstream_inference_completions_cost": 0.0065428
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1472,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 17871.7059
+    },
+    {
+      "moveNumber": 26,
+      "timestamp": "2026-01-21T19:31:43.7268584Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023890-BrUvDILYk5z8oOnaZ1gB",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023890,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_4TEifclyUu2Vft1b946BN5Ut",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022west\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 797,
+          "completion_tokens": 1359,
+          "total_tokens": 2156,
+          "cost": 0.0068563,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0068563,
+            "upstream_inference_prompt_cost": 0.0008767,
+            "upstream_inference_completions_cost": 0.0059796
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1344,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 13258.6717
+    },
+    {
+      "moveNumber": 27,
+      "timestamp": "2026-01-21T19:32:00.1202233Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 1 cells (to cell (8, 5))\n- West: 6 cells (to cell (1, 5))\n\nYour current position is (7, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023903-PDpg8SVBTArmQPbOQw5g",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023903,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_bsgA9E69KN4mlsWuNltQd0Ls",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 794,
+          "completion_tokens": 1487,
+          "total_tokens": 2281,
+          "cost": 0.0074162,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0074162,
+            "upstream_inference_prompt_cost": 0.0008734,
+            "upstream_inference_completions_cost": 0.0065428
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1472,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 16393.2537
+    },
+    {
+      "moveNumber": 28,
+      "timestamp": "2026-01-21T19:32:13.3319294Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023920-LU4abxaAnGQZ5gU2R4ZB",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023920,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_WeRzxwl91JVVQpBJ3lZgn1SO",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 835,
+          "completion_tokens": 1423,
+          "total_tokens": 2258,
+          "cost": 0.0071797,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0071797,
+            "upstream_inference_prompt_cost": 0.0009185,
+            "upstream_inference_completions_cost": 0.0062612
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1408,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 13211.6037
+    },
+    {
+      "moveNumber": 29,
+      "timestamp": "2026-01-21T19:32:18.2982051Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023933-QtW0kMgkHzkBu6FLlq2e",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023933,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_PztMGAzYnegCQXb610LdYesI",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 848,
+          "completion_tokens": 335,
+          "total_tokens": 1183,
+          "cost": 0.0024068,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0024068,
+            "upstream_inference_prompt_cost": 0.0009328,
+            "upstream_inference_completions_cost": 0.001474
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 320,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4966.16
+    },
+    {
+      "moveNumber": 30,
+      "timestamp": "2026-01-21T19:32:35.5814562Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4)\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023938-wy773yTb5HwgVNuw7txW",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023938,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_5Dj8Ch0oz7BJNWeZ6h0zZMMM",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 877,
+          "completion_tokens": 1359,
+          "total_tokens": 2236,
+          "cost": 0.0069443,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0069443,
+            "upstream_inference_prompt_cost": 0.0009647,
+            "upstream_inference_completions_cost": 0.0059796
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1344,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 17283.1412
+    },
+    {
+      "moveNumber": 31,
+      "timestamp": "2026-01-21T19:32:50.7501213Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 1 cells (to cell (8, 3))\n- South: 3 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 4).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4) [crumbs]\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n  30. N: (8,5)\u2192(8,4) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023955-x5fyNoLw3a97sOp1tR7e",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023955,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_mUNYBsJfR7TExZ0ltdB9Xzz3",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 894,
+          "completion_tokens": 1295,
+          "total_tokens": 2189,
+          "cost": 0.0066814,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0066814,
+            "upstream_inference_prompt_cost": 0.0009834,
+            "upstream_inference_completions_cost": 0.005698
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1280,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 15168.5436
+    },
+    {
+      "moveNumber": 32,
+      "timestamp": "2026-01-21T19:32:58.3615232Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4) [crumbs]\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n  30. N: (8,5)\u2192(8,4) [crumbs]\n  31. S: (8,4)\u2192(8,5) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023970-Ecg5uwGJ7DUlwEUnocnq",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023970,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_jwx7z5MhS9PiQc2OBmi2WDZm",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 923,
+          "completion_tokens": 783,
+          "total_tokens": 1706,
+          "cost": 0.0044605,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0044605,
+            "upstream_inference_prompt_cost": 0.0010153,
+            "upstream_inference_completions_cost": 0.0034452
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 768,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 7611.2947
+    },
+    {
+      "moveNumber": 33,
+      "timestamp": "2026-01-21T19:33:17.9949031Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4) [crumbs]\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n  30. N: (8,5)\u2192(8,4) [crumbs]\n  31. S: (8,4)\u2192(8,5) [crumbs]\n  32. S: (8,5)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023978-5NsqMCqiUinwXiz9DcNe",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023978,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_IbOftaURLHFMiGRZwdLq7Kvo",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 936,
+          "completion_tokens": 2063,
+          "total_tokens": 2999,
+          "cost": 0.0101068,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0101068,
+            "upstream_inference_prompt_cost": 0.0010296,
+            "upstream_inference_completions_cost": 0.0090772
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2048,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 19633.2357
+    },
+    {
+      "moveNumber": 34,
+      "timestamp": "2026-01-21T19:33:29.8793487Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (8, 3))\n- South: 0 cells\n- East: 0 cells\n- West: 7 cells (to cell (1, 7))\n\nYour current position is (8, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4) [crumbs]\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n  30. N: (8,5)\u2192(8,4) [crumbs]\n  31. S: (8,4)\u2192(8,5) [crumbs]\n  32. S: (8,5)\u2192(8,6) [crumbs]\n  33. S: (8,6)\u2192(8,7) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769023998-yO8RCTRcPLETvI5XMeXA",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769023998,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_BV3IO6wpnOUbzsusyO09tBTG",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 957,
+          "completion_tokens": 1295,
+          "total_tokens": 2252,
+          "cost": 0.0067507,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0067507,
+            "upstream_inference_prompt_cost": 0.0010527,
+            "upstream_inference_completions_cost": 0.005698
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1280,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 11884.3356
+    },
+    {
+      "moveNumber": 35,
+      "timestamp": "2026-01-21T19:33:34.5615648Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4) [crumbs]\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n  30. N: (8,5)\u2192(8,4) [crumbs]\n  31. S: (8,4)\u2192(8,5) [crumbs]\n  32. S: (8,5)\u2192(8,6) [crumbs]\n  33. S: (8,6)\u2192(8,7) [crumbs]\n  34. N: (8,7)\u2192(8,6) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769024010-zfSHQh9ekYYeUXhikbi5",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769024010,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_KA3j6s2eKyCtSHI957iGPzOa",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 978,
+          "completion_tokens": 399,
+          "total_tokens": 1377,
+          "cost": 0.0028314,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0028314,
+            "upstream_inference_prompt_cost": 0.0010758,
+            "upstream_inference_completions_cost": 0.0017556
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 384,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4682.1247
+    },
+    {
+      "moveNumber": 36,
+      "timestamp": "2026-01-21T19:33:41.0717478Z",
+      "request": {
+        "model": "openai/o3-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (8, 3))\n- South: 0 cells\n- East: 0 cells\n- West: 7 cells (to cell (1, 7))\n\nYour current position is (8, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n  3. S: (3,1)\u2192(3,2)\n  4. S: (3,2)\u2192(3,3)\n  5. E: (3,3)\u2192(4,3)\n  6. E: (4,3)\u2192(5,3)\n  7. E: (5,3)\u2192(6,3)\n  8. E: (6,3)\u2192(7,3)\n  9. E: (7,3)\u2192(8,3)\n  10. S: (8,3)\u2192(8,4) [crumbs]\n  11. S: (8,4)\u2192(8,5) [crumbs]\n  12. S: (8,5)\u2192(8,6) [crumbs]\n  13. S: (8,6)\u2192(8,7) [crumbs]\n  14. N: (8,7)\u2192(8,6) [crumbs]\n  15. N: (8,6)\u2192(8,5) [crumbs]\n  16. S: (8,5)\u2192(8,6) [crumbs]\n  17. S: (8,6)\u2192(8,7) [crumbs]\n  18. N: (8,7)\u2192(8,6) [crumbs]\n  19. N: (8,6)\u2192(8,5) [crumbs]\n  20. S: (8,5)\u2192(8,6) [crumbs]\n  21. N: (8,6)\u2192(8,5) [crumbs]\n  22. S: (8,5)\u2192(8,6) [crumbs]\n  23. S: (8,6)\u2192(8,7) [crumbs]\n  24. N: (8,7)\u2192(8,6) [crumbs]\n  25. N: (8,6)\u2192(8,5) [crumbs]\n  26. W: (8,5)\u2192(7,5)\n  27. E: (7,5)\u2192(8,5) [crumbs]\n  28. S: (8,5)\u2192(8,6) [crumbs]\n  29. N: (8,6)\u2192(8,5) [crumbs]\n  30. N: (8,5)\u2192(8,4) [crumbs]\n  31. S: (8,4)\u2192(8,5) [crumbs]\n  32. S: (8,5)\u2192(8,6) [crumbs]\n  33. S: (8,6)\u2192(8,7) [crumbs]\n  34. N: (8,7)\u2192(8,6) [crumbs]\n  35. S: (8,6)\u2192(8,7) [crumbs]\n\nWARNING: Lots of breadcrumbs here - you\u0027re going in circles!\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1769024014-dA2pLPbLUVSl5QVvmkIn",
+        "provider": "OpenAI",
+        "model": "openai/o3-mini",
+        "object": "chat.completion",
+        "created": 1769024014,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "completed",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "call_9TmD3razU0tRT41JsApiyuyw",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022north\u0022}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 999,
+          "completion_tokens": 591,
+          "total_tokens": 1590,
+          "cost": 0.0036993,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0036993,
+            "upstream_inference_prompt_cost": 0.0010989,
+            "upstream_inference_completions_cost": 0.0026004
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 576,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 6510.0723
+    }
+  ]
+}

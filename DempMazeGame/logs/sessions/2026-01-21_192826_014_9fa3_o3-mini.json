@@ -1,0 +1,660 @@
+{
+  "sessionId": "9fa34e2e-f454-42ab-8afe-e23b22808512",
+  "startTime": "2026-01-21T19:28:26.0140513Z",
+  "endTime": "2026-01-21T19:33:41.0717488Z",
+  "durationSeconds": 315.0576975,
+  "model": {
+    "id": "openai/o3-mini",
+    "name": "O3 Mini"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": true,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": false,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": true,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 36,
+    "successfulMoves": 36,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 14,
+    "backtrackCount": 22
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 22776,
+    "totalCompletionTokens": 27484,
+    "totalTokens": 50260,
+    "totalReasoningTokens": 26944
+  },
+  "cost": {
+    "totalCostUsd": 0.1459832,
+    "costPerMove": 0.0040550888888888888888888889,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 278,
+      "completionTokens": 335,
+      "reasoningTokens": 320,
+      "costUsd": 0.0017798
+    },
+    {
+      "moveNumber": 2,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 309,
+      "completionTokens": 143,
+      "reasoningTokens": 128,
+      "costUsd": 0.0009691
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 326,
+      "completionTokens": 143,
+      "reasoningTokens": 128,
+      "costUsd": 0.0009878
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 343,
+      "completionTokens": 207,
+      "reasoningTokens": 192,
+      "costUsd": 0.0012881
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 360,
+      "completionTokens": 271,
+      "reasoningTokens": 256,
+      "costUsd": 0.0015884
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 377,
+      "completionTokens": 207,
+      "reasoningTokens": 192,
+      "costUsd": 0.0013255
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 402,
+      "completionTokens": 335,
+      "reasoningTokens": 320,
+      "costUsd": 0.0019162
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 411,
+      "completionTokens": 207,
+      "reasoningTokens": 192,
+      "costUsd": 0.0013629
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 428,
+      "completionTokens": 207,
+      "reasoningTokens": 192,
+      "costUsd": 0.0013816
+    },
+    {
+      "moveNumber": 10,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 445,
+      "completionTokens": 591,
+      "reasoningTokens": 576,
+      "costUsd": 0.0030899
+    },
+    {
+      "moveNumber": 11,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 462,
+      "completionTokens": 207,
+      "reasoningTokens": 192,
+      "costUsd": 0.001419
+    },
+    {
+      "moveNumber": 12,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 487,
+      "completionTokens": 847,
+      "reasoningTokens": 832,
+      "costUsd": 0.0042625
+    },
+    {
+      "moveNumber": 13,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 496,
+      "completionTokens": 527,
+      "reasoningTokens": 512,
+      "costUsd": 0.0028644
+    },
+    {
+      "moveNumber": 14,
+      "direction": "N",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 513,
+      "completionTokens": 1423,
+      "reasoningTokens": 1408,
+      "costUsd": 0.0068255
+    },
+    {
+      "moveNumber": 15,
+      "direction": "N",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 550,
+      "completionTokens": 655,
+      "reasoningTokens": 640,
+      "costUsd": 0.003487
+    },
+    {
+      "moveNumber": 16,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 583,
+      "completionTokens": 783,
+      "reasoningTokens": 768,
+      "costUsd": 0.0040865
+    },
+    {
+      "moveNumber": 17,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 596,
+      "completionTokens": 1359,
+      "reasoningTokens": 1344,
+      "costUsd": 0.0066352
+    },
+    {
+      "moveNumber": 18,
+      "direction": "N",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 621,
+      "completionTokens": 719,
+      "reasoningTokens": 704,
+      "costUsd": 0.0038467
+    },
+    {
+      "moveNumber": 19,
+      "direction": "N",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 642,
+      "completionTokens": 591,
+      "reasoningTokens": 576,
+      "costUsd": 0.0033066
+    },
+    {
+      "moveNumber": 20,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 671,
+      "completionTokens": 719,
+      "reasoningTokens": 704,
+      "costUsd": 0.0039017
+    },
+    {
+      "moveNumber": 21,
+      "direction": "N",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 684,
+      "completionTokens": 591,
+      "reasoningTokens": 576,
+      "costUsd": 0.0033528
+    },
+    {
+      "moveNumber": 22,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 713,
+      "completionTokens": 783,
+      "reasoningTokens": 768,
+      "costUsd": 0.0042295
+    },
+    {
+      "moveNumber": 23,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 726,
+      "completionTokens": 1039,
+      "reasoningTokens": 1024,
+      "costUsd": 0.0053702
+    },
+    {
+      "moveNumber": 24,
+      "direction": "N",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 747,
+      "completionTokens": 719,
+      "reasoningTokens": 704,
+      "costUsd": 0.0039853
+    },
+    {
+      "moveNumber": 25,
+      "direction": "N",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 768,
+      "completionTokens": 1487,
+      "reasoningTokens": 1472,
+      "costUsd": 0.0073876
+    },
+    {
+      "moveNumber": 26,
+      "direction": "W",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 797,
+      "completionTokens": 1359,
+      "reasoningTokens": 1344,
+      "costUsd": 0.0068563
+    },
+    {
+      "moveNumber": 27,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 794,
+      "completionTokens": 1487,
+      "reasoningTokens": 1472,
+      "costUsd": 0.0074162
+    },
+    {
+      "moveNumber": 28,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 835,
+      "completionTokens": 1423,
+      "reasoningTokens": 1408,
+      "costUsd": 0.0071797
+    },
+    {
+      "moveNumber": 29,
+      "direction": "N",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 848,
+      "completionTokens": 335,
+      "reasoningTokens": 320,
+      "costUsd": 0.0024068
+    },
+    {
+      "moveNumber": 30,
+      "direction": "N",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 877,
+      "completionTokens": 1359,
+      "reasoningTokens": 1344,
+      "costUsd": 0.0069443
+    },
+    {
+      "moveNumber": 31,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 894,
+      "completionTokens": 1295,
+      "reasoningTokens": 1280,
+      "costUsd": 0.0066814
+    },
+    {
+      "moveNumber": 32,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 923,
+      "completionTokens": 783,
+      "reasoningTokens": 768,
+      "costUsd": 0.0044605
+    },
+    {
+      "moveNumber": 33,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 936,
+      "completionTokens": 2063,
+      "reasoningTokens": 2048,
+      "costUsd": 0.0101068
+    },
+    {
+      "moveNumber": 34,
+      "direction": "N",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 957,
+      "completionTokens": 1295,
+      "reasoningTokens": 1280,
+      "costUsd": 0.0067507
+    },
+    {
+      "moveNumber": 35,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 978,
+      "completionTokens": 399,
+      "reasoningTokens": 384,
+      "costUsd": 0.0028314
+    },
+    {
+      "moveNumber": 36,
+      "direction": "N",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 999,
+      "completionTokens": 591,
+      "reasoningTokens": 576,
+      "costUsd": 0.0036993
+    }
+  ]
+}

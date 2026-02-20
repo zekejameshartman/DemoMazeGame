@@ -1,0 +1,624 @@
+{
+  "sessionId": "68cbe878-f4b6-4ee5-abb1-7d107319f6b9",
+  "startTime": "2026-01-19T18:23:25.7589351Z",
+  "endTime": "2026-01-19T18:25:20.6426048Z",
+  "durationSeconds": 114.8836697,
+  "model": {
+    "id": "google/gemini-3-flash-preview",
+    "name": "Gemini 3 Flash Preview"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": false,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": true,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 32,
+    "successfulMoves": 32,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 32,
+    "backtrackCount": 0
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 17710,
+    "totalCompletionTokens": 10104,
+    "totalTokens": 27814,
+    "totalReasoningTokens": 9768
+  },
+  "cost": {
+    "totalCostUsd": 0.0391670,
+    "costPerMove": 0.00122396875,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 235,
+      "completionTokens": 90,
+      "reasoningTokens": 83,
+      "costUsd": 0.0003875,
+      "reasoning": "**Navigating the Maze\u0027s Start**\n\nI\u0027m currently at (1, 1). The viable moves are south, to (1, 5), and east, to (3, 1). North and West are blocked. My primary objective is to locate the exit. I\u0027ll proceed south initially, to see what that reveals.\n\n\n"
+    },
+    {
+      "moveNumber": 2,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 269,
+      "completionTokens": 146,
+      "reasoningTokens": 139,
+      "costUsd": 0.0005725,
+      "reasoning": "**Evaluating Possible Paths**\n\nI\u0027m currently at (1, 2) and need to find the exit. The only moves available are north to (1, 1) or south to (1, 5). Considering my starting point, going south seems like a more logical progression. I\u0027m building on the moves available and mapping the potential routes.\n\n\n**Mapping Southward Progression**\n\nThe latest analysis confirms the initial move southward. I\u0027ve successfully charted a path from (1,1) to (1,2) with a single move. Recalibrating, I\u0027m now focused on the southern route, recognizing it as the only unexplored option. This simplifies the next phase: proceeding directly south.\n\n\n"
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 337,
+      "completionTokens": 184,
+      "reasoningTokens": 170,
+      "costUsd": 0.0007205,
+      "reasoning": "**Mapping The Current State**\n\nMy current position is (1, 3). I can move two cells north or south. Moving east or west is currently blocked, as are any further cells to the north. I have just moved from (1,2) to (1,3).\n\n\n**Assessing Next Steps**\n\nI\u0027m now at coordinate (1, 3). The only direction I can move is south. I have decided this is the logical next step in my exploration, since moving north would take me back to where I just came from. Therefore, I will now be moving south, into new territory.\n\n\n"
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 303,
+      "completionTokens": 196,
+      "reasoningTokens": 189,
+      "costUsd": 0.0007395,
+      "reasoning": "**Assessing the Options**\n\nI\u0027m presently at (1, 4). My available moves are limited. I can move north three cells to (1, 1), or south one cell to (1, 5). No east or west movements are possible. My past steps were (1, 1) to (1,2) south.\n\n\n**Charting the Course Forward**\n\nI\u0027ve decided to proceed south to (1, 5). The path taken was all south, moving from (1, 1) to (1, 4). The next logical step is to explore the implications of moving south one more step. This should provide new insights into the overall objective.\n\n\n"
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 371,
+      "completionTokens": 206,
+      "reasoningTokens": 192,
+      "costUsd": 0.0008035,
+      "reasoning": "**Charting a Course Forward**\n\nI\u0027m currently at (1, 5) and the exit is the target. My available moves include North, for 4 cells, leading me to (1,1); East, which gives me 7 cells and takes me to (8,5), but I have zero cells South or West. Previously, I had the following path: (1,1)-\u003E(1,2). My objective is to strategize the optimal route.\n\n\n**Navigating Eastward Exploration**\n\nI\u0027ve just considered the recent path updates, now at (1,5). My mind is now focused on the next move. Previously, the path went from (1,1) to (1,2). My available moves are North or East. My plan is to start by moving East to check a new route, as moving North would be retracing steps.\n\n\n"
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 337,
+      "completionTokens": 207,
+      "reasoningTokens": 200,
+      "costUsd": 0.0007895,
+      "reasoning": "**Assessing the Options**\n\nI\u0027m currently at (2, 5) and calculating my next move. Considering East is the most promising direction, with 6 cells available. West offers only a single cell. North and South are blocked for now. Considering the available options and the previous journey.\n\n\n**Planning the Eastward Journey**\n\nThe destination is (8, 5) which can be reached via East. The path ahead seems straightforward. I\u0027ll make the move East from (2, 5) now. The earlier moves have provided sufficient context. The next step is a clear calculation of a path eastward.\n\n\n"
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 354,
+      "completionTokens": 279,
+      "reasoningTokens": 272,
+      "costUsd": 0.001014,
+      "reasoning": "**Evaluating the Possibilities**\n\nThe grid position (3, 5) presents limited immediate options. My focus is now on the Eastward and Westward paths, considering their respective cell counts of 5 and 2. I\u0027m strategizing how to best leverage these movements, considering the constraints of the starting point and the previously charted course.\n\n\n**Charting the Course Eastward**\n\nMy analysis now strongly favors a continued eastward trajectory. Considering my origin, the southern route has been exhausted. The eastern path presents significantly more opportunity. I am calculating the implications of an eastward move, specifically regarding the potential endpoints and the subsequent maneuvering choices that would open up.\n\n\n"
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 422,
+      "completionTokens": 313,
+      "reasoningTokens": 299,
+      "costUsd": 0.00115,
+      "reasoning": "**Analyzing Current Options**\n\nOkay, I\u0027ve got a grasp of the current location, it\u0027s (4, 5). The target is still the exit. From here, I can move East four cells or West three cells. North and South are blocked for now. The journey has begun at (1, 1). I have not yet mapped the path, but I have the options to evaluate.\n\n\n**Tracking Directional Progression**\n\nI\u0027ve successfully mapped a path from (1,1) to (4,5), initially exploring South. Now at (4,5), my next move is East, potentially up to (8,5). I will evaluate East, having just come from the West.\n\n\n"
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 439,
+      "completionTokens": 264,
+      "reasoningTokens": 250,
+      "costUsd": 0.0010115,
+      "reasoning": "**Mapping the Route**\n\nI\u0027ve got the current location at (5, 5). The exit is the ultimate objective, and I\u0027ve identified the possible moves: East offers three cells and West provides four. North and South, however, are dead ends. The map is slowly unfolding.\n\n\n**Revising the Path**\n\nI am now moving east, mapping my new course. The previous moves have been logged and the direction to the east is the only logical route forward at this time. I am currently at position (1,2) and the path is unfolding.\n\n\n"
+    },
+    {
+      "moveNumber": 10,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 405,
+      "completionTokens": 222,
+      "reasoningTokens": 215,
+      "costUsd": 0.0008685,
+      "reasoning": "**Evaluating Possible Moves**\n\nI\u0027m currently at (6, 5) and calculating my next move. Considering the options, East looks promising. I see I can move East two cells. West appears to be an option too, but requires more steps. I\u0027m focusing on the East option first, as it appears to be more direct.\n\n\n**Analyzing Eastward Progression**\n\nHaving assessed the situation at (6, 5), I\u0027ve determined that the most efficient path forward appears to be eastward. The data strongly suggests this, given the direct route offered. My focus now is on moving East. I\u0027ll take two steps to (7, 5) or (8, 5) if available. The other options are not viable at the moment.\n\n\n"
+    },
+    {
+      "moveNumber": 11,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 474,
+      "completionTokens": 207,
+      "reasoningTokens": 193,
+      "costUsd": 0.000858,
+      "reasoning": "**Evaluating Possible Paths Forward**\n\nI\u0027m currently at (7, 5) and still seeking the exit. East offers a single move to (8, 5), while West allows a longer trek of six cells. North and South are blocked. The route has been (1,1) -\u003E (1,2) -\u003E (1,3) -\u003E (1,4).\n\n\n**Moving Eastward Still**\n\nI have been progressing East, moving from (1,5) to (7,5). I\u0027m now at the point where I\u0027m considering an additional move East to (8,5). West is an option, but I think I should be going East instead.\n\n\n"
+    },
+    {
+      "moveNumber": 12,
+      "direction": "N",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 450,
+      "completionTokens": 218,
+      "reasoningTokens": 211,
+      "costUsd": 0.000879,
+      "reasoning": "**Evaluating the Options**\n\nI\u0027ve got the map\u0027s layout and my current coordinates at (8, 5). The pathfinding puzzle is in front of me, and I need to solve it. I see the available moves: North, South, East, and West, each with different cell limits. Right now, I\u0027m focusing on the constraints. It\u0027s like a strategic game, where I need to plan each move carefully to locate the exit point.\n\n\n**Charting a New Course**\n\nI\u0027m at (8, 5) and deciding my next move. The options are North and South, since East is blocked, and West leads back where I came. I\u0027m prioritizing North, considering the two-cell limit, and starting to map out the potential path to the exit. I\u0027m focusing on those two moves.\n\n\n"
+    },
+    {
+      "moveNumber": 13,
+      "direction": "N",
+      "fromPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 510,
+      "completionTokens": 385,
+      "reasoningTokens": 371,
+      "costUsd": 0.00141,
+      "reasoning": "**Mapping Movement Options**\n\nI\u0027ve just assessed the available moves from my current spot at (8, 4). Looks like I can go North one step, South three, but East and West are blocked. I\u0027m focusing on the range of motion before planning the next step. So far, the journey started at (1,1) and moved South to (1,2)\n\n\n**Planning Further Traversal**\n\nI\u0027ve decided to move North to (8,3), so that will be my next position. From here, I will need to reassess my options. I\u0027m taking the opportunity to evaluate my current move set, which will be available options from (8,3). I have a South direction, which is three steps, and now I can go North, just one step.\n\n\n"
+    },
+    {
+      "moveNumber": 14,
+      "direction": "W",
+      "fromPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 477,
+      "completionTokens": 267,
+      "reasoningTokens": 260,
+      "costUsd": 0.0010395,
+      "reasoning": "**Evaluating Available Paths**\n\nI\u0027m currently at (8, 3) and need to find the exit. The data reveals movement options: south to (8, 7), west to (3, 3), with no north or east paths available. This changes everything, and I must reassess the best course. The journey log helps inform how to proceed.\n\n\n**Reassessing Westward Movement**\n\nI\u0027m now contemplating a westward move from (8, 3) to (3, 3). This is a five-cell journey. I am considering the implications of this, comparing the route to the already-traveled path towards the south. My journey log will serve to determine if this new direction will pay off.\n\n\n"
+    },
+    {
+      "moveNumber": 15,
+      "direction": "W",
+      "fromPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 495,
+      "completionTokens": 427,
+      "reasoningTokens": 420,
+      "costUsd": 0.0015285,
+      "reasoning": "**Assessing the Options**\n\nI\u0027m currently at (7, 3). Eastward, I can move one cell, and west, four. North and south are blocked. I\u0027m reviewing the possible paths, but the immediate decision is between moving east or west. Further analysis is needed before I commit.\n\n\n**Charting a Path Forward**\n\n\\n\\n\n\nI\u0027ve just finished reviewing the moves available, and the history leading to my current position at (7, 3). Moving east takes me back to (8,3), which I just left. It seems more sensible to go West. Further, I\u0027ve concluded that going West allows me to explore a wider range of the grid. I\u0027m now contemplating the potential benefits of the westward route.\n\n\n"
+    },
+    {
+      "moveNumber": 16,
+      "direction": "W",
+      "fromPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 513,
+      "completionTokens": 541,
+      "reasoningTokens": 534,
+      "costUsd": 0.0018795,
+      "reasoning": "**Mapping the Terrain**\n\nOkay, I\u0027m analyzing the current grid position, which is (6, 3). It seems the exit is my primary objective. I\u0027ve identified the possible moves from this location: East offers two cells, and West gives three. North and South are blocked. The historical data shows a prior move from (1,1) to (1,2) heading South.\n\n\n**Charting a New Course**\n\nI\u0027m now contemplating a move westward from (6, 3) to test uncharted territory. Revisiting the path, I recall I came from the East. Recalibrating, I confirm that moving West now makes the most sense. The options are West 3, or East 2 cells. After reflection, West appears a better option. \n\n\n"
+    },
+    {
+      "moveNumber": 17,
+      "direction": "N",
+      "fromPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 591,
+      "completionTokens": 433,
+      "reasoningTokens": 419,
+      "costUsd": 0.0015945,
+      "reasoning": "**Analyzing Possible Moves**\n\nI\u0027ve pinpointed my current location as (5, 3) and my primary objective is to reach the exit. From my vantage point, I can move north up to 2 cells, south none, east up to 3 cells, or west up to 2 cells. I\u0027m focusing on the potential paths and distances for each direction.\n\n\n**Evaluating Northern Paths**\n\nI\u0027ve decided to test a northward move, seeking new possibilities. My current position is (5,3). I have been analyzing my movements: (8,3) was from (8,4), and (5,3) was from (6,3), going East. I\u0027m choosing North from (5,3) to explore (5,2) instead of continuing West.\n\n\n"
+    },
+    {
+      "moveNumber": 18,
+      "direction": "N",
+      "fromPosition": {
+        "row": 2,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 600,
+      "completionTokens": 567,
+      "reasoningTokens": 553,
+      "costUsd": 0.002001,
+      "reasoning": "**Evaluating Current Position**\n\nI am now at (5, 2). I can move one cell north or south, but not east or west, based on available moves. I\u0027ve been reviewing the journey and its components, and I am focusing on what this means for the next steps and the overall objective.\n\n\n**Planning the Next Movement**\n\nI\u0027m presently at (5, 2) and reviewing the possible actions, with the goal being to determine the best path. I\u0027ve considered that moving south would just result in retracing a previous step, so I\u0027m now set on going north to (5, 1) to open up unexplored territory. I will continue to track and consider the overall direction and goal.\n\n\n"
+    },
+    {
+      "moveNumber": 19,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 568,
+      "completionTokens": 497,
+      "reasoningTokens": 490,
+      "costUsd": 0.001775,
+      "reasoning": "**Assessing Available Options**\n\nI\u0027m currently at (5, 1). Exploring my movement options, I see I can head South to (5, 3) or East to (10, 1). North and West are blocked. Examining the breadcrumbs, it appears I came from (1,1). The next logical step is to analyze which direction offers the greatest benefit to progress.\n\n\n**Deciding on Direction**\n\nI\u0027ve analyzed the available moves: South to (5, 3) and East to (10, 1). Considering the breadcrumbs, South appears less promising as it leads back to a previously visited position, (5, 3). East to (10, 1) seems like the more strategic choice for exploring new territory.\n\n\n"
+    },
+    {
+      "moveNumber": 20,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 637,
+      "completionTokens": 517,
+      "reasoningTokens": 503,
+      "costUsd": 0.0018695,
+      "reasoning": "**Considering Directional Options**\n\nI\u0027m currently at (6, 1). My available moves are to the East, four cells to (10, 1), and West, one cell to (5, 1). I know I was at (5, 1) in step 18. I need to make a move.\n\n\n**Prioritizing Eastern Exploration**\n\nI\u0027ve just arrived at (6, 1) and need to move forward, as (5, 1) was visited previously. Examining the history, I see that I have never moved further east than this cell, so (6, 1) and moving further east is the logical next step to explore.\n\n\n"
+    },
+    {
+      "moveNumber": 21,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 604,
+      "completionTokens": 515,
+      "reasoningTokens": 508,
+      "costUsd": 0.001847,
+      "reasoning": "**Evaluating Possible Moves**\n\nI\u0027ve got the current position locked in, and the exit is the primary focus. Analyzing the available moves, I see going North and South are dead ends at the moment. Eastward offers three cells, and Westward, two. I\u0027m prioritizing the paths, and making notes, using the history to inform the decisions.\n\n\n**Analyzing Next Step Eastward**\n\nI\u0027m now at (7, 1) and will proceed East. Given that West leads back to a recently visited location, the path to the East is the more promising direction to explore for a potential exit. I\u0027ll test the route eastward and track its impact on the decision-making process.\n\n\n"
+    },
+    {
+      "moveNumber": 22,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 9
+      },
+      "wasSuccessful": true,
+      "promptTokens": 622,
+      "completionTokens": 525,
+      "reasoningTokens": 518,
+      "costUsd": 0.001886,
+      "reasoning": "**Assessing the Options**\n\nI\u0027m currently focused on the possible moves from (8, 1). The East option looks promising, allowing me to advance a couple of cells. I\u0027m also mapping out the previous steps of the journey, to better understand any patterns or useful constraints. \n\n\n**Contemplating Eastward Movement**\n\nI\u0027m now zeroing in on an eastward trajectory. The available moves are quite limited at (8, 1). West is a non-starter, as it leads back to a previously visited location. So, I will proceed to (9, 1), and then (10, 1), if necessary.\n\n\n"
+    },
+    {
+      "moveNumber": 23,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 9
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 640,
+      "completionTokens": 213,
+      "reasoningTokens": 206,
+      "costUsd": 0.000959,
+      "reasoning": "**Examining Available Paths**\n\nI\u0027m currently at (9, 1). Exploring potential moves, I see I can go east one cell to (10, 1) or west four cells to (5, 1). Considering the journey\u0027s history, I\u0027m trying to decide the best path forward given past moves: (1,1) -\u003E (1,5) then (1,5) -\u003E (8,5).\n\n\n**Analyzing Next Location**\n\nI\u0027ve decided to move east to (10, 1). That\u0027s the only unexplored path from here. Thinking ahead, I\u0027m already envisioning the next set of possible moves from the new location, always considering the path\u0027s history and avoiding redundant steps.\n\n\n"
+    },
+    {
+      "moveNumber": 24,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 660,
+      "completionTokens": 260,
+      "reasoningTokens": 253,
+      "costUsd": 0.00111,
+      "reasoning": "**Evaluating the Options**\n\nI\u0027m currently at (10, 1), and it looks like my options are limited. North and East are dead ends, so it\u0027s either South to (10, 9) or West to (5, 1). Considering the path so far, the most recent leg was a jump from (1,1) to (1,5). This might inform my next move.\n\n\n**Contemplating a Direction**\n\nI\u0027ve considered the options from (10, 1), and I\u0027m leaning toward heading south. West feels like retracing steps. The previous path is clear in my mind now: (1,1) to (1,5), then onwards. I have to figure out if going south provides any new insights or if it\u0027s another dead end.\n\n\n"
+    },
+    {
+      "moveNumber": 25,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 732,
+      "completionTokens": 412,
+      "reasoningTokens": 398,
+      "costUsd": 0.001602,
+      "reasoning": "**Analyzing Available Moves**\n\nI\u0027ve just finished analyzing the available moves from my current position, (10, 2). I can go north one cell, south seven, and east/west are blocked. I\u0027m trying to decide on the best next move based on the available directions.\n\n\n**Re-examining Previous Moves**\n\nI\u0027ve been re-evaluating my previous moves and the overarching objective, the exit\u0027s location. I\u0027ve re-assessed my position at (10, 2), considering that my most recent move came from the north at (10, 1). I can currently move one cell north or seven cells south. Given the direction, I\u0027m now leaning toward moving south to (10, 3), and will go from there.\n\n\n"
+    },
+    {
+      "moveNumber": 26,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 752,
+      "completionTokens": 422,
+      "reasoningTokens": 408,
+      "costUsd": 0.001642,
+      "reasoning": "**Analyzing Available Moves**\n\nOkay, I\u0027m currently at (10, 3). It looks like I can only move north two cells, landing me at (10, 1), or south six cells, to (10, 9). East and West are off the table. My primary goal remains finding the exit, and I have no prior history to reference yet. I\u0027m focusing on these two potential movements.\n\n\n**Planning the Next Step**\n\nI\u0027ve mapped out a path: (1,1) to (10,3). My current position is (10,3), having just come from (10,1). North is backtracking, so I\u0027m now set on moving south to (10,9). I\u0027ve got a good feeling about this move, it seems promising to venture into unmapped territory.\n\n\n"
+    },
+    {
+      "moveNumber": 27,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 772,
+      "completionTokens": 316,
+      "reasoningTokens": 302,
+      "costUsd": 0.001334,
+      "reasoning": "**Mapping Available Paths**\n\nI\u0027ve just pinpointed my current location and mapped potential moves. I\u0027m currently at (10, 4). My recent analysis identifies three northward cells available, to (10, 1), five southward cells to (10, 9), and no eastward or westward movement options. My previous moves are recorded as (1,1) -\u003E (1,5) and (1,5) -\u003E (8,5).\n\n\n**Exploring New Directions**\n\nI\u0027ve decided to move South from my current position, (10, 4). This direction opens up new unexplored areas, whereas moving North would take me back towards a previously visited location, (10, 1). I\u0027m looking at potential southward movements now, and I\u0027ve recorded the journey\u0027s complete steps, from (1, 1). I\u0027m excited about this new development.\n\n\n"
+    },
+    {
+      "moveNumber": 28,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 792,
+      "completionTokens": 340,
+      "reasoningTokens": 326,
+      "costUsd": 0.001416,
+      "reasoning": "**Mapping Optimal Routes**\n\nI\u0027ve just pinpointed my current location as (10, 5). My movement options are now restricted; I can only travel north 4 cells to (10, 1), or south 4 cells to (10, 9). East and west are blocked for the moment. This helps with the route planning, building on the initial south move.\n\n\n**Revisiting Previous Paths**\n\nI\u0027ve just landed back at (10, 5), and now I\u0027m considering retracing steps or charting new territory. My recent route involved a southward shift. I can go north to (10, 1), or I can continue South to (10,9). I\u0027ve decided to head South and explore fresh ground.\n\n\n"
+    },
+    {
+      "moveNumber": 29,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 761,
+      "completionTokens": 292,
+      "reasoningTokens": 285,
+      "costUsd": 0.0012565,
+      "reasoning": "**Evaluating Possible Paths**\n\nI\u0027m currently at (10, 6). Considering my options, I see I can move North up to 5 cells, South up to 3 cells, and no movement East or West is currently possible. Looking back, I see my past moves have included South from (1,1) to (1,5), and then East to (8,5).\n\n\n**Contemplating Southern Expansion**\n\nI\u0027ve considered my options and, given my location at (10, 6), I think the best path forward is to head South, allowing exploration of previously uncharted territory. North would take me back towards familiar ground, but South feels right for now.\n\n\n"
+    },
+    {
+      "moveNumber": 30,
+      "direction": "S",
+      "fromPosition": {
+        "row": 7,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 8,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 832,
+      "completionTokens": 301,
+      "reasoningTokens": 287,
+      "costUsd": 0.001319,
+      "reasoning": "**Calculating Movement Options**\n\nI\u0027ve just determined the current position at (10, 7). The available moves are North (6 cells), South (2 cells), and no East or West movement is possible. I\u0027m focusing on evaluating these immediate options for the next step, considering their impact on the overall journey\u0027s direction and distance. I\u0027m also comparing this to prior movements.\n\n\n**Considering Next Move**\n\nI\u0027ve just arrived at (10, 7) and need to move. Analyzing my available options, I can move north or south. North would be backtracking, so I\u0027m now leaning toward going south to break new ground and not repeat the past. I think that\u0027s the best option to continue.\n\n\n"
+    },
+    {
+      "moveNumber": 31,
+      "direction": "S",
+      "fromPosition": {
+        "row": 8,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 852,
+      "completionTokens": 201,
+      "reasoningTokens": 187,
+      "costUsd": 0.001029,
+      "reasoning": "**Tracking Movement Progress**\n\nI\u0027m currently at (10, 8). My possible moves are North (7 cells), South (1 cell), and no East/West movement. I\u0027ve noted I\u0027m moving south, tracing the path from (10, 1) and now at (10, 8), and I\u0027m updating the available moves to reflect the latest grid position.\n\n\n**Evaluating Next Steps**\n\nI\u0027ve been reviewing my movement history, focusing on how I got to my current location. I\u0027m noting the south-bound path from (10,1) through to (10,8). I\u0027ve got one more south move available. My next move will be to (10, 9) to explore whether a new path emerges.\n\n\n"
+    },
+    {
+      "moveNumber": 32,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 11
+      },
+      "wasSuccessful": true,
+      "promptTokens": 904,
+      "completionTokens": 141,
+      "reasoningTokens": 127,
+      "costUsd": 0.000875,
+      "reasoning": "**Analyzing Maze Options**\n\nI\u0027m currently considering the available options within this maze. The exit is clearly visible one cell east. North presents a significant path of eight cells, while south is blocked. West offers nine cells. My focus is on the quickest route to the exit, and I\u0027m leaning toward the obvious choice.\n\n\n**Focusing on Direction**\n\nI\u0027ve got the grid coordinates in focus now. My plan is crystal clear: move directly east. The exit is right there at (11, 9), just a single step away. No need to overthink it; the most direct route is the most efficient, and that\u0027s my priority.\n\n\n"
+    }
+  ]
+}

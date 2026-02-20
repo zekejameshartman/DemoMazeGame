@@ -1,0 +1,133 @@
+{
+  "sessionId": "b30a4f74-693a-4536-b601-25950acf9fc4",
+  "startTime": "2026-01-21T19:38:58.0217008Z",
+  "endTime": "2026-01-21T19:39:22.5167483Z",
+  "durationSeconds": 24.4950475,
+  "model": {
+    "id": "openai/o3-mini",
+    "name": "O3 Mini"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": true,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": false,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": true
+  },
+  "metrics": {
+    "totalMoves": 5,
+    "successfulMoves": 5,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 5,
+    "backtrackCount": 0
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 1616,
+    "totalCompletionTokens": 1419,
+    "totalTokens": 3035,
+    "totalReasoningTokens": 1344
+  },
+  "cost": {
+    "totalCostUsd": 0.0080212,
+    "costPerMove": 0.00160424,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 278,
+      "completionTokens": 463,
+      "reasoningTokens": 448,
+      "costUsd": 0.002343
+    },
+    {
+      "moveNumber": 2,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 309,
+      "completionTokens": 79,
+      "reasoningTokens": 64,
+      "costUsd": 0.0006875
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 326,
+      "completionTokens": 143,
+      "reasoningTokens": 128,
+      "costUsd": 0.0009878
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 343,
+      "completionTokens": 399,
+      "reasoningTokens": 384,
+      "costUsd": 0.0021329
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 360,
+      "completionTokens": 335,
+      "reasoningTokens": 320,
+      "costUsd": 0.00187
+    }
+  ]
+}
