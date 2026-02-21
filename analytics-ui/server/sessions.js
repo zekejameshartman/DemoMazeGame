@@ -43,8 +43,11 @@ export async function readSessionSummaries(sessionsDir) {
     }),
   );
 
+  const EXCLUDED_OUTCOMES = new Set(["error", "stopped", "unknown"]);
+
   return summaries
     .filter(Boolean)
+    .filter((s) => !EXCLUDED_OUTCOMES.has(s.outcomeType) && s.totalMoves > 0)
     .sort((a, b) => (b.startTime || "").localeCompare(a.startTime || ""));
 }
 

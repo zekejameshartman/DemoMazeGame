@@ -1,0 +1,358 @@
+{
+  "startTime": "2026-02-21T01:23:49.4188641Z",
+  "modelId": "anthropic/claude-sonnet-4.5",
+  "modelName": "Claude Sonnet 4.5",
+  "calls": [
+    {
+      "moveNumber": 1,
+      "timestamp": "2026-02-21T01:23:58.2530964Z",
+      "request": {
+        "model": "anthropic/claude-sonnet-4.5",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 4 cells (to cell (1, 5))\n- East: 2 cells (to cell (3, 1))\n- West: 0 cells\n\nYour current position is (1, 1).\nThe goal is at position (11, 9).\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "max_tokens": 2000,
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771637030-84O7Bn3b8QhVTPTePgeA",
+        "provider": "Google",
+        "model": "anthropic/claude-sonnet-4.5",
+        "object": "chat.completion",
+        "created": 1771637030,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "tool_calls",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "I need to navigate from (1, 1) to (11, 9). That means I need to move 10 units east and 8 units south overall.\n\nCurrently I can move:\n- East: 2 cells \n- South: 4 cells\n\nSince I need to make progress in both directions and east is more constrained right now, let me start by moving east.",
+              "refusal": null,
+              "reasoning": "Let me understand the current situation:\n- Current position: (1, 1)\n- Goal position: (11, 9)\n- I need to move from (1, 1) to (11, 9)\n\nThe coordinate system:\n- X-axis: 0 is leftmost, higher values go east (right)\n- Y-axis: 0 is topmost, higher values go south (down)\n\nTo reach (11, 9) from (1, 1):\n- I need to increase X from 1 to 11 (move 10 units east)\n- I need to increase Y from 1 to 9 (move 8 units south)\n\nAvailable moves right now:\n- North: 0 cells (blocked)\n- South: 4 cells (can go to (1, 5))\n- East: 2 cells (can go to (3, 1))\n- West: 0 cells (blocked)\n\nSince I need to go both east and south, and I have options for both, let me think strategically. I need to move east (increase X) and south (increase Y). \n\nI can move east 2 cells or south 4 cells. Since I need to go east eventually and it\u0027s available, I should take it. But I also need to go south. Let me start by going east since that\u0027s the direction where I need to make more progress relative to what\u0027s available.\n\nActually, let me reconsider. I need to move \u002B10 in X and \u002B8 in Y. Both directions are somewhat available. Let me go east first to make progress in the X direction.",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "toolu_vrtx_015sTeF2PdCdTwAUiUguC6W4",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "anthropic-claude-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "Let me understand the current situation:\n- Current position: (1, 1)\n- Goal position: (11, 9)\n- I need to move from (1, 1) to (11, 9)\n\nThe coordinate system:\n- X-axis: 0 is leftmost, higher values go east (right)\n- Y-axis: 0 is topmost, higher values go south (down)\n\nTo reach (11, 9) from (1, 1):\n- I need to increase X from 1 to 11 (move 10 units east)\n- I need to increase Y from 1 to 9 (move 8 units south)\n\nAvailable moves right now:\n- North: 0 cells (blocked)\n- South: 4 cells (can go to (1, 5))\n- East: 2 cells (can go to (3, 1))\n- West: 0 cells (blocked)\n\nSince I need to go both east and south, and I have options for both, let me think strategically. I need to move east (increase X) and south (increase Y). \n\nI can move east 2 cells or south 4 cells. Since I need to go east eventually and it\u0027s available, I should take it. But I also need to go south. Let me start by going east since that\u0027s the direction where I need to make more progress relative to what\u0027s available.\n\nActually, let me reconsider. I need to move \u002B10 in X and \u002B8 in Y. Both directions are somewhat available. Let me go east first to make progress in the X direction.",
+                  "signature": "Ep4KCkgICxACGAIqQNB7\u002BBJz0\u002B2\u002B43vvKXiDhoPI3LP5nLLFMcBw12TX89mf1FI5S3GAxbrWJHENNzIERlvMa\u002BNMvSTS3gil/Y//LwESDBLd6TCRa42U1Th7TRoMZHgDbMAH41lv6ePXIjDQinUFbqT8idpPVfdSHpatAPkydNHtXrpxCNbzU2hBAolfzkEGyardnpQciupVo3QqgwlgWDZHKJv\u002BFaHxbwg2/kYbp/lZDuKJbOITenmngbmUb64nOqTEXxb1g/Wc4fiSyEx7921fm/uYb01TH6G\u002BAlEzPjsN\u002BlHjC5NumAXWpL/brYuCW8pYjWeTy/Be59sfNstbaPUf9Jfwrwk2UBHxeJZnr6b8vs1sNcBC2QG56r/L3pKqZKK8/9EVHYe/rumOKmmC1Z1SCWKzekGSMCnHgiOM7sVWcpzgeJ6gv6AMyQsXYCoWa3jswS5DdUQDHBwfBmfyGpEPbLj1n6\u002BKbFcKWnE89jG2Gg\u002B88rwd1C\u002BrVfJHKnQsYw\u002BkjSE\u002BM3diB3l1DUg6BuAQdbZaYZwx/RPTHeJjN\u002Bp9BqyRDsX8yHB2x7HRZ\u002BIhsbBHlpZ3CbR1t/f1VSuZ9luVuvMrh2zkzaRje\u002BMx4dgQTVHCbtcRphB8Fc4eNeYWg/QwtVFoh6zj1NLixQ035eSm9Gb6cGplocHnAsXgptnCc5c2SBvBTH1kVq/obp5Wad\u002BXPSE9FRTTf9vM1rY4xCM2SLmAAUs4BRZXzj989myTzsQ/0Xih9YADmkWQoOnWZxvRQ40WriNxBARSEd8\u002B6AT8lFqAwE5BrxuBVDH9jQakFYrgDMlULf3\u002BlL/DCyL1vOJUJqOrgNONTDQVcldngKRK2GETXbIH2xbxDb1MNvaVfSnOAag96dThnJNp6vGEu3Z/PJBv\u002B\u002Bs63sBFOA8waFlHTJU31v\u002BFE1\u002B7Xsz/Jmgsg8FxmKNW6g5I1sXRKf3wsef8FWTI33t61xVShghpa0WFWjLcHMAn\u002BDfm4PreYJo8VOtfxdBpqT\u002BBcfCSlrAslcQ9SEeJS7FBJ3HsPAK/QoYDYj8moqvERrD4j03AiQUF10uMuiK9pVJg7bJjjY4E44UvCRwhvONwqeObHRdxw\u002BJmv678/ocUK7go0LZ30IQlbOL1xzkY4UV1I3RisQKczJV74iBr2DviEcBoHIr1PqX9LCR9iRIh5pW9o6xkuHt1nwT8dNkTepi5KiR0V7L4rEj8rpqDDLotAIXtVJJA2T3WDe2CWT/8lYaqQnISSuiS60qazxR0op0aqxTMsuH79hA3kIq/ZPKMTrzoBumibF5pNCI381WnAx7l9W9\u002BYoTazBBPWrW63txY0N9iVNDc1/JSrsEcyUY/FRHXUAaWWebQAtelCZoDsnytjPCvAWNwIyyfI58o3cT2voAwUIRcaIBLwGNNORjJQW6RYuFC7iZJEyLV3v584UKFhnTTmNIvJEIH9rhqZVbQqxIUbNkLMAxg7mfgBiHECULON7qDNnoJQQmlC6SgE9t6MsEg2G6avAKRehnbhQg2OBH1osZFw2Yy2fCilfaDM7tlJYU3Gso8pKr9pGpvrQh3PEfpZtQj9ei72uTbuxHesgVQiA00d7H8K0ZeTYOyb/fZrYoqStfka3LY11omdFLeF7ktJhTSiPEXB90Tyrzd6QJzwyXGdcFe6mIyLJgB2cRTqCZzqBXM\u002BZ\u002Bj6RWrgcVQiJJutoqwipul79axQC6UebS2FOwMlEPlQqpLx/\u002BOi/pcSN0v4LMYAQ=="
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 850,
+          "completion_tokens": 515,
+          "total_tokens": 1365,
+          "cost": 0.010275,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.010275,
+            "upstream_inference_prompt_cost": 0.00255,
+            "upstream_inference_completions_cost": 0.007725
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 304
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8766.6307
+    },
+    {
+      "moveNumber": 2,
+      "timestamp": "2026-02-21T01:24:05.2512899Z",
+      "request": {
+        "model": "anthropic/claude-sonnet-4.5",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 1 cells (to cell (3, 1))\n- West: 1 cells (to cell (1, 1))\n\nYour current position is (2, 1).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "max_tokens": 2000,
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771637038-PGVXiGOf83gOD5Qxn5Df",
+        "provider": "Google",
+        "model": "anthropic/claude-sonnet-4.5",
+        "object": "chat.completion",
+        "created": 1771637038,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "tool_calls",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Looking at my situation:\n- Current position: (2, 1)\n- Goal position: (11, 9)\n- I need to move east (increase X from 2 to 11) and south (increase Y from 1 to 9)\n\nAvailable moves:\n- North and South are blocked (0 cells)\n- East: 1 cell available (toward goal)\n- West: 1 cell available (but that\u0027s backtracking)\n\nI\u0027ll move **east** to continue progressing toward the goal.",
+              "refusal": null,
+              "reasoning": "Let me analyze the situation:\n- Current position: (2, 1)\n- Goal position: (11, 9)\n- I need to go from (2, 1) to (11, 9)\n\nTo reach (11, 9) from (2, 1):\n- X needs to increase from 2 to 11 (need to go 9 cells east)\n- Y needs to increase from 1 to 9 (need to go 8 cells south)\n\nCurrent available moves:\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 1 cell to (3, 1)\n- West: 1 cell to (1, 1)\n\nSince I can\u0027t go south (which I need to eventually) and I can\u0027t go north, my options are east or west. Going west would be backtracking to (1, 1) where I just came from. Going east to (3, 1) would move me closer to the goal in the x-direction.\n\nI should go east to make progress toward the goal.",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "toolu_vrtx_012yzs2Yz3s4nJmSirtKcFwh",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "anthropic-claude-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "Let me analyze the situation:\n- Current position: (2, 1)\n- Goal position: (11, 9)\n- I need to go from (2, 1) to (11, 9)\n\nTo reach (11, 9) from (2, 1):\n- X needs to increase from 2 to 11 (need to go 9 cells east)\n- Y needs to increase from 1 to 9 (need to go 8 cells south)\n\nCurrent available moves:\n- North: 0 cells (blocked)\n- South: 0 cells (blocked)\n- East: 1 cell to (3, 1)\n- West: 1 cell to (1, 1)\n\nSince I can\u0027t go south (which I need to eventually) and I can\u0027t go north, my options are east or west. Going west would be backtracking to (1, 1) where I just came from. Going east to (3, 1) would move me closer to the goal in the x-direction.\n\nI should go east to make progress toward the goal.",
+                  "signature": "EtwGCkgICxACGAIqQKRDdOTqCajJYTGWJN7oAJhJ2oEn7qIVhPAZP\u002B52kwSN3ehhD\u002BWTmZESv9L9abBhKNdf8zNtYzJzo3yLFhS0dCoSDFsCxcYvwIkkktktBhoMXnHzxByGz0WFL3OLIjCfhDPfS9zWGuPRK9NO5EXf\u002B1kUtVaBG/c8E1v11k6oCqj7ZB8HN0KqBi3klzz4auEqwQV6R1igOX7a\u002B7pYolXo6hvI2EDTDh\u002Bk6IvTyNs5sCOmv0VD0Kbm8BU2U/MIo5LKun2KESHDCmnjR0ycHjbpPqdtDehYgIQlXOoD1godmOmqzmo1RcvSS5BSDlRBvCTDYB9wW9Ik7riGljSDgJ/SgHY689Q8fvpL4c//AnjqiNuWZbgvagRtkbxQmQ88fgca32SayygtOKKpE0WAkTce2UjxjqKlA5Rfwz7opKV3vNmdwskx/wOMCZBmxV1autR2fgJD\u002BfwhLwfSkFEx\u002BIH2LDCNLUNdwdzLoXpqxVqS1YF91eEYuy2XT8jKhnz39jjyAa5bWN0ekNLIXwNegmfU/Ktf8dcS\u002BbjZQwvDQeccz5vItw7hWAK9wiPC6V6Jiss0xjy\u002B7Kr2ve0QDXHxjGOr8xB0d5\u002Bwn5tP7nRxw9in6IZax7v7R0z6HdrbBkqitU1d7znjMO4CnFF1g6cASgZmxnPjPasMQTp1gPz7ULc7W7EO2LNte2JvEdeBxzqXrlxAYmeTQIfvabfH1lPOW98d3M6h153yCMz8enuPH2BeQTvKv2wSK90tB9NmKQP8yUitVSaEnHP1O8sCwORwEvUVhQIOVvvMX4i9OUmuF00ev25SaY2QPwoEpeXv\u002B0\u002B3I7AeQyD/JLf7EV6tjdd92wwZ7M5rSefPjC4wKZCN9ODRkAzIyLP/AT9s5rFqLgnHMvIeAh\u002BpJHGuw084JSBWRPAsCNYC/y3tg2MCK1YNd7l9tQR9x0cgnbs17zL3sWa0NHGk/EHBmCyXjICv65xZ2CZITk68/kxcLndoxy1cqC/VhJO3uF5Hp0bDdn0/vzwxC4ykhQKdrl8J/xM3rq97C/xYEfXqimWhwqjvzlQJCFvZEznTHdDspULTMk4waA/5dzSlEcvfet8\u002BWUK5wh7VLAlPZejCvkvuVM5yZvO7eVQ2PtNGHu4YAQ=="
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 886,
+          "completion_tokens": 430,
+          "total_tokens": 1316,
+          "cost": 0.009108,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.009108,
+            "upstream_inference_prompt_cost": 0.002658,
+            "upstream_inference_completions_cost": 0.00645
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 188
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 6981.0445
+    },
+    {
+      "moveNumber": 3,
+      "timestamp": "2026-02-21T01:24:12.5627351Z",
+      "request": {
+        "model": "anthropic/claude-sonnet-4.5",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 2 cells (to cell (3, 3))\n- East: 0 cells\n- West: 2 cells (to cell (1, 1))\n\nYour current position is (3, 1).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. E: (1,1)\u2192(2,1)\n  2. E: (2,1)\u2192(3,1)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "max_tokens": 2000,
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771637045-Bh7erSVtvHebd8Rqfeod",
+        "provider": "Google",
+        "model": "anthropic/claude-sonnet-4.5",
+        "object": "chat.completion",
+        "created": 1771637045,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "tool_calls",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Looking at my current situation:\n- Current position: (3, 1)\n- Goal position: (11, 9)\n- I need to go east (increase X by 8) and south (increase Y by 8)\n\nAvailable moves:\n- North: blocked\n- South: 2 cells available (would take me to (3, 3))\n- East: blocked\n- West: would go backward\n\nSince I need to reach (11, 9) and east is currently blocked, I\u0027ll move south to make progress toward the goal.",
+              "refusal": null,
+              "reasoning": "Let me analyze the current situation:\n- Current position: (3, 1)\n- Goal position: (11, 9)\n- I need to move right (east) from X=3 to X=11, so \u002B8 in X direction\n- I need to move down (south) from Y=1 to Y=9, so \u002B8 in Y direction\n\nAvailable moves from (3, 1):\n- North: 0 cells (blocked)\n- South: 2 cells to (3, 3)\n- East: 0 cells (blocked)\n- West: 2 cells to (1, 1)\n\nSince I need to go east and south to reach the goal, and east is currently blocked, I should try going south first. Going west would take me backwards (I just came from there).\n\nMy journey so far shows I came from (1,1) \u2192 (2,1) \u2192 (3,1), moving east twice. Now I should move south to make progress toward the goal.",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "toolu_vrtx_01N9W8hBYC18tfuhjFWwHjrG",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022: \u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "anthropic-claude-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "Let me analyze the current situation:\n- Current position: (3, 1)\n- Goal position: (11, 9)\n- I need to move right (east) from X=3 to X=11, so \u002B8 in X direction\n- I need to move down (south) from Y=1 to Y=9, so \u002B8 in Y direction\n\nAvailable moves from (3, 1):\n- North: 0 cells (blocked)\n- South: 2 cells to (3, 3)\n- East: 0 cells (blocked)\n- West: 2 cells to (1, 1)\n\nSince I need to go east and south to reach the goal, and east is currently blocked, I should try going south first. Going west would take me backwards (I just came from there).\n\nMy journey so far shows I came from (1,1) \u2192 (2,1) \u2192 (3,1), moving east twice. Now I should move south to make progress toward the goal.",
+                  "signature": "Es4GCkgICxACGAIqQCp37dnSOx0tvNqNwNahsHe7nm/SvLZvTCdsb2WSN7jhox6tPDeF/\u002B7yzOZu0q1qbSpmXl/dTnwwB454xWrGgQkSDIdzKcb76\u002BmeVltFGRoMlQ\u002BUn/ivPPHiVlfGIjCzejs47B\u002BvasnkIOejAG/mNa2iYhFHixg0F/dG7XnbJdSNeYcLlc5gsLScBH/07OQqswVkr0LRrIvVLiif0DzaNzpcPEoCNhLRLDV3m6H5Y/qEApisc69WzURo3QT8RczALY9d9JkvqzBbWUI3ipK5XCl1RSEekjdFVnUdJ5i\u002BIbZdiuDn\u002BcPKIPP96YOKvspLKDxkIYZhGBAAvL87qm37/Fk\u002B1KAFXKRhA9PMaUgnVmZA59mVCfOVAA4g1W/1x4ypdAsydbVzqUqFParAfzTvB8UJhLu3mWPEKyaXvszXJEJnseWldlv23NT2o3JEDxhyeKluDGhg1KtNNoBz47QPUu4ibuGBHdNpl1qezjAWOxFeocz3A28JubPQMMEcB5ia7xjYMQpi\u002Bttqy67DpOvF9afrp1QuBzjohEMLzWMwY\u002BDwRulHLf\u002BxWbncz7j2UnZOaBVuyqsdwwR/\u002B7/m/oXBCcs\u002BHDXdn11x2vODkig2P63N01xwRj3vQF7qod0jsxmFzPk3WXbJJSUZfuMqd0d/lsofy8JrIlK3qzLoJOuBsQQ2rDh1inqGNZDrr\u002BYWa5RHp6srUVNN1m/HveIEVADhRv9I3eYW5ACoSCwdDAcbmd48QpTQsVx1d2P8Mn62E37yF/8YU1DDQ1biluH/DaT95d3E8XNRQLYokHO7dx8fxOgf5d3Q0X6ZoiRofNZbfOtMA4PNjL6fF\u002BykIB4VnZYeYYao5cW05xfAhAKV/mrMEAeUbjRX886plJtf6z2/DfLPbcPWo/N1PyTj6Th5glyLQ1Zua8DAdwqxJBpNYOgl\u002Bwgx0zT1Tpd8XcuTIL5seUoTwbzoxNkRlj1BjwVch2GRIm8uoSEUgjOVcBDn/eDGA/MqeZwqhAPWKhCFCRETI7gsTayl0GFtxYu9SFiR\u002B3Re/vdeSQF9E5FkHZjj2pElEbradoad2QbfT8huyz0mlWtwkfNyxmrUZP3FmNrPPMrakEF488hGGAE="
+                }
+              ]
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 903,
+          "completion_tokens": 408,
+          "total_tokens": 1311,
+          "cost": 0.008829,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.008829,
+            "upstream_inference_prompt_cost": 0.002709,
+            "upstream_inference_completions_cost": 0.00612
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 182
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 7305.9371
+    }
+  ]
+}

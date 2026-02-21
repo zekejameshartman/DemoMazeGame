@@ -6,9 +6,6 @@ const OUTCOME_META = [
   { key: "won", label: "Won", color: "#0f766e" },
   { key: "max_moves", label: "Max Moves", color: "#d97706" },
   { key: "loops", label: "Loops", color: "#ea580c" },
-  { key: "error", label: "Error", color: "#b91c1c" },
-  { key: "stopped", label: "Stopped", color: "#475569" },
-  { key: "unknown", label: "Unknown", color: "#6b7280" },
 ];
 
 const outcomeLabelMap = Object.fromEntries(OUTCOME_META.map((entry) => [entry.key, entry.label]));
