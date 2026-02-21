@@ -1,0 +1,703 @@
+{
+  "sessionId": "bb122874-4011-4bf2-83a4-a391bde55946",
+  "startTime": "2026-02-21T02:04:32.9074361Z",
+  "endTime": "2026-02-21T02:07:52.2366318Z",
+  "durationSeconds": 199.3291957,
+  "model": {
+    "id": "google/gemini-3.1-pro-preview",
+    "name": "Gemini 3 Pro Preview"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": true,
+    "breadcrumbs": true,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": true,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 38,
+    "successfulMoves": 38,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 35,
+    "backtrackCount": 3
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 24861,
+    "totalCompletionTokens": 4740,
+    "totalTokens": 29601,
+    "totalReasoningTokens": 4222
+  },
+  "cost": {
+    "totalCostUsd": 0.106602,
+    "costPerMove": 0.0028053157894736842105263158,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 299,
+      "completionTokens": 78,
+      "reasoningTokens": 64,
+      "costUsd": 0.001534
+    },
+    {
+      "moveNumber": 2,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 282,
+      "completionTokens": 99,
+      "reasoningTokens": 92,
+      "costUsd": 0.001752,
+      "reasoning": "**Calculating Optimal Pathing**\n\nI\u0027ve determined my current position and the target coordinates. Analyzing the available moves, I see I can go North or South, and I\u0027m coming from North. Given that, I\u0027ll prioritize moving South.\n\n\n"
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 299,
+      "completionTokens": 98,
+      "reasoningTokens": 91,
+      "costUsd": 0.001774,
+      "reasoning": "**Evaluating Optimal Movement**\n\nI\u0027ve analyzed the grid and the available moves. Based on my origin, I need to adjust my direction. Given the options, moving South appears to be the most logical next step to progress toward the goal.\n\n\n"
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 367,
+      "completionTokens": 131,
+      "reasoningTokens": 117,
+      "costUsd": 0.002306
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 384,
+      "completionTokens": 99,
+      "reasoningTokens": 85,
+      "costUsd": 0.001956
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 401,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.00175
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 418,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001784
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 435,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001818
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 452,
+      "completionTokens": 91,
+      "reasoningTokens": 77,
+      "costUsd": 0.001996
+    },
+    {
+      "moveNumber": 10,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 469,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001886
+    },
+    {
+      "moveNumber": 11,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 487,
+      "completionTokens": 76,
+      "reasoningTokens": 62,
+      "costUsd": 0.001886
+    },
+    {
+      "moveNumber": 12,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 514,
+      "completionTokens": 128,
+      "reasoningTokens": 114,
+      "costUsd": 0.002564
+    },
+    {
+      "moveNumber": 13,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 523,
+      "completionTokens": 108,
+      "reasoningTokens": 94,
+      "costUsd": 0.002342
+    },
+    {
+      "moveNumber": 14,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 541,
+      "completionTokens": 133,
+      "reasoningTokens": 119,
+      "costUsd": 0.002678
+    },
+    {
+      "moveNumber": 15,
+      "direction": "E",
+      "fromPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 559,
+      "completionTokens": 270,
+      "reasoningTokens": 256,
+      "costUsd": 0.004358,
+      "reasoning": "**Analyzing Available Moves**\n\nOkay, I\u0027m at (7, 7) and aiming for (11, 9). I have two immediate options: East (1 cell) and West (6 cells). Hold on, I\u0027ve already been at (8, 7), arriving from the East, and have just moved West to (7,7). Exploring West will take me to (1, 7). That seems a strategic move.\n\n\n"
+    },
+    {
+      "moveNumber": 16,
+      "direction": "N",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 599,
+      "completionTokens": 201,
+      "reasoningTokens": 187,
+      "costUsd": 0.00361,
+      "reasoning": "**Analyzing Current Pathfinding**\n\nI\u0027m currently at (8, 7), aiming for (11, 9). I have a clear sense of available moves: North is the best option with 4 cells. I have already moved West to (7, 7) and then East back to (8, 7). South and East are currently blocked. It seems I am going in circles.\n\n\n"
+    },
+    {
+      "moveNumber": 17,
+      "direction": "N",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 623,
+      "completionTokens": 205,
+      "reasoningTokens": 191,
+      "costUsd": 0.003706,
+      "reasoning": "**Mapping the Route**\n\nI\u0027ve determined my current location and the target coordinates. My available moves have been identified: North for three cells, South for one. No moves are possible East or West. The path I\u0027ve taken so far is documented. My next move will be a south move.\n\n\n"
+    },
+    {
+      "moveNumber": 18,
+      "direction": "N",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 656,
+      "completionTokens": 295,
+      "reasoningTokens": 281,
+      "costUsd": 0.004852,
+      "reasoning": "**Mapping the Terrain**\n\nI\u0027ve got a grasp of my current location at (8, 5) and the objective at (11, 9). North offers a two-cell move, as does South. West is the most flexible, with seven cells, while East is limited to zero. Previously, I had the following journey logged: (1,1) -\u003E (1,2) -\u003E (1,3) -\u003E (1,4) -\u003E (1,5) -\u003E (2,5).\n\n\n"
+    },
+    {
+      "moveNumber": 19,
+      "direction": "N",
+      "fromPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 649,
+      "completionTokens": 254,
+      "reasoningTokens": 240,
+      "costUsd": 0.004346,
+      "reasoning": "**Assessing current position**\n\nI\u0027m currently at (8, 4), and my destination remains (11, 9). North is an option for one cell, while South can move me three cells, East and West are off the table. I\u0027ve covered some ground, most recently at (8,6) after moving South from (8,5), which was arrived at from the East (7,5).\n\n\n"
+    },
+    {
+      "moveNumber": 20,
+      "direction": "W",
+      "fromPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 667,
+      "completionTokens": 116,
+      "reasoningTokens": 102,
+      "costUsd": 0.002726
+    },
+    {
+      "moveNumber": 21,
+      "direction": "W",
+      "fromPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 685,
+      "completionTokens": 115,
+      "reasoningTokens": 101,
+      "costUsd": 0.00275
+    },
+    {
+      "moveNumber": 22,
+      "direction": "W",
+      "fromPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 703,
+      "completionTokens": 121,
+      "reasoningTokens": 107,
+      "costUsd": 0.002858,
+      "reasoning": "**Analyzing Current Pathing**\n\nI\u0027m currently at (6, 3), and my target is (11, 9). I can move east two units or west three. However, I just moved east from (7, 3), and now I\u0027m thinking of moving west to (3, 3). The calculations are underway to make sure I don\u0027t go backwards. I need to make a more efficient path, or the user won\u0027t be happy.\n\n\n"
+    },
+    {
+      "moveNumber": 23,
+      "direction": "N",
+      "fromPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 730,
+      "completionTokens": 137,
+      "reasoningTokens": 123,
+      "costUsd": 0.003104
+    },
+    {
+      "moveNumber": 24,
+      "direction": "N",
+      "fromPosition": {
+        "row": 2,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 739,
+      "completionTokens": 134,
+      "reasoningTokens": 120,
+      "costUsd": 0.003086
+    },
+    {
+      "moveNumber": 25,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 758,
+      "completionTokens": 128,
+      "reasoningTokens": 114,
+      "costUsd": 0.003052
+    },
+    {
+      "moveNumber": 26,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 776,
+      "completionTokens": 98,
+      "reasoningTokens": 84,
+      "costUsd": 0.002728
+    },
+    {
+      "moveNumber": 27,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 794,
+      "completionTokens": 95,
+      "reasoningTokens": 81,
+      "costUsd": 0.002728
+    },
+    {
+      "moveNumber": 28,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 9
+      },
+      "wasSuccessful": true,
+      "promptTokens": 812,
+      "completionTokens": 91,
+      "reasoningTokens": 77,
+      "costUsd": 0.002716
+    },
+    {
+      "moveNumber": 29,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 9
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 830,
+      "completionTokens": 84,
+      "reasoningTokens": 70,
+      "costUsd": 0.002668
+    },
+    {
+      "moveNumber": 30,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 850,
+      "completionTokens": 131,
+      "reasoningTokens": 117,
+      "costUsd": 0.003272
+    },
+    {
+      "moveNumber": 31,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 871,
+      "completionTokens": 93,
+      "reasoningTokens": 79,
+      "costUsd": 0.002858
+    },
+    {
+      "moveNumber": 32,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 891,
+      "completionTokens": 109,
+      "reasoningTokens": 95,
+      "costUsd": 0.00309
+    },
+    {
+      "moveNumber": 33,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 911,
+      "completionTokens": 112,
+      "reasoningTokens": 98,
+      "costUsd": 0.003166
+    },
+    {
+      "moveNumber": 34,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 931,
+      "completionTokens": 138,
+      "reasoningTokens": 124,
+      "costUsd": 0.003518
+    },
+    {
+      "moveNumber": 35,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 951,
+      "completionTokens": 134,
+      "reasoningTokens": 120,
+      "costUsd": 0.00351
+    },
+    {
+      "moveNumber": 36,
+      "direction": "S",
+      "fromPosition": {
+        "row": 7,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 8,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 971,
+      "completionTokens": 125,
+      "reasoningTokens": 111,
+      "costUsd": 0.003442
+    },
+    {
+      "moveNumber": 37,
+      "direction": "S",
+      "fromPosition": {
+        "row": 8,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 991,
+      "completionTokens": 136,
+      "reasoningTokens": 122,
+      "costUsd": 0.003614
+    },
+    {
+      "moveNumber": 38,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 11
+      },
+      "wasSuccessful": true,
+      "promptTokens": 1043,
+      "completionTokens": 61,
+      "reasoningTokens": 47,
+      "costUsd": 0.002818
+    }
+  ]
+}

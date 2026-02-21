@@ -1,0 +1,596 @@
+{
+  "sessionId": "b0b33f7c-93cc-41ea-9a49-212182b01603",
+  "startTime": "2026-02-21T01:56:15.8107971Z",
+  "endTime": "2026-02-21T01:58:19.8732459Z",
+  "durationSeconds": 124.0624488,
+  "model": {
+    "id": "google/gemini-3.1-pro-preview",
+    "name": "Gemini 3 Pro Preview"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": true,
+    "breadcrumbs": true,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": true,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 32,
+    "successfulMoves": 32,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 32,
+    "backtrackCount": 0
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 19051,
+    "totalCompletionTokens": 3243,
+    "totalTokens": 22294,
+    "totalReasoningTokens": 2795
+  },
+  "cost": {
+    "totalCostUsd": 0.077018,
+    "costPerMove": 0.0024068125,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 299,
+      "completionTokens": 120,
+      "reasoningTokens": 106,
+      "costUsd": 0.002038
+    },
+    {
+      "moveNumber": 2,
+      "direction": "E",
+      "fromPosition": {
+        "row": 1,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 333,
+      "completionTokens": 97,
+      "reasoningTokens": 83,
+      "costUsd": 0.00183
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 350,
+      "completionTokens": 102,
+      "reasoningTokens": 88,
+      "costUsd": 0.001924
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 367,
+      "completionTokens": 92,
+      "reasoningTokens": 78,
+      "costUsd": 0.001838
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 384,
+      "completionTokens": 114,
+      "reasoningTokens": 100,
+      "costUsd": 0.002136
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 401,
+      "completionTokens": 86,
+      "reasoningTokens": 72,
+      "costUsd": 0.001834
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 427,
+      "completionTokens": 116,
+      "reasoningTokens": 102,
+      "costUsd": 0.002246
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 435,
+      "completionTokens": 89,
+      "reasoningTokens": 75,
+      "costUsd": 0.001938
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 3,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 452,
+      "completionTokens": 95,
+      "reasoningTokens": 81,
+      "costUsd": 0.002044
+    },
+    {
+      "moveNumber": 10,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 469,
+      "completionTokens": 110,
+      "reasoningTokens": 96,
+      "costUsd": 0.002258
+    },
+    {
+      "moveNumber": 11,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 487,
+      "completionTokens": 106,
+      "reasoningTokens": 92,
+      "costUsd": 0.002246
+    },
+    {
+      "moveNumber": 12,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 514,
+      "completionTokens": 118,
+      "reasoningTokens": 104,
+      "costUsd": 0.002444
+    },
+    {
+      "moveNumber": 13,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 523,
+      "completionTokens": 108,
+      "reasoningTokens": 94,
+      "costUsd": 0.002342
+    },
+    {
+      "moveNumber": 14,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 541,
+      "completionTokens": 111,
+      "reasoningTokens": 97,
+      "costUsd": 0.002414
+    },
+    {
+      "moveNumber": 15,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 559,
+      "completionTokens": 196,
+      "reasoningTokens": 182,
+      "costUsd": 0.00347,
+      "reasoning": "**Exploring New Paths**\n\nI\u0027ve got a new update on my navigation strategy. My current location is (7, 7), and the goal remains at (11, 9). I\u0027ve just realized going West from here offers unexplored routes, since I came from the East at step 14. East only gives me 1 cell, so west for 6 is the way to go, for now.\n\n\n"
+    },
+    {
+      "moveNumber": 16,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 577,
+      "completionTokens": 154,
+      "reasoningTokens": 140,
+      "costUsd": 0.003002
+    },
+    {
+      "moveNumber": 17,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 595,
+      "completionTokens": 194,
+      "reasoningTokens": 180,
+      "costUsd": 0.003518,
+      "reasoning": "**Analyzing Current Position**\n\nI\u0027ve got a lock on my current location, (5, 7), and the target at (11, 9). East looks promising, giving me an opportunity to move 3 units. However, I need to consider my prior path. I moved west from (8,7), to (7, 7), (6, 7), and (5, 7) and if I continue in the same direction, I can get to (4, 7).\n\n\n"
+    },
+    {
+      "moveNumber": 18,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 613,
+      "completionTokens": 222,
+      "reasoningTokens": 208,
+      "costUsd": 0.00389,
+      "reasoning": "**Analyzing Possible Moves**\n\nI\u0027m currently at (4, 7), aiming for (11, 9). I\u0027ve got these move options: East (4 steps), West (3 steps), and zero steps North or South. But I\u0027ve just come from (8,7), having moved West to get here, so that could be an issue. Moving West again from here doesn\u0027t seem to make sense.\n\n\n"
+    },
+    {
+      "moveNumber": 19,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 631,
+      "completionTokens": 125,
+      "reasoningTokens": 111,
+      "costUsd": 0.002762
+    },
+    {
+      "moveNumber": 20,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 649,
+      "completionTokens": 117,
+      "reasoningTokens": 103,
+      "costUsd": 0.002702
+    },
+    {
+      "moveNumber": 21,
+      "direction": "S",
+      "fromPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 667,
+      "completionTokens": 105,
+      "reasoningTokens": 91,
+      "costUsd": 0.002594
+    },
+    {
+      "moveNumber": 22,
+      "direction": "S",
+      "fromPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 685,
+      "completionTokens": 115,
+      "reasoningTokens": 101,
+      "costUsd": 0.00275
+    },
+    {
+      "moveNumber": 23,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 728,
+      "completionTokens": 58,
+      "reasoningTokens": 44,
+      "costUsd": 0.002152
+    },
+    {
+      "moveNumber": 24,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 745,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.002114
+    },
+    {
+      "moveNumber": 25,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 763,
+      "completionTokens": 47,
+      "reasoningTokens": 33,
+      "costUsd": 0.00209
+    },
+    {
+      "moveNumber": 26,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 781,
+      "completionTokens": 56,
+      "reasoningTokens": 42,
+      "costUsd": 0.002234
+    },
+    {
+      "moveNumber": 27,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 799,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.002222
+    },
+    {
+      "moveNumber": 28,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 817,
+      "completionTokens": 58,
+      "reasoningTokens": 44,
+      "costUsd": 0.00233
+    },
+    {
+      "moveNumber": 29,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 835,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.002294
+    },
+    {
+      "moveNumber": 30,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "wasSuccessful": true,
+      "promptTokens": 853,
+      "completionTokens": 63,
+      "reasoningTokens": 49,
+      "costUsd": 0.002462
+    },
+    {
+      "moveNumber": 31,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 871,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.002366
+    },
+    {
+      "moveNumber": 32,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 11
+      },
+      "wasSuccessful": true,
+      "promptTokens": 901,
+      "completionTokens": 61,
+      "reasoningTokens": 47,
+      "costUsd": 0.002534
+    }
+  ]
+}

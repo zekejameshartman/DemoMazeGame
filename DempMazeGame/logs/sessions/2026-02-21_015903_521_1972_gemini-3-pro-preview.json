@@ -1,0 +1,601 @@
+{
+  "sessionId": "19726333-473d-4644-aa8f-0ad2288a0502",
+  "startTime": "2026-02-21T01:59:03.5219764Z",
+  "endTime": "2026-02-21T02:01:46.402293Z",
+  "durationSeconds": 162.8803166,
+  "model": {
+    "id": "google/gemini-3.1-pro-preview",
+    "name": "Gemini 3 Pro Preview"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": true,
+    "breadcrumbs": true,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": true,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 32,
+    "successfulMoves": 32,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 32,
+    "backtrackCount": 0
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 18685,
+    "totalCompletionTokens": 3026,
+    "totalTokens": 21711,
+    "totalReasoningTokens": 2627
+  },
+  "cost": {
+    "totalCostUsd": 0.073682,
+    "costPerMove": 0.0023025625,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 299,
+      "completionTokens": 122,
+      "reasoningTokens": 108,
+      "costUsd": 0.002062
+    },
+    {
+      "moveNumber": 2,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 333,
+      "completionTokens": 101,
+      "reasoningTokens": 87,
+      "costUsd": 0.001878
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 350,
+      "completionTokens": 117,
+      "reasoningTokens": 103,
+      "costUsd": 0.002104
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 316,
+      "completionTokens": 98,
+      "reasoningTokens": 91,
+      "costUsd": 0.001808,
+      "reasoning": "**Mapping the Trajectory**\n\n\\n\\n\n\nMy current location is (1, 4), and my objective rests at (11, 9). I\u0027ve analyzed the available moves: North permits 3 cells, South offers 1. East and West are blocked. Considering my origin from North at (1,3), the optimal path appears to be South, leading me to (1,5).\n\n\n"
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 333,
+      "completionTokens": 90,
+      "reasoningTokens": 83,
+      "costUsd": 0.001746,
+      "reasoning": "**Charting the Course Forward**\n\nI\u0027ve got a clear path now, heading east. Avoiding any backtracking is key, so the prior north trajectory is irrelevant. It\u0027s all about that eastern push to reach the final coordinates. I\u0027m focusing solely on that eastward advancement, seven cells in total, as the optimal route.\n\n\n"
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 401,
+      "completionTokens": 90,
+      "reasoningTokens": 76,
+      "costUsd": 0.001882
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 367,
+      "completionTokens": 72,
+      "reasoningTokens": 65,
+      "costUsd": 0.001598,
+      "reasoning": "**Evaluating Trajectory Options**\n\nI\u0027m presently at (3, 5) and aiming for (11, 9). My options are to go East 5 cells to (8, 5) or West 2 cells to (1, 5). Given the goal\u0027s location, moving East seems like the more productive approach.\n\n\n"
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 435,
+      "completionTokens": 85,
+      "reasoningTokens": 71,
+      "costUsd": 0.00189
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 452,
+      "completionTokens": 100,
+      "reasoningTokens": 86,
+      "costUsd": 0.002104
+    },
+    {
+      "moveNumber": 10,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 469,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001886
+    },
+    {
+      "moveNumber": 11,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 487,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001922
+    },
+    {
+      "moveNumber": 12,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 514,
+      "completionTokens": 122,
+      "reasoningTokens": 108,
+      "costUsd": 0.002492
+    },
+    {
+      "moveNumber": 13,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 472,
+      "completionTokens": 101,
+      "reasoningTokens": 94,
+      "costUsd": 0.002156,
+      "reasoning": "**Assessing Optimal Movement**\n\nI\u0027m evaluating the available moves to reach my goal at (11, 9) from my current position at (8, 6). Considering my origin at (8, 5) and the available options, moving South to (8, 7) appears to be the most logical next step.\n\n\n"
+    },
+    {
+      "moveNumber": 14,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 541,
+      "completionTokens": 123,
+      "reasoningTokens": 109,
+      "costUsd": 0.002558
+    },
+    {
+      "moveNumber": 15,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 559,
+      "completionTokens": 122,
+      "reasoningTokens": 108,
+      "costUsd": 0.002582
+    },
+    {
+      "moveNumber": 16,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 577,
+      "completionTokens": 135,
+      "reasoningTokens": 121,
+      "costUsd": 0.002774
+    },
+    {
+      "moveNumber": 17,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 595,
+      "completionTokens": 178,
+      "reasoningTokens": 164,
+      "costUsd": 0.003326,
+      "reasoning": "**Analyzing Movement Options**\n\nI\u0027m currently at (5, 7) and aiming for (11, 9). I see I can move East 3 cells or West 4 cells. I just came from (8, 7) and now I\u0027m reconsidering the best path towards the goal.\n\n\n"
+    },
+    {
+      "moveNumber": 18,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 562,
+      "completionTokens": 115,
+      "reasoningTokens": 108,
+      "costUsd": 0.002504,
+      "reasoning": "**Calculating the Route**\n\nI\u0027ve got the current position and the destination coordinates, along with the available moves. It looks like heading West is the most promising path, since I can reach (1,7) and I just came from (8, 7).\n\n\n**Mapping the Next Step**\n\nI\u0027m at (4, 7) now, and the target is at (11, 9). Considering my options, East gives me a move of 4, going to (8, 7). West moves me by 3 to (1, 7). Given I\u0027m trying to get to (11,9) I should focus on going East.\n\n\n"
+    },
+    {
+      "moveNumber": 19,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 631,
+      "completionTokens": 159,
+      "reasoningTokens": 145,
+      "costUsd": 0.00317
+    },
+    {
+      "moveNumber": 20,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 649,
+      "completionTokens": 124,
+      "reasoningTokens": 110,
+      "costUsd": 0.002786
+    },
+    {
+      "moveNumber": 21,
+      "direction": "S",
+      "fromPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 667,
+      "completionTokens": 126,
+      "reasoningTokens": 112,
+      "costUsd": 0.002846
+    },
+    {
+      "moveNumber": 22,
+      "direction": "S",
+      "fromPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 685,
+      "completionTokens": 117,
+      "reasoningTokens": 103,
+      "costUsd": 0.002774
+    },
+    {
+      "moveNumber": 23,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 728,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.00208
+    },
+    {
+      "moveNumber": 24,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 745,
+      "completionTokens": 67,
+      "reasoningTokens": 53,
+      "costUsd": 0.002294
+    },
+    {
+      "moveNumber": 25,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 712,
+      "completionTokens": 55,
+      "reasoningTokens": 48,
+      "costUsd": 0.002084,
+      "reasoning": "**Planning the Next Move**\n\nOkay, so I\u0027m currently at (3, 9) and aiming for (11, 9). The target is straight ahead, East, eight cells away. Seems straightforward: I\u0027ll advance eastward.\n\n\n"
+    },
+    {
+      "moveNumber": 26,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 730,
+      "completionTokens": 40,
+      "reasoningTokens": 33,
+      "costUsd": 0.00194,
+      "reasoning": "**Charting the Course**\n\nI\u0027ve determined my position and the exit\u0027s coordinates. My primary goal is to move east. The path is set, the direction is clear.\n\n\n"
+    },
+    {
+      "moveNumber": 27,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 799,
+      "completionTokens": 62,
+      "reasoningTokens": 48,
+      "costUsd": 0.002342
+    },
+    {
+      "moveNumber": 28,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 817,
+      "completionTokens": 59,
+      "reasoningTokens": 45,
+      "costUsd": 0.002342
+    },
+    {
+      "moveNumber": 29,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 835,
+      "completionTokens": 63,
+      "reasoningTokens": 49,
+      "costUsd": 0.002426
+    },
+    {
+      "moveNumber": 30,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "wasSuccessful": true,
+      "promptTokens": 853,
+      "completionTokens": 59,
+      "reasoningTokens": 45,
+      "costUsd": 0.002414
+    },
+    {
+      "moveNumber": 31,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 871,
+      "completionTokens": 59,
+      "reasoningTokens": 45,
+      "costUsd": 0.00245
+    },
+    {
+      "moveNumber": 32,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 11
+      },
+      "wasSuccessful": true,
+      "promptTokens": 901,
+      "completionTokens": 55,
+      "reasoningTokens": 41,
+      "costUsd": 0.002462
+    }
+  ]
+}

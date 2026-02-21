@@ -1,0 +1,3975 @@
+{
+  "startTime": "2026-02-21T01:58:14.8791515Z",
+  "modelId": "google/gemini-3.1-pro-preview",
+  "modelName": "Gemini 3 Pro Preview",
+  "calls": [
+    {
+      "moveNumber": 1,
+      "timestamp": "2026-02-21T01:58:29.7041921Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 4 cells (to cell (1, 5))\n- East: 2 cells (to cell (3, 1))\n- West: 0 cells\n\nYour current position is (1, 1).\nThe goal is at position (11, 9).\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639095-sZ7rfnLJacqmTAdpbNnM",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639105,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_vjVljEnoVTnfVLcNasMy",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_vjVljEnoVTnfVLcNasMy",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "ErMCCrACAb4\u002B9vuV2WR08TskuADcXhN9mywJtH/H1GWq52H0schJPOUI7UjdM9jNLXjqXiFRT/obSqF9get1iCbS0jCS7NZr\u002BuhrcZs9qUaX1Afl1YkT0ljG2fhoOJzip3Ri9Lh/UiealJFSY\u002BB4LXH/28nbOuEi3MsjeVoR8YdzzXQHASONQLo52QJJULHolGKkA1VDAJoRje11cKfeqftKciMQKq4YnpT7L9dNJ75E0v/qpZsSwsChjF0H\u002BDB3Ybg6MrL7aU/JFJ/z/McbijFvh7sJCxVDH6d1zFr/7/HhQKAoChnMK5sl2c9\u002B28F0Nh5FUP/D674y437p\u002BpmXfZo3VGOGMetCapeT1tE5M9j6YU/sYnKzxychL9MBqLEb3/T192QYhgPfn1DPkOy2QhEbXnATHA=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 299,
+          "completion_tokens": 98,
+          "total_tokens": 397,
+          "cost": 0.001774,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001774,
+            "upstream_inference_prompt_cost": 0.000598,
+            "upstream_inference_completions_cost": 0.001176
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 84,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 14824.8462
+    },
+    {
+      "moveNumber": 2,
+      "timestamp": "2026-02-21T01:58:34.0150002Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 1 cells (to cell (1, 1))\n- South: 3 cells (to cell (1, 5))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (1, 2).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639109-MyP2yj9kCgdXxBvNYzjs",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639109,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_AF5awrSmmegTxqMdOCyk",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_AF5awrSmmegTxqMdOCyk",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EvgCCvUCAb4\u002B9vtIylyIVaNdO6hvuOeg/hx85mvH2zWHFVwxFBXfFaetsqCx8/tZ/YLL3aBJ3y/MslUYmy6QXqMuiD0M0VPyezgSnqH4HKxnqhW2n\u002BI\u002Bf0mD/j04TCG4RQqGliLkeJCDYBJRIUwI\u002Bp5hk9819tl5q2AA095m1qyCAeLsnBXBZo\u002BKJFQG0HOITtYGTrAnZMJeMM5fasBPWJOKkz0HtWeTBYkmy/xM8RNgnU8MH8wGHZi02TyVOHUWfbijFrdqC5OdWYZS3RTKrtbJBXr24Z5BGujNEvCg4f3WWeHP/SstaVDklxJsgw1uLGGNPL8m8rzjMEzflJ1BaSCw\u002BkifNg\u002BGgO4gTl8N3NnwF/tA3eDBUxzCKHHKihtPJBGVwxId8VlcGty1v1rue/dVjJ0\u002BbQjctUotmHdUsz6zrA1yk41V2/8PtkZDDKueZS34rDRjS0KBoMW4V9\u002B7D5WMS9GgQqvTvLMUDK5GwuX2IRHTeGXgE\u002Bd56Q=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 333,
+          "completion_tokens": 106,
+          "total_tokens": 439,
+          "cost": 0.001938,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001938,
+            "upstream_inference_prompt_cost": 0.000666,
+            "upstream_inference_completions_cost": 0.001272
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 92,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4310.4622
+    },
+    {
+      "moveNumber": 3,
+      "timestamp": "2026-02-21T01:58:37.1139989Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (1, 1))\n- South: 2 cells (to cell (1, 5))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (1, 3).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639114-DJoDA9IOjUNMwzz00911",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639114,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_2WYWefkQYy26hriYvlLP",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_2WYWefkQYy26hriYvlLP",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EtsCCtgCAb4\u002B9vvbocV8HPRBCb5a/\u002Bj2XzZDeSnlj6wXd4gHhzanIttVnciFkpWWUL2Y7\u002BckNyk\u002BRo9JhunLEmcEsSL9bszrzqMeTYULUD8igSEBIRpaqxj9TSyuyMfkiKhdegTQThTd44KZJYAhV4fDF/yBt9Iby6BOHtPpW2E5zApFlPfqoOgtQwNYd0h6RIFD/kB/NA9Uzbm0PjtESaHTiv99EBZYMhkMHxEJ6VSEiPfOtotXv6IPhKS\u002BCAXcqYp85p/7BpIC\u002B8VOoWYb/z68qEaCTJZpRwHeQi/16EZXEF0CqylH40YsC0SjaI7sWb4GcMgwGEIho7oBOFpsiO3VcOQexfwKH\u002BZph/r4C293ok9GlplsJsXPJb3Yy/MQTmD6dqax22HMV/NrHFiKlEL3Tz8Pecod1qfdsXs93PS\u002BkOqTnoRg5S1AsTFGkedVQjWw3n8YpCZMasK3U/s="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 350,
+          "completion_tokens": 105,
+          "total_tokens": 455,
+          "cost": 0.00196,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00196,
+            "upstream_inference_prompt_cost": 0.0007,
+            "upstream_inference_completions_cost": 0.00126
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 91,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3098.7032
+    },
+    {
+      "moveNumber": 4,
+      "timestamp": "2026-02-21T01:58:51.4131188Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (1, 1))\n- South: 1 cells (to cell (1, 5))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (1, 4).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639117-NCDhaBAlh199rYAOOi64",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639127,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_kpwutQFMzCzmD2pyE5Jw",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_kpwutQFMzCzmD2pyE5Jw",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EvACCu0CAb4\u002B9vvbKhvUQLh3aJViSiafQYQ1m25lfFFxPlHQ0nzAEzP/dRu4AkPcUWR90\u002B6PWPMRqF0iZcDR0YX0QM53KOHl2npCLC4jwHvA2hTBlIblXfWndOcou8F\u002BhW/A1l2/0i02Mdv6RqbSDzKX\u002BuOpNBAoB5HY25hYj0HctRbcLGafPabeszXhXTer/C92IeZxNcLP\u002B2fN/jQ7fUKs22RhvrXrVME\u002Bs5Aid6tjxguO1mntEmAQMY1MTJIzsNpeK9Umus7Dvnt54uJd8rjbdGlaJ0CH/6IMVoEv\u002B3veVAG00uXX8iMCV5PNJHlbJbsUNkFQcAMzPJlF2JWqAPA4sA4QIVwgXd4R4k//Q9Lg8WdZzn02FYWUPIWtTnxPJTN03hinI6g\u002B1C4TABpKbR2mQitwiVy4HNzqUK9Xzm3BsKD2iKnSgGQ8lh56gXeXOehF3JKTmonTnYwzqkU/6ijm0sYqz4l93QvympOIIHX4LPk="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 367,
+          "completion_tokens": 109,
+          "total_tokens": 476,
+          "cost": 0.002042,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002042,
+            "upstream_inference_prompt_cost": 0.000734,
+            "upstream_inference_completions_cost": 0.001308
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 95,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 14298.9191
+    },
+    {
+      "moveNumber": 5,
+      "timestamp": "2026-02-21T01:58:54.8364748Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (1, 1))\n- South: 0 cells\n- East: 7 cells (to cell (8, 5))\n- West: 0 cells\n\nYour current position is (1, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639131-nei3Gt7oScPTs4bz03va",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639131,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Planning the Route**\n\nI\u0027ve got the current location and the target coordinates, along with possible moves. I can move East a fair distance, which looks like the most promising direction to get closer to (11, 9). I\u0027m evaluating the best path forward given the available options.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_WfhrQ3igZgtFSXqu5OEz",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Planning the Route**\n\nI\u0027ve got the current location and the target coordinates, along with possible moves. I can move East a fair distance, which looks like the most promising direction to get closer to (11, 9). I\u0027m evaluating the best path forward given the available options.\n\n\n"
+                },
+                {
+                  "id": "tool_move_WfhrQ3igZgtFSXqu5OEz",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rX30h\u002BBBA7b0NGz8M7FgGh\u002BvD\u002Bx1S7xnVinaih8Y7BW8KTwGPPWtfw8Y7Fq8L6gcDSuZQNU5JrB3g7KWtFk9jWJzEGy0YyurBj/mV4K3ENIFSQaQ1Z1gzkZxLcUgTJpg8VeY\u002BmNk9k9QYHvCy2kYtPWoKSQGPPWtfO2DzpKSYrwmMm0FxW7Peb\u002BdjKEvo0F9PrPnUvk2Wml1d9hLHUbaW8r1up4XmVrHdDbvdZWNuS3d54H\u002BVpLKoGIF1ms0KXAGPPWtf/LXXwQp8qNe5cPW/iAWrOgkw0u2oVoXr70WHoU0Ni9uvHHW1rW5TrBBVZ1urwume\u002BHDevNQmh9k9\u002B1uaqtluHXZVw6keiPFSWg/9nhh3\u002B0UF6N/61/0RCl0Bjz1rX9irVJ3Ycf2T2wcZDnbc/I/YtkXrUCMtFtOWO1PXyxF1W/NGQgwYHL8nUJCtvBjowzxvR/AHwqUzxhtPbhEidv4LCHfx5j/Let1cznHBzFFHa1sAJxeqSxE="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 333,
+          "completion_tokens": 92,
+          "total_tokens": 425,
+          "cost": 0.00177,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00177,
+            "upstream_inference_prompt_cost": 0.000666,
+            "upstream_inference_completions_cost": 0.001104
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 85,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3422.9914
+    },
+    {
+      "moveNumber": 6,
+      "timestamp": "2026-02-21T01:58:58.1722805Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 6 cells (to cell (8, 5))\n- West: 1 cells (to cell (1, 5))\n\nYour current position is (2, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639134-ISpyzDbKUROp4MYlEwmL",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639134,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Evaluating Maze Navigation**\n\nI\u0027ve analyzed the maze and the user\u0027s starting point. Given the constraints, East seems the only viable path. My current plan is to move towards the East. The destination is clearly established, and the first step appears straightforward.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_nT0UW0NU4TKTdAuZ5avV",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Evaluating Maze Navigation**\n\nI\u0027ve analyzed the maze and the user\u0027s starting point. Given the constraints, East seems the only viable path. My current plan is to move towards the East. The destination is clearly established, and the first step appears straightforward.\n\n\n"
+                },
+                {
+                  "id": "tool_move_nT0UW0NU4TKTdAuZ5avV",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "ClsBjz1rXzqu4ds2SMHbxTe6PjNMy\u002B365jlSK9Ii2vRD25XjM4hSFv8TEuGZn\u002BydvWpYQl7s1YV0yz1eIYUJuegTm/qvCNeLjePOsfi3ExAP81Yh3PDWnxglhFrSClABjz1rX\u002BpC/UWVbHUwFCaVNGnS8/ree6X1QZ9Ds1FpVKoNv5YUN1XxgfY95X391nMZLnDZJM\u002BNAknk2cWx06bbAfSjsej\u002BEoegecTQpjYJHgphAY89a18jjHlykounvU/SucEdpOnjJ97s\u002BQAqlT\u002BwWq7J42Nfi/66eU9xvKPB0btp1urZ7afbjmNfDzOttAUNWeYdqv4ZKgQqNbWfE8cfqHUmMdH/zUpM4OVD/lp/S2YihgpUAY89a1/IVqPmd1vWO21IHrjjzAlOkpolxpsShWPq7x5NxA\u002B7GVl30Lk/zpaHSMefm3YT94ic8HL\u002B/WxVe\u002BOsG\u002BPsiaETEjOXScTMjWE2JyJBYzBy"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 350,
+          "completion_tokens": 99,
+          "total_tokens": 449,
+          "cost": 0.001888,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001888,
+            "upstream_inference_prompt_cost": 0.0007,
+            "upstream_inference_completions_cost": 0.001188
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 92,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3335.6169
+    },
+    {
+      "moveNumber": 7,
+      "timestamp": "2026-02-21T01:59:07.310576Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 5 cells (to cell (8, 5))\n- West: 2 cells (to cell (1, 5))\n\nYour current position is (3, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639138-xlDBLoAptn4J1xLn6pbd",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639138,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Evaluating Trajectory Options**\n\nI\u0027m presently at (3, 5) and aiming for (11, 9). My options are to go East 5 cells to (8, 5) or West 2 cells to (1, 5). Given the goal\u0027s location, moving East seems like the more productive approach.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_9jMF4q9P5wKoIFIqwCKk",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Evaluating Trajectory Options**\n\nI\u0027m presently at (3, 5) and aiming for (11, 9). My options are to go East 5 cells to (8, 5) or West 2 cells to (1, 5). Given the goal\u0027s location, moving East seems like the more productive approach.\n\n\n"
+                },
+                {
+                  "id": "tool_move_9jMF4q9P5wKoIFIqwCKk",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rX9aWlwafoEuhpS/k\u002B7j/YTWxUJWe9G1lySbqM4257KAKUAGPPWtffsmxbqIGcr/t5cXNRijqaiFNfYgXr9eCg4b2tJNBHi\u002BkGZscIrKdDV6wkcTQ1POx84tb8uqSnkQOVxCwfnpgOoU6tanL5Mmg8fUuCk4Bjz1rX\u002BXIlKYBqXbtNjFE6Ipqr4ovgytqfjoxsoVfs4VkKxF9q0xJv8ePurcDua6cTKxbZjPSp5zv2byqdjSeHUfLdoMpgmd8Dc0sdOIKaAGPPWtfJ3mIKknZyScS96LQdofc3EyR/y1fdSZeTe3MYmpiCb8vpHyUfUPkhr08A3jyJ35MPbt0kwtPWLcPD\u002BSpQt4CNhAMA/bpIZEKm/6Bt9bvHCvjGd6hZ\u002BesuITmpjzsNuuYxlmS"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 367,
+          "completion_tokens": 72,
+          "total_tokens": 439,
+          "cost": 0.001598,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001598,
+            "upstream_inference_prompt_cost": 0.000734,
+            "upstream_inference_completions_cost": 0.000864
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 65,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9138.1156
+    },
+    {
+      "moveNumber": 8,
+      "timestamp": "2026-02-21T01:59:10.8703745Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 4 cells (to cell (8, 5))\n- West: 3 cells (to cell (1, 5))\n\nYour current position is (4, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639147-53ffu8WkGDi5Rnmd5x9m",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639147,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Evaluating Trajectory Options**\n\nI\u0027m presently at (4, 5) and the target is at (11, 9). I can move East four spaces, landing at (8, 5). Moving East seems like the most promising approach. I\u0027m now comparing the two options I have, I\u0027ll update again soon.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_7wgfIN7wa2Kq1MvfxX5y",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Evaluating Trajectory Options**\n\nI\u0027m presently at (4, 5) and the target is at (11, 9). I can move East four spaces, landing at (8, 5). Moving East seems like the most promising approach. I\u0027m now comparing the two options I have, I\u0027ll update again soon.\n\n\n"
+                },
+                {
+                  "id": "tool_move_7wgfIN7wa2Kq1MvfxX5y",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CkwBjz1rXwF5y5b\u002Bx7heNpAYKrs0Z8pJFTJ3JHNCt36h1rSrcoeZpMoZkVrJDCPwXtRuteo44BpnLBBlvDZEU4XyxJ9DAUpbJXd\u002Bu28uCk4Bjz1rX2S/ZVQo\u002BwcG3b3DDXObaizZMxGdo3YUoFPq9Jw0NHHGE8aYjlojrCMV9jYnLnP6kyRroAKr8x11ecQGObKr5lEawBqNLipc5t0KawGPPWtfW6BELrTD4\u002BTC0KEU3KnkDiX58PmK0wB8a3EW0aZ3MYjBle/ZkJKHAJWF8EweSwSKfY56QU8wcG/qZBj0/BlRA6utmzagH/XBjnmARzfduXH8rOXOZ6IVqAMtVXMOERaccOTfpUq2"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 384,
+          "completion_tokens": 72,
+          "total_tokens": 456,
+          "cost": 0.001632,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001632,
+            "upstream_inference_prompt_cost": 0.000768,
+            "upstream_inference_completions_cost": 0.000864
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 65,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3559.4677
+    },
+    {
+      "moveNumber": 9,
+      "timestamp": "2026-02-21T01:59:19.7006481Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 3 cells (to cell (8, 5))\n- West: 4 cells (to cell (1, 5))\n\nYour current position is (5, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639150-TbEkq3liELEuO9mcpySd",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639150,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Evaluating Available Moves**\n\nThe current coordinates are (5, 5), and the objective lies at (11, 9). Considering the permitted movements, I observe that eastward movement offers the most progress, with three cells available in that direction. No moves are available to the North or South. Hence, I\u0027m leaning toward an eastward trajectory.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_nfFdV6cPSNjsAyg6l8Sf",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Evaluating Available Moves**\n\nThe current coordinates are (5, 5), and the objective lies at (11, 9). Considering the permitted movements, I observe that eastward movement offers the most progress, with three cells available in that direction. No moves are available to the North or South. Hence, I\u0027m leaning toward an eastward trajectory.\n\n\n"
+                },
+                {
+                  "id": "tool_move_nfFdV6cPSNjsAyg6l8Sf",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rXzpF4uQ5B95gFwVU8s7SBT85Tw4GUBjLjWXGJ5z06K4KUAGPPWtfqrdoEMj6jdxjGXchsKlLYxeWFT4JNurUrXWsoBkxiW0RkVlmhHuvgvRZQydGs0YSdd8Vb\u002Bt7JuZECl34qYXAyzQCIcfajvIo2s\u002BJCkwBjz1rX7pMJuM8umrbwn3/okcMJxrHVUGfMkEZKJG2BFc\u002Bk3D5I\u002BsfQU2vyQ947nnhpThZDFcvUnQjwtg0IfA2aFcZ1jbx\u002BbIF212FCmIBjz1rX\u002BSxId2pZnMvBVbMFkDZRPlUpFG3vRMll0PZSx\u002BIl\u002Bk2YfZ822frgiMviJJ3vscawYwKPODZr2vc3WuhMv3Kjv8rPNfRcVVXzi/jiohALA\u002BndByTXWUUdJwfAsh7TgpHAY89a19ogLYzxr9Sy1T\u002B/yQ1RBzkLtYeJAayg51lUnjEQPAst7ng5RbuEr5reLLk2Jo8b7pU1RWJ8z2znQVwyhAxx7p2zCM="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 401,
+          "completion_tokens": 86,
+          "total_tokens": 487,
+          "cost": 0.001834,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001834,
+            "upstream_inference_prompt_cost": 0.000802,
+            "upstream_inference_completions_cost": 0.001032
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 79,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8830.0181
+    },
+    {
+      "moveNumber": 10,
+      "timestamp": "2026-02-21T01:59:23.667208Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 2 cells (to cell (8, 5))\n- West: 5 cells (to cell (1, 5))\n\nYour current position is (6, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639159-5nC8AaEwtZxm7wJzpXIL",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639159,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_HNaaPSNRvNLXNKYVZyIK",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_HNaaPSNRvNLXNKYVZyIK",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EooCCocCAb4\u002B9vs5f5FqP8f0sz5QrVplLsTH08B8rms0Z2YlFFJMGYZYzRMjX0RKYn5Q0Au8cpCcRjW/DOmpTac9GGUsERpQa4lL\u002BOC/X3VomVx2NMMyEK3m02AP7kqrwS4CeaQLE3iSljdF5MU31RkGF/evPHIe46SvusM5ex8JeZfTcSluzVORHfbIQZbGYVyYFnDKFFyc93P7Lvy6dSFO48g/XWscQWvRRe7ID1fejAuHqb0BEGzdGTqV7RNCucKQe3uOsDxHmI1Oi69wsobC4xkQ/OQasFfZWuyOpvQ6Czy31d0sZGC7P2iVZb/Uha989apeM8giXcxHbxKgWmt3CIpJCJ/CoIRIbU4="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 469,
+          "completion_tokens": 79,
+          "total_tokens": 548,
+          "cost": 0.001886,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001886,
+            "upstream_inference_prompt_cost": 0.000938,
+            "upstream_inference_completions_cost": 0.000948
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 65,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3966.3419
+    },
+    {
+      "moveNumber": 11,
+      "timestamp": "2026-02-21T01:59:33.6280433Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 1 cells (to cell (8, 5))\n- West: 6 cells (to cell (1, 5))\n\nYour current position is (7, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639163-nnSLUWKnZ4LRp2etGZ0j",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639170,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_CW835F6eufOUF7x5sPu7",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_CW835F6eufOUF7x5sPu7",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "Eo0CCooCAb4\u002B9vvlXsA6S/YG/4vLoodRASMW/j/y/wMjM5PJ0Uflb/tHnFDQvxndd1Ret0bYTH0VUeRwqiGksAWIJq3kuKKJDQqKDVJQNaO\u002BBWSv7Fl2OaH5R4EYupBbr7uF6fzOuMwvPc\u002BoU\u002BZWX2qFJzyH5afVQY6M5IniQqgjEqI/Vli\u002BwAkweIvyRLUNThD8GqjcBKCnXThNgOEj4aooW\u002B6WT17zZGo48b4s4PtlOE0vI9QJjmkA80T1PywFarJMBG39F6mgewOC6/qWTyoCZ0OoRhFJIyhZ6z\u002BApEybCTt\u002BRCK\u002B/LMwV1BNuf7vqKzE5DF1Osp6eU57APrWXY50wKFo9GX34CTgHYJldoc="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 487,
+          "completion_tokens": 79,
+          "total_tokens": 566,
+          "cost": 0.001922,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.001922,
+            "upstream_inference_prompt_cost": 0.000974,
+            "upstream_inference_completions_cost": 0.000948
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 65,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9960.6796
+    },
+    {
+      "moveNumber": 12,
+      "timestamp": "2026-02-21T01:59:39.4071232Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (8, 3))\n- South: 2 cells (to cell (8, 7))\n- East: 0 cells\n- West: 7 cells (to cell (1, 5))\n\nYour current position is (8, 5).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639173-O2j2FGkM1l0lb4fJSHA9",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639173,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Calculating Optimal Pathing**\n\nI\u0027m currently at (8, 5) and the objective is (11, 9). I see I can go North to (8,3), South to (8,7), West to (1,5) and can\u0027t go East at all. Given the goal is southeast of me, heading west is not optimal. I\u0027ll need to head South and then East to (11,9).\n\n\n**Considering Next Move South**\n\nI\u0027ve determined I can move South to (8,7). The target is at (11,9), therefore moving south is closer to the objective. A new path strategy seems best, and I will be at (8,7) if I move south.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_PfAQifc7sVle605OXyTu",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Calculating Optimal Pathing**\n\nI\u0027m currently at (8, 5) and the objective is (11, 9). I see I can go North to (8,3), South to (8,7), West to (1,5) and can\u0027t go East at all. Given the goal is southeast of me, heading west is not optimal. I\u0027ll need to head South and then East to (11,9).\n\n\n**Considering Next Move South**\n\nI\u0027ve determined I can move South to (8,7). The target is at (11,9), therefore moving south is closer to the objective. A new path strategy seems best, and I will be at (8,7) if I move south.\n\n\n"
+                },
+                {
+                  "id": "tool_move_PfAQifc7sVle605OXyTu",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rXzOCgsw3BsEkFWNARYSZFKkc4nhVxFvqETSjvE02\u002BrEKTwGPPWtftyY4ztF0pXkJiZMC\u002B9RIS1AgrUr/BBHOJit7Xf2VDNmILMWkibnoO7GImPuMGwi7ZExQW37gBDeaA51I3TIZWpF1FEgaFwq3smgKSQGPPWtfgBaN3Su1\u002B/5yd9nisCy2Pvw6vnnVTqNjwo\u002BX\u002Bp5jpFOOthWZJea5AlJqTGsHi/TD0OCRwLz905RcM2SoDZgn4rAUwZAKYwGPPWtf9B0ttbHjES\u002BlXRukRtYT248X0iGj5QkFlMqo3erVzv3SxKxljDw\u002ByBCrg01r6/cN6hD9O/W9bQSBeOtFlcyd1rlP0b2T6zhSqsLsKQPrzaG2yNSG\u002B6hiGrDXGhw\u002BLAp9AY89a1/D\u002BHJRr2WhkzY7ZOVL2XFUSHOJGEonpc0vpcC\u002BLR14znBsUZuTv5/PbH\u002BZfM7E2Q8vf5uVc39W6FKcEDb9/D3LxX8ac1Mhne95Gi8QzzH8B8kFsOfq5rGjPrtgzHIh/wZiSjM/HT\u002B00et3GKv7eqvZqvwP4acHYEoKZwGPPWtfWs5Sr88P48RfSwnS07DPScEi0j6D4g63lNTo2wzvdedMnjsm5uu7qybUDn0ndrLpXfPT8zn1oIaSzygopf6QTzo61QZX7VP2sB9Gxfsm0wzy34HFb3b6pmr5U1qaAOJ9SZQ="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 463,
+          "completion_tokens": 126,
+          "total_tokens": 589,
+          "cost": 0.002438,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002438,
+            "upstream_inference_prompt_cost": 0.000926,
+            "upstream_inference_completions_cost": 0.001512
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 119,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 5778.9077
+    },
+    {
+      "moveNumber": 13,
+      "timestamp": "2026-02-21T01:59:43.4457273Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 3 cells (to cell (8, 3))\n- South: 1 cells (to cell (8, 7))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (8, 6).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639179-rPcbUzoDchovU0UXvYzP",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639179,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Calculating the Optimal Path**\n\nI\u0027m currently at (8, 6) and my objective is (11, 9). I can move north three cells or south one cell. Since I moved south from (8, 5) to arrive here, I now realize I can\u0027t move East or West at all. Clearly, a North move might be best, but I need to plot out the next moves.\n\n\n**Mapping the Next Move**\n\nI\u0027ve decided to move south from (8, 6) to (8, 7). This keeps me from needing to adjust East or West and simplifies the next calculation. The ultimate objective remains at (11, 9). Now I\u0027ll recalculate based on the new position.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_0GTSKwlYQhlLmZOCM8wc",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Calculating the Optimal Path**\n\nI\u0027m currently at (8, 6) and my objective is (11, 9). I can move north three cells or south one cell. Since I moved south from (8, 5) to arrive here, I now realize I can\u0027t move East or West at all. Clearly, a North move might be best, but I need to plot out the next moves.\n\n\n**Mapping the Next Move**\n\nI\u0027ve decided to move south from (8, 6) to (8, 7). This keeps me from needing to adjust East or West and simplifies the next calculation. The ultimate objective remains at (11, 9). Now I\u0027ll recalculate based on the new position.\n\n\n"
+                },
+                {
+                  "id": "tool_move_0GTSKwlYQhlLmZOCM8wc",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CkwBjz1rX7znApHbqioc8E54pnv9/KHAnLnOePfc7b4q8H0KuQRfgEVhDbBhBw1ym/kIPnlx2eM2yMNR5RxOm/3miVQT9EfMU8DygoiqCk8Bjz1rX6nI4z557ZKlMop4CkgqNAgZwD8/3BjqkaLXyQ8hwUtVQEcealf/QK9YgseHlXsbyXHrDDY2iJMcA6gdMgxr8w48tooUrkZCI88RCmMBjz1rX8TsTQ00a7IlJyL8dLsuuLXOov/jsjwaBG/wKSiNQLMBt/Jwbje0lxe2SoJwyYI9d3xvL0pLCE2tFYlXiwUW2RW8otNJ7skOlsnaRPMJIYAYGFJaIgPukcdLJG369ogKdAGPPWtfWXJ6tldQ\u002Bjtkeu6\u002Bv64ail2o6GsU42TiEOov0nMDftytA8O1mTXO8AqBaIeX4RAuNvXdJRMvS1nic8AFxAt6jIdqOceAiwBeXnlObrj5IgR7dCxhfloPUqUeHr8AO3\u002BptKItv3w4vA3hL9I2ztcqCjcBjz1rX\u002BdoPYDXuHPu\u002B2vih5Jfp4Jxst1Am34wkEXciqZGxYsthG/TLol/6wxaEUcK06SrTyzn"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 472,
+          "completion_tokens": 119,
+          "total_tokens": 591,
+          "cost": 0.002372,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002372,
+            "upstream_inference_prompt_cost": 0.000944,
+            "upstream_inference_completions_cost": 0.001428
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 112,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4038.3796
+    },
+    {
+      "moveNumber": 14,
+      "timestamp": "2026-02-21T01:59:46.8415744Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 4 cells (to cell (8, 3))\n- South: 0 cells\n- East: 0 cells\n- West: 7 cells (to cell (1, 7))\n\nYour current position is (8, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639183-G9DyMdpjRvhZCgMG6CT5",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639183,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_rwWY7XlOV8pt6ydff8pN",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_rwWY7XlOV8pt6ydff8pN",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "ErsDCrgDAb4\u002B9vtd8KgEPkeumZQOtvu2owHIoeSadC\u002BELSKHdnIFz9rIvE4mrIDOuyJ2R5abPc6AeSBdSDx5/v7stVuF4Fxxe2Tek9zJyTt4upd2NhNwM68gmDLGz5niXpDRx8Jxc7V4crZ2I9s3ocROa\u002B8vAC8Dm5DN\u002BaSsWhiZ4kDVOQX1ahE/J9CtZHDOkAFp4NCL9UzzqbZU3MA7QuIhrltBefCNvUsDFACQlfoqFAGA2xvaJuQ/VeYO\u002BClUMA\u002BgS66MpbcM4bMpkfdQ/kKNst/Rgh0JD9rnNq9bSIWYM2hsFPTgSsAhW7QEBNd79QZCHNzNfuw2Nk23q6LIWSDTz25daOuJVWva1/yVQf6ftgFxkkhIbUIAIYhh6GScqURvPzANrpWxv3VTeoKTtFm1wCDA28/EdcUgk97BK88ng2KtuEtGaDvpnlmSEPIKT9tb\u002BQVQ1E6gkxfplVdFslLv\u002B5clQBMGIpyctxEfr92hoIxMJCo9mLyF4JvkNVXavMqNUAKge/GFvOh\u002BdkhxQQYQQOOS21UZe565nqF1HfcNQ7C61hAo7P\u002B\u002BgIG75/nAoLVkrX1Rd9s8LWWm/VQ="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 541,
+          "completion_tokens": 132,
+          "total_tokens": 673,
+          "cost": 0.002666,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002666,
+            "upstream_inference_prompt_cost": 0.001082,
+            "upstream_inference_completions_cost": 0.001584
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 118,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3395.6909
+    },
+    {
+      "moveNumber": 15,
+      "timestamp": "2026-02-21T01:59:54.975301Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 1 cells (to cell (8, 7))\n- West: 6 cells (to cell (1, 7))\n\nYour current position is (7, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639186-LaM5dvsHvYjKpiKSmovm",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639186,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Analyzing Available Moves**\n\nOkay, I\u0027m at (7, 7) and aiming for (11, 9). I have two immediate options: East (1 cell) and West (6 cells). Hold on, I\u0027ve already been at (8, 7), arriving from the East, and have just moved West to (7,7). Exploring West will take me to (1, 7). That seems a strategic move.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_WSZ7zmZQ5Wzav5qzz5mA",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Analyzing Available Moves**\n\nOkay, I\u0027m at (7, 7) and aiming for (11, 9). I have two immediate options: East (1 cell) and West (6 cells). Hold on, I\u0027ve already been at (8, 7), arriving from the East, and have just moved West to (7,7). Exploring West will take me to (1, 7). That seems a strategic move.\n\n\n"
+                },
+                {
+                  "id": "tool_move_WSZ7zmZQ5Wzav5qzz5mA",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EuMICuAIAb4\u002B9vssiJCt6RKaabZaxmnu6n3\u002BT7czHEbU4aJGSkmpt8zENdRm4a/YW35p1OeyRAZNjDAFuEpRNC9GXpnRsZ8/5\u002BCY5DWzEA28kIbKwkCJHCzJVwMlymqkpk1tg4rV5oVivjETYANnnzZWmFGZ\u002BD6Ps7iW9lUuFpfcitJkHNoakNWEH80Vde4oE2DCCeVHtgtcSs3LuBjC2hMOhhAftQbcUBNZnC8Tu5M0EtWjxjT8uwDEwUU4bJrWX5lOMxAbDxHS8chNp4HT1O//AgSkGfHrQFpV9qhEQkZ\u002BEqYzB/mBitz6TXkFIy3w7rid/7mEvgu3cYtFRStc0ek5vT1obuiqI8td/jdVwsAK1iSxUdor3zpbCO1wrw7Xto2T207p3cRIzcPYKXyLkohnFUKSzzcSoa8oV2Y/QzOlzIyYlZ8h6pIeqMYh2ks/p1RToheQb8nkJghraAQAgx3J/gupUstEMJgyoZpPNjtdEokljuExNWCupokeNfvMvfDxEA2t7gpFYhGmqm1P6H4dfsN7DVNF9jvCXPMGuWGITTpHY\u002BxAm4ZLRDNcSyb7N7G4tToL7jdqB/gRGYXxJoNu0ITJHs1Eh2ZeAWq2F/Mxhjd3VIzPpFiUvsx1gXikyUxKRhDGigqGX51vUUNDeh5t3tt2a4OTtkWdmcI8g9TYwo1TcvngsFoMAws8lulZF9xY85WGYlIEUI5Epug4QywryA46VkEyITNXYBRJfIyT6QW//bg8L7xnzCvsVWxSxWFwejrrrR5xfDQn3TFL02/YQWDwSa4vwz3G7kfZDnuvfkQGjezd9T3X6CErASWshw0aKI0i7kNCKI6HNRsHaHHb6X1Dxji0Lp5yOWgV\u002BOw6d\u002BDQBjl1\u002BMj77Yw3TO0oBYs1eC69pRUEofY4JdbMKsAJDS8nJ7/kGjfbckGZMJEKoZlBRtA5SWPVqOncrTFztSQRl1cmIls79m2\u002Bbayb5fk87ZM1B7PiAgdgW0GXs3VmzgNqOKwjWdVeQ3fAGPxgOaGOOriGB98CiO7r5zTEWMIAKizwTz1adfqXlzo5ZkxHUQzEgTQdWC3EpKRkTgNn0nNRj7rERDZHb9r8PEigMq7i1/iWWUjDEkJq8wbNFMowfIBLI5Q49lXP66jqiOCWFbseRU8SpGxV0GMtpV9aFx0U5VJr\u002BPwA\u002BWyo94pisk6UPGxIace0n\u002BEGiGOjNDZ/AGjdcTOEb8/ORMf59x8ea3vnnJ6ngwGiWJaBOihpKBa6c4\u002B1tZztAaJzGnk5BJcGtYh/sNuAEXRA1kYhpxhcODCmSOtuwYhkYoqRXanNpKg3REQF1ikB77m1r3u/C9sWhMPb\u002B4JqeYUtGEQvXki4z03FBJI3ko08Om83ZSI5wVuguiDE72PEDwDMA8B4z8/K3gsNrho7fvcp73c0U2pxAMS/HPX7Otdj1cSdBiSDw4RcpyQz2H7vzs7Ay\u002BhXcugtd7rZNjnX3LNhmKP\u002BG6\u002BSrNU7brxeHg=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 559,
+          "completion_tokens": 348,
+          "total_tokens": 907,
+          "cost": 0.005294,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.005294,
+            "upstream_inference_prompt_cost": 0.001118,
+            "upstream_inference_completions_cost": 0.004176
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 334,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8133.3357
+    },
+    {
+      "moveNumber": 16,
+      "timestamp": "2026-02-21T01:59:59.2030498Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 2 cells (to cell (8, 7))\n- West: 5 cells (to cell (1, 7))\n\nYour current position is (6, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639195-0REbhxIgEJ4LLIicAVlv",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639195,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Analyzing Potential Moves**\n\nI\u0027m currently at (6, 7) and aiming for (11, 9). My available moves are limited: East to (8, 7) and West to (1, 7). However, I recall moving from both (7, 7) and (8, 7), which should impact my next decision-making process.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_o3edYAKUNc23PcmkFVAg",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Analyzing Potential Moves**\n\nI\u0027m currently at (6, 7) and aiming for (11, 9). My available moves are limited: East to (8, 7) and West to (1, 7). However, I recall moving from both (7, 7) and (8, 7), which should impact my next decision-making process.\n\n\n"
+                },
+                {
+                  "id": "tool_move_o3edYAKUNc23PcmkFVAg",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EvEECu4EAb4\u002B9vs1JKUhGENF1BT/g204Ge0RiDtWRe4hFCmROuHJqqQhE7H93\u002BpeSVWpeM8dbs9qP231KMFld43v32zNMnRF81gBMLpJOiGBmk22sYJ6cgUVLLWy42nUoF\u002B7FqrHqNDJPLB5jpOivccnGdFm9sL7fqJZHjMFSWTAEUmVFhc\u002B\u002BjLvrJaitYAfT5wkcgmPo5zeawQdGfhtWN\u002BdZtZecE\u002BuLtk2wHadHgIwFQdAPjDkR4gjFYoChKZwNyJ2nzlYWRJIwk/HCXyKoUGVLHZHQl7TCrqLZpLtnUAaJLcUE/5lSSUsMUM/er5HLF4UmSAT1CRM4EO8mTbekXAin2SfI\u002BaBUOhLm37\u002BRzw/IWhOfM3C1FdZ\u002B\u002BJU57t6fuNXGxPXOPi1UnFUQme8N1bzgrfbpuJNqZBQsUMIRbdPLhJ/epdaC/jcGrMpBJfb1WRGN7A8RjOlxB6HsAx6jCFwZJmxoRBZm8iqOXXcvxhxhN9YnZky105qao9qZm9mKU2vxRf0jdcTdEY35xkOQpoAYL/vA0xUHboUahYfRIa4l0up\u002BEtNlpniMjbtrxGpQdA4cjg1mkkaje5Vp5sgL/H7W/XXANYsVhqXkAHkzEgjBPZXk4N1a2PTO/8nDzSJmRgjOxQVKIBGc7APC7eRp5dXS3ESTDCO2NyPkwM/tQjMXKPsj7cw1Gm8JmiN9hRtyLlx4\u002B\u002BlLVaqaZ2mu/DJqQtlMH3/adUm3/2G7XH\u002BkHdc2n\u002BnsOnQZOkOkZFHKh4ujau7VQS7OzxRfBdlvAuKfhbgbCpgmiKKvIyRBjo9AZ8/72B8/mn/VBJOW1V2UOMETKSwWw=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 577,
+          "completion_tokens": 227,
+          "total_tokens": 804,
+          "cost": 0.003878,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.003878,
+            "upstream_inference_prompt_cost": 0.001154,
+            "upstream_inference_completions_cost": 0.002724
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 213,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4227.466
+    },
+    {
+      "moveNumber": 17,
+      "timestamp": "2026-02-21T02:00:03.0151704Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 3 cells (to cell (8, 7))\n- West: 4 cells (to cell (1, 7))\n\nYour current position is (5, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639199-wEQbhgYKxFRnghQ3BY7n",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639199,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_yFIPW14Jd8zGWBNVfZJZ",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_yFIPW14Jd8zGWBNVfZJZ",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EugDCuUDAb4\u002B9vsKyzGIPIytmyEjn/FYs0prS83bglAjq3hdePEUVuA5G98nLgahF80mALmg49bs7DzsDxSBm8da8b2LrYiCtwR/kO12Vv4Tf1P6KuOlOyWXhFBzLegENVACf451l5qHH/H6gBK25Ezw4zfdhoFbHzS61KVW8NgbAkwu6o8q8nF5sg59SsB3UW7bl0SOceQRgXyU7NwpfxeWLLG6GkoQIUwXnEnd5mxf7u/DhiyAlWnXzXp5pgZLf4S7AEUynpKnzOgUFVhBqrQqXc0OI6XaDQM1oVkSxX1AsR9x2hE\u002BDWo5FLmvR4YUd6ZWmxuVz5JOvSS\u002BKjQgBf\u002BdWLxGpwC8icWuX88dNYMzLczBccQnbpMt4WhqcuPEuiSQtGEHvUDktFZnEVU7TxfXuu5\u002Bcbd0Cf2PYxZXsEDpYvV9V75AYMNhPvOOw0t/p8irCZkdJmATWNol0VEutXUjWlBGlXZpy85VgaqIFotRNmdy3DkO/GsE/xdlqJong9bzjkV2weTuepdoSgT2oMMvcFHtvl0s9c2oTXcNXr3O4Hs9/\u002BRqUIE\u002B3r64TEfh3N/0lg/mDYvNZjVPY5SanXTFhyfo3CljiOCsl7LisUA9\u002BCgp6OiTqhCj40tPwN0zcE12adNGliRD2yo="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 595,
+          "completion_tokens": 161,
+          "total_tokens": 756,
+          "cost": 0.003122,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.003122,
+            "upstream_inference_prompt_cost": 0.00119,
+            "upstream_inference_completions_cost": 0.001932
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 147,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3811.9468
+    },
+    {
+      "moveNumber": 18,
+      "timestamp": "2026-02-21T02:00:17.2253044Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 4 cells (to cell (8, 7))\n- West: 3 cells (to cell (1, 7))\n\nYour current position is (4, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639203-B8TBUQdJGFqPCHATopIS",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639213,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_jT3m9PY1i0ReMjmSIHi9",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_jT3m9PY1i0ReMjmSIHi9",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EvgCCvUCAb4\u002B9vtCubLSTVnpFLOoVHoHvJ2Kd8/jFIuKyf\u002BjfNRtZiLqUA1FDQbYckSyHeAfT53UhnLhssWa7/xiiwGkFtub1mYqal4Uezz47HsKHLzpe/r7OXwBWptgfAhNXrjX2aM6JFg12FBl4QIvF7gvT\u002BMmplj2NskegDUT24T2CQb0eL9y6R789QJuReBzV4a7au4cXt\u002BUUMFKZAWhRJ\u002B6T/KwsL7m4aqzZMed3dvEccqnb015YaqBNVEtYtraEAYM8qaE9VuLahFwrGqp321tDY6Wblc69Yj4zoHsC5fXIE/7spNjpQzcAA1/CxWJ/kcurBdh7l3CbDcdblMUezaN5E/PX7ak\u002BYwY2740GCP3BKZYJbQc2fEpEgKzFzEqLNzIHF6pIWyVFdewaRXsXF1o0/SQeuuT58xhccUQBvf9tHv7P2gm6DRfo4ZRryl5kJAwdKD3k2R8jAbUhq/Qhthz97vpJaUVHvzlkLsig0czrUp5xz2VLQ=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 613,
+          "completion_tokens": 122,
+          "total_tokens": 735,
+          "cost": 0.00269,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00269,
+            "upstream_inference_prompt_cost": 0.001226,
+            "upstream_inference_completions_cost": 0.001464
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 108,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 14209.7838
+    },
+    {
+      "moveNumber": 19,
+      "timestamp": "2026-02-21T02:00:21.1464184Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 5 cells (to cell (8, 7))\n- West: 2 cells (to cell (1, 7))\n\nYour current position is (3, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639217-bRzxDBOE5aWyQsM2avt6",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639217,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_YktSTp91DipaJk8uRXmh",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_YktSTp91DipaJk8uRXmh",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "Eo8ECowEAb4\u002B9vs7ynJkaOoZ2oKhGKMCNJw3a8k71ShFvkZDUDnTwZS7llD5aMqQ3IQ2xVwxNriapGvbNeHX1uSuotcF5lx73axRo2LTLa9i1YN\u002BAJhNd7Ve/Glrvi8ZRiWjd4/3NfTpt/OAPu7gtKiPFHz86tYYSTQlGZ9dk6540ufUgwf\u002BN/gjPGOmuULoM9jUBTovyAUp40llz0iMVoRp41Vne6ZSliawd5S0iEwWt1zc5Re7FaMJ\u002B\u002BIqNmdC4pxvodaM72RdqDvzb8XXwfF0Rh1sLn431s548yX0LwQDpJKDeeU\u002BkXL2A545QN4Hd7uTSbX7wAjkWqyhXngoQjO1l7\u002BD6Eob5Wm2CQ/M2aBmB2KHPxKnfzYLnazZdbaDY3E1O2mftRbw0YiU\u002BNCloRRCSTALVJBo5TZ\u002BoutDyWltOL0AFrHcOqN0dujueIUlBEPJhkJCaX9NeTtmWCfC0VDWkyIlOFPTo0fwQnzj70orHFj/\u002BdqZW\u002BvZtWRSPpNnOCKP/nLT6p2zwolvaPsRxojC4lMLe1idLsXnPv/jMeFPfpdKRPDVL0ZHFGu17IVT74kY1efqyC0f3T\u002BPlp480fPZLW60FeZ6fOgAv4vXMJe9o55AW/57bOlF7wB5Pdxo4xkrguYECoV48cfhNMJGbXraiqrOM0YFgDPpZeI4877m0AyJSapbn5O6aJXHJ9QCEOM="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 631,
+          "completion_tokens": 168,
+          "total_tokens": 799,
+          "cost": 0.003278,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.003278,
+            "upstream_inference_prompt_cost": 0.001262,
+            "upstream_inference_completions_cost": 0.002016
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 154,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3920.8236
+    },
+    {
+      "moveNumber": 20,
+      "timestamp": "2026-02-21T02:00:25.3156215Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 6 cells (to cell (8, 7))\n- West: 1 cells (to cell (1, 7))\n\nYour current position is (2, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639221-5LwPXMRgyAjLDTAjbrbL",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639221,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Considering Maze Navigation**\n\nI\u0027m currently at (2, 7) and need to reach (11, 9). My available moves are east to (8, 7) and west to (1, 7). I see a problem: I just moved west from (8, 7)! It might be a loop, so I need to reconsider this and try another path. The user is an expert, so I\u0027m sure they have an idea.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_olllANmCl8SLxfnpuidr",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022west\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Considering Maze Navigation**\n\nI\u0027m currently at (2, 7) and need to reach (11, 9). My available moves are east to (8, 7) and west to (1, 7). I see a problem: I just moved west from (8, 7)! It might be a loop, so I need to reconsider this and try another path. The user is an expert, so I\u0027m sure they have an idea.\n\n\n"
+                },
+                {
+                  "id": "tool_move_olllANmCl8SLxfnpuidr",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EvYECvMEAb4\u002B9vttv64SCOUai/wc\u002B77jn6HpMT99USJX8GLKY7L25GptHmiLEMygk84CJ4jCLqBm1t/c4PdD1bnwn6O3MPTawyxqIAiUNKHBCsEoB9OCI6oMePWeJ7bDAL8esi0VF4rwYPRjbojM5H85hg1PaYp/EYb3fzL6F3ofNbdBch6AcPszoG7naCEwtu/34MPpHCCkdVR1qxHVLYg6z7qDJaXdMuRtnmRF/w/MXtXeDGjcZcQz3WVKqpttRQVw0a7koB0987yzB6e4nZ4zpw\u002BDi9xW0LX0TNfwxoEczwRx5VSfsFixxJQLuVAb56ooz45os\u002B7QTme\u002BRlLRXJSbuUUDGBqzT6OSO\u002BClboseKeM1JJcChg5EYfW1BTqPYxce6f/bTh9atC5FTXElrgfMctRfkt7Tcu\u002B1zT4U\u002BynHS3SQZlRcRFBi4KG2FD5An2wT71cT4oOxvkHoYlHfWVsOWbF7vMxJLElN/p4TV61LjzvLwrCBsddR2Mgl4ITUxHAkTK1uLrHS2u3BSh\u002BhDWz7eCngxkB/IaOlgMGs3Qff6mkeA6NODskXo7jDn0TUw\u002BqC/knX59TQqlqGQZTdwFy1jJT6cmyeXvWAwaojOXB9x/8rB5lCTl593TC4Q4qubIXg8k8py\u002B4kx1ClRmtqnP33EstW5UXRawbF398\u002Bf7yZpqTYC5ZUy71KQiLZi9GBcArS/U/tVYI2Gq\u002B5ksMbpqj2fAxvuVYrNxBrG3ylEJK55xf6b1GURopv08mvuU1je360eAJefNoxJgUkng3XO3r9SJbdiZ6\u002BNldKf43f9GGN469ayikN4wFHTiWGZ1DSyBht2dF/p5mn"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 649,
+          "completion_tokens": 216,
+          "total_tokens": 865,
+          "cost": 0.00389,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00389,
+            "upstream_inference_prompt_cost": 0.001298,
+            "upstream_inference_completions_cost": 0.002592
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 202,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4169.0286
+    },
+    {
+      "moveNumber": 21,
+      "timestamp": "2026-02-21T02:00:29.7972187Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 2 cells (to cell (1, 9))\n- East: 7 cells (to cell (8, 7))\n- West: 0 cells\n\nYour current position is (1, 7).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639225-KA8d5MYbkev6mg449FAF",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639225,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_MnvKn1uCi5uFb8C9AHIO",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_MnvKn1uCi5uFb8C9AHIO",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EpYDCpMDAb4\u002B9vuGOHRD/dCQOpUsSlk53VM393WBpBPIyOjpmDtpHHYy3zvr6nLfVU\u002BCgt89\u002BS3MU4SuMRsl4wP0cFqM\u002Bf8o5qv1y00Imz1r7cLg7mWqMUj2MK2xvZM/6Rkyhg4N3yprJXh6LcxylyDkUi7wCOG0mEehFBjPhHlf/yB3LcwB1CxppKR\u002Bmb5xMUirFsXfMyHQEDOxyVxVIfWxx92VlYmqsQDsHCJPAAYbtn4dM92nFuxm0oVXU6uZz1J23DWuetd1DZJuw3EOHTiicbVHWU3RRAXodrUnJRKQCJv9qkWia/QB80vTJ7PV2Z7Q1ZnmhGLCrybGs/Ir9WPO6el/TmzMz\u002BR4wE/eyocsCdUJjK6NBAzkDg4V58Ss1l02ktye\u002BNU4y18pLo4WpvO4PIWmqPOljXlD4pOWNCfMkQep2JaRRo1t2UatHJB\u002BY/kPqQMaebkGzb6dhyLHVjZ3p3XV0CyTgWIiJSKbsFpBLc/cNR4tSLyjAXr0Ka6VcwGZxBHna6OxCdHydRYs0xScBM3GTMaXIg=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 667,
+          "completion_tokens": 119,
+          "total_tokens": 786,
+          "cost": 0.002762,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002762,
+            "upstream_inference_prompt_cost": 0.001334,
+            "upstream_inference_completions_cost": 0.001428
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 105,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 4481.4023
+    },
+    {
+      "moveNumber": 22,
+      "timestamp": "2026-02-21T02:00:39.4778565Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 1 cells (to cell (1, 7))\n- South: 1 cells (to cell (1, 9))\n- East: 0 cells\n- West: 0 cells\n\nYour current position is (1, 8).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639229-DRdg6SAfKQW5FCH41YSW",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639229,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Mapping the Trajectory**\n\nI\u0027m evaluating the optimal path. Currently, my position is (1, 8), and the target is (11, 9). Considering the available moves, a southward shift seems promising to reach (1, 9). I\u0027ve already come from (1, 7). That puts the goal one step closer. Let\u0027s see how this unfolds.\n\n\n**Charting the Next Step**\n\nI\u0027m focused on moving towards the target (11, 9). Given my present location at (1, 8), I\u0027m strategizing. I\u0027ve analyzed available movements. A southward shift is the most obvious path, putting me in position (1, 9). This follows the path taken from (1, 7).\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_NILs2TeSTMRhj3vDaLxT",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022south\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Mapping the Trajectory**\n\nI\u0027m evaluating the optimal path. Currently, my position is (1, 8), and the target is (11, 9). Considering the available moves, a southward shift seems promising to reach (1, 9). I\u0027ve already come from (1, 7). That puts the goal one step closer. Let\u0027s see how this unfolds.\n\n\n**Charting the Next Step**\n\nI\u0027m focused on moving towards the target (11, 9). Given my present location at (1, 8), I\u0027m strategizing. I\u0027ve analyzed available movements. A southward shift is the most obvious path, putting me in position (1, 9). This follows the path taken from (1, 7).\n\n\n"
+                },
+                {
+                  "id": "tool_move_NILs2TeSTMRhj3vDaLxT",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "ClEBjz1rX79wlgmbCOpHcSOvS7Wc1VqdqNICuPgdJVEJG6vMnh7p4B8SfMW1YZHtG6IAvqcmJoXHXqRehfFMsXcVmx31OXPOqELw0icfXl5VJRYKSQGPPWtfzI4D9YI1lqelNY8x4gmh7JPgZiwIfAPZIhRU4CRZ\u002BeICbJrhL1SpkqITEApRAG8nXYeJ3EK19yNrhH\u002BN6xgQctVazR0KYAGPPWtfEt87XxqYNlfokUa5u5wChsJe1sSLiVGOi4rtihpk0vXSvu8cig/Ih/C8jqR5q5ZGHXHqZZIT1cpgrUXxZoyfm6VfN5DEqK5aJnmaRBVAfzIJMpeedsOS3BYF4Ap7AY89a1\u002Bihq0/38JxEGUezhk15GpOWzX2DTXpRy/RCVctts8xqsszTePQrCYpBaidicRzEQd4z0EJvYOplfyhrxAinUUw/Iy1uqRHm/hbWhyFAT0KgjnysPk9wde0D4jGPccUUDOqXa25u01u7KRGpAdqxJAyKgPJgcoyCiUBjz1rX7EJn1/bWhOeWlsDVtUo456BXtbpa5mlnDLUC/03xqPJ"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 634,
+          "completion_tokens": 110,
+          "total_tokens": 744,
+          "cost": 0.002588,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002588,
+            "upstream_inference_prompt_cost": 0.001268,
+            "upstream_inference_completions_cost": 0.00132
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 103,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9680.4049
+    },
+    {
+      "moveNumber": 23,
+      "timestamp": "2026-02-21T02:00:42.5188735Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 2 cells (to cell (1, 7))\n- South: 0 cells\n- East: 10 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 0 cells\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (1, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639239-uwgcmm8RTg37aKj1I37F",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639239,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_hfJN3eqTpMbwuGanyi4N",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_hfJN3eqTpMbwuGanyi4N",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "Er4BCrsBAb4\u002B9vsT1PK1YJlyKrSUO65zytLRYpPFmloh4oLSK/PQPxOyWt8idfguuXrgAa4vM324TyOUZ4715rlY8oBAIz8UDzR3al9MubjC9KKqvDY1eA87pPlZUJ12wdmsc8cnuFKr2AicgQn0Se4tQaAJwOd6/itPl5RXbWQwxUyfkkg3535eStBkNnWytQJ1wBBu03Z\u002BeldO/\u002BD1\u002BKNlacUxj4u4lR1E3RqGcE\u002BYHh17h5TsUzzDgnyVcsGo9A=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 728,
+          "completion_tokens": 52,
+          "total_tokens": 780,
+          "cost": 0.00208,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00208,
+            "upstream_inference_prompt_cost": 0.001456,
+            "upstream_inference_completions_cost": 0.000624
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 38,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3040.4779
+    },
+    {
+      "moveNumber": 24,
+      "timestamp": "2026-02-21T02:00:45.600496Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 9 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 1 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (2, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639242-cEFDVzdWQHPRaqWJIxsy",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639242,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_JO7SUyyfQJCmmfcKoWYp",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_JO7SUyyfQJCmmfcKoWYp",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "Eo0CCooCAb4\u002B9vsXplPtUco9ZwnktawGSAQOpo5S4UJObLpKZotrqveRXQBq98SgNTZC5UjnSIH\u002BbESL89nQZPAw7rJKnnCIs6olCYWnfhxLmqh8Amojeo2hM2IHeRaKNLbh14zaWtzVp\u002Bg/4r9qDjsDFkjlGu5mFb9dSCzfgiJcqP/e917eGz0SsO4yRY8jpuN3Jbd/x9/ZNw6YPlbARxanZwjz97JgROFL5BdYQF/pDZtW\u002BnqRqMw49FhidKMyKZjgd/JSeNoOSpZ07cp\u002BVXpm3zIkLoFoTyCo8LFnS/WCeMhtm\u002BbCIrhiOo8\u002BoCaEt3NRGaYBsFh9IWkiJimP622gVyJjNpxwnV0K3Wb\u002BygY="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 745,
+          "completion_tokens": 63,
+          "total_tokens": 808,
+          "cost": 0.002246,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002246,
+            "upstream_inference_prompt_cost": 0.00149,
+            "upstream_inference_completions_cost": 0.000756
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 49,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3081.275
+    },
+    {
+      "moveNumber": 25,
+      "timestamp": "2026-02-21T02:00:48.970639Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 8 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 2 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (3, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639245-k4zOqK7l1pcwShhqsfpy",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639245,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_zkgSJpffMaR2tSVZbKN5",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_zkgSJpffMaR2tSVZbKN5",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "EoECCv4BAb4\u002B9vtRsQy\u002BPsWRtMpU/DjR2EyPae3wFkgMkWJqii/W77oNBOXgfm3oK2yH4fmAKgM8mF4S1f5Rs7aRELvbF1GiopBhNy\u002BGxVAAmp00wQfUBDN1nDUTFVHGEzHUtX3bHe5C9omF5\u002BktKa4DqtRKw75UbAbhFFI5OOCXUjsd4hTH7qAeCsaayzNmrXyFD7jPqG1rvgKxW6Y3zUNu/IkqsVf7WCZRDOEUgOSSAuD7wiYdvbjt66xajx98PDpDK4DDu8bylbN5i15AoTv2muCcByh8DqvS5LriqZjD9Voud7q6MoExNdjgIOWORBMgOV1IDJl00yd2HYpKHi8Ljws="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 763,
+          "completion_tokens": 63,
+          "total_tokens": 826,
+          "cost": 0.002282,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002282,
+            "upstream_inference_prompt_cost": 0.001526,
+            "upstream_inference_completions_cost": 0.000756
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 49,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3369.6027
+    },
+    {
+      "moveNumber": 26,
+      "timestamp": "2026-02-21T02:00:51.9396992Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 7 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 3 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (4, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639249-MugsayiRfHFlRFjldDwZ",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639249,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Contemplating Maze Navigation**\n\nI\u0027m currently at (4, 9) and need to reach (11, 9). The exit is directly east, seven steps away. My next action is clear: move eastward.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_WYhOD1bIVPueqwz8pxLS",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Contemplating Maze Navigation**\n\nI\u0027m currently at (4, 9) and need to reach (11, 9). The exit is directly east, seven steps away. My next action is clear: move eastward.\n\n\n"
+                },
+                {
+                  "id": "tool_move_WYhOD1bIVPueqwz8pxLS",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CloBjz1rX\u002B6pqGgup\u002B26eBSYqhBHpQoVsbB2xuh9c4H\u002BHiJOU3T1eZ0oPQqYySwamPNarEN01vQ1w92f2jOaowfNO57zFK7x8q2wQCzinyp8j6MiGe\u002BuACnddBkKSAGPPWtfFP2AL/6bwD3szhmr2ilLYW3L\u002BPqVull61anWWnm0DZbnFn629IRve0cOIqoz5fx1X4NqqKkz7YP6dEt\u002Bd0lZsczcXgpaAY89a188NpG40TmtjaM46ELq9D6ogvlmiYE\u002B/fNN5FvayTB/eIR9TXiuXjjCumZzhnqeml\u002BR/kkCVc2ZE9p8K7KwVugYCzAu3jDd2kJiq8o\u002BgvezhuVZJEAJ"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 730,
+          "completion_tokens": 56,
+          "total_tokens": 786,
+          "cost": 0.002132,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002132,
+            "upstream_inference_prompt_cost": 0.00146,
+            "upstream_inference_completions_cost": 0.000672
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 49,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 2968.7558
+    },
+    {
+      "moveNumber": 27,
+      "timestamp": "2026-02-21T02:00:55.0275547Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 6 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 4 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (5, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n  26. E: (4,9)\u2192(5,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639251-UhmotzW14dRv0stJwvM3",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639252,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Analyzing the Situation**\n\nI\u0027ve assessed my current position and the desired destination. The exit is clearly east, a straightforward path. The distance is 6 cells. Therefore, my immediate action is to proceed eastward.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_lierStePy6M4WsqSUIbQ",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Analyzing the Situation**\n\nI\u0027ve assessed my current position and the desired destination. The exit is clearly east, a straightforward path. The distance is 6 cells. Therefore, my immediate action is to proceed eastward.\n\n\n"
+                },
+                {
+                  "id": "tool_move_lierStePy6M4WsqSUIbQ",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CkYBjz1rX\u002Bfcp\u002BqocWlXZmxbe0W6CcBlR0z\u002BWMn98Etk2QeV6DqupEs8BTgVBmmsBTaI2z0NCkOqk\u002BbUB9KrBw3N6AyOD\u002BsRCk0Bjz1rXwLdxxR\u002B85awxLQERhCyzs51HKeRI9xswRmaMcyk62u7JFXTnmmzf0lmx1TFbhp0wQBurgu54HkvQdig3Bj62x53Az3QKuogoApwAY89a18t0h8MrucwfBT\u002B\u002BZIfmK6gm6aEfNZMVJLprh65v/Xe1kYBgdP959qudpRPc0ZzpuK9iRcJHapt2TiN/IuSN8ioR8UDSueASjP7q3MlkemZtsPSF9tqCckfp16G4r0J0RwYXHUpkFNLKoUbKwo5AY89a186tv1mlPhbzOQJkKT6scA/VqMfy5pPr/5b20lKOxBppDnnVer7qHBIlCQrh8ar69\u002ByBssk"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 748,
+          "completion_tokens": 79,
+          "total_tokens": 827,
+          "cost": 0.002444,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002444,
+            "upstream_inference_prompt_cost": 0.001496,
+            "upstream_inference_completions_cost": 0.000948
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 72,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 3087.6436
+    },
+    {
+      "moveNumber": 28,
+      "timestamp": "2026-02-21T02:01:04.4909616Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 5 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 5 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (6, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n  26. E: (4,9)\u2192(5,9)\n  27. E: (5,9)\u2192(6,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639255-O13qLu2jIHuQuQMCwvXF",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639255,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Mapping Maze Movement**\n\nI\u0027ve determined the goal\u0027s direction: East! Given my current position (6,9) and the exit at (11,9), the solution is clear. My next step? Call the move function, specifying \u0022east\u0022 as the direction. Simple, direct, and the best path forward.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_TwKOFjAdSG7ccWty2VbC",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Mapping Maze Movement**\n\nI\u0027ve determined the goal\u0027s direction: East! Given my current position (6,9) and the exit at (11,9), the solution is clear. My next step? Call the move function, specifying \u0022east\u0022 as the direction. Simple, direct, and the best path forward.\n\n\n"
+                },
+                {
+                  "id": "tool_move_TwKOFjAdSG7ccWty2VbC",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rX\u002BICleSknAun7NbKXvbkevpQzd4puyRHlqK1/H6\u002BrxIKWgGPPWtf6cyKbr4HR\u002BsstmIpeqFkPXPfINonZYhi6fxlCPHITQ\u002BYiTTKeSBq2Dyrqec9fhmObTFRJwKME8QtemmDtsmXCiqiTWpwAB1sz6k8pVZr64rxQdQ7swpZAY89a1/jsndAeDnJyeqXUiRDqowet34gYg/DmR4sdFGG9KQ2dvT4/HdO0h4eyjO8\u002BRMchc12F90n8g7Ui92T50Z7oRD8HeghwzNJAmfSZ8jmo56eLphVmtgKbAGPPWtf4J0KOV7jG2KqkzejVqJxdfno9HPneZ/2UwOCIqutctjxY0TMI6KWF16I45fE8crlV15UyrY7EEI5jVih5XBw6DbU1JVlB5nc6ARckUZxioIs8zV7M1f/CgSI6YWooR1YNgkph6ncCg=="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 766,
+          "completion_tokens": 64,
+          "total_tokens": 830,
+          "cost": 0.0023,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0023,
+            "upstream_inference_prompt_cost": 0.001532,
+            "upstream_inference_completions_cost": 0.000768
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 57,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9463.1639
+    },
+    {
+      "moveNumber": 29,
+      "timestamp": "2026-02-21T02:01:12.6096295Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 4 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 6 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (7, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n  26. E: (4,9)\u2192(5,9)\n  27. E: (5,9)\u2192(6,9)\n  28. E: (6,9)\u2192(7,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639264-G5xqdBz8ir0jYWYflHjs",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639264,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Analyzing Maze Navigation**\n\nI\u0027ve pinpointed the user\u0027s location at (7, 9) and the objective at (11, 9). The exit\u0027s clearly in the east. My next move is logically eastward.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_PbvuWnuOoNZ6IrV00Hjy",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Analyzing Maze Navigation**\n\nI\u0027ve pinpointed the user\u0027s location at (7, 9) and the objective at (11, 9). The exit\u0027s clearly in the east. My next move is logically eastward.\n\n\n"
+                },
+                {
+                  "id": "tool_move_PbvuWnuOoNZ6IrV00Hjy",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rXwt6IbUHa40AvBtGtIS7WiHAnv0C4XHPiLGDZ6VGVUIKYAGPPWtfNjm9jwnWPMRwlQi6bPTr4jwUylV\u002BV5uuDI3jUrg05hkkVZljVFslEStc7W/tahw0qF6RqgBJqYTYKQZVmiWbPN2hFGKU\u002BVSqsYHHN7tNUUAwUobXw4Z9qRfO3QpLAY89a19Gqb4eNCoHdCeebSuqP06tErYOY9aZkQATO7tDy47XMZVfa0nqNDRhbob/KbPBvoXSGHGqsbwA/3671X6ukwDdK9iYjqGjCjwBjz1rX0YndOaJuha3Un9ONxcCufvuhNIIbq5Pnfpd3InU/5G\u002BtBkegWBKnYyteEuUzi1TEG3MQsaI4vM="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 784,
+          "completion_tokens": 51,
+          "total_tokens": 835,
+          "cost": 0.00218,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00218,
+            "upstream_inference_prompt_cost": 0.001568,
+            "upstream_inference_completions_cost": 0.000612
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 44,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 8118.3296
+    },
+    {
+      "moveNumber": 30,
+      "timestamp": "2026-02-21T02:01:21.7706172Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 3 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 7 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (8, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n  26. E: (4,9)\u2192(5,9)\n  27. E: (5,9)\u2192(6,9)\n  28. E: (6,9)\u2192(7,9)\n  29. E: (7,9)\u2192(8,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639272-I9598AZSuazuuH8UyUBY",
+        "provider": "Google",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639272,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": "**Contemplating Maze Navigation**\n\nI\u0027ve located my current position within the maze and have identified the exit. Right now, I can see the goal is east of me. Consequently, my immediate plan is to execute a move eastward to progress toward the exit.\n\n\n",
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_iRpRiG3Ct9CPWuKyKnVe",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.text",
+                  "text": "**Contemplating Maze Navigation**\n\nI\u0027ve located my current position within the maze and have identified the exit. Right now, I can see the goal is east of me. Consequently, my immediate plan is to execute a move eastward to progress toward the exit.\n\n\n"
+                },
+                {
+                  "id": "tool_move_iRpRiG3Ct9CPWuKyKnVe",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "CiQBjz1rX0/hI4BEzSRWrjk7cxWw7Lv\u002BJvCx1uT4f6Dj/jKNCJcKXwGPPWtfESYDqVtFks0dlBxw5LStPJkegm9pTu/phDn5g33hF\u002Bv/si/d7S06SeCroHfPMAzK0W2UNHWGuFa1QQGEucIMYbdVBxvkY9qQxo/wvqA0rFn/\u002BT0k6Hj/WxQAClQBjz1rX3JJmED1LfYeYsHC/5\u002B2kB/HRJ\u002BwxZ7sXAh2k2NAU2v8UHQw9rydNu5XNFeZDEk5YB\u002BlM6tk4MOpLJlgEVqI05nmQBqWxSoZw7fZSZ1hNfkKNwGPPWtfWuwvqtcreDw1vumEJMepZkMHNo1/muAzAFfd6aTGoOx7KFr\u002BE0Xq1nPdrff1FJg8djA="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 802,
+          "completion_tokens": 52,
+          "total_tokens": 854,
+          "cost": 0.002228,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002228,
+            "upstream_inference_prompt_cost": 0.001604,
+            "upstream_inference_completions_cost": 0.000624
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 45,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9160.7917
+    },
+    {
+      "moveNumber": 31,
+      "timestamp": "2026-02-21T02:01:24.537783Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 0 cells\n- South: 0 cells\n- East: 2 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 8 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (9, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n  26. E: (4,9)\u2192(5,9)\n  27. E: (5,9)\u2192(6,9)\n  28. E: (6,9)\u2192(7,9)\n  29. E: (7,9)\u2192(8,9)\n  30. E: (8,9)\u2192(9,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639281-3Zns0NCuIZC52U39C8Zq",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639281,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_JhoDgrXwvrRHfq65omZt",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_JhoDgrXwvrRHfq65omZt",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "ErEBCq4BAb4\u002B9vvfgL0TlEuX1LaaEuG6\u002BmhtkFMsGfHfuDTerwZgWe9w3ZSFZ844dNSwziml\u002B6IToMekJdDgT8gDnvAW8c2B2yudnsqMPr7ZlfFmEh65Ak134zWCiYA433t996DfMPcPTmm0k9mhQgnapMJeuSxqBaFtE/fWk/c0Dn1UavKSCdmwmAADiPlivdsADKN9/Ver5iNRLMI0XxJrFilOStEYvMKheuECWvmfwWKw"
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 871,
+          "completion_tokens": 47,
+          "total_tokens": 918,
+          "cost": 0.002306,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002306,
+            "upstream_inference_prompt_cost": 0.001742,
+            "upstream_inference_completions_cost": 0.000564
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 33,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 2766.9616
+    },
+    {
+      "moveNumber": 32,
+      "timestamp": "2026-02-21T02:01:33.8944643Z",
+      "request": {
+        "model": "google/gemini-3.1-pro-preview",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are navigating a maze. Your goal is to find the exit.\n\n"
+          },
+          {
+            "role": "user",
+            "content": "You are navigating a maze. Your goal is to reach the end position.\n\nThe coordinate system works as follows:\n- X-axis (first number): 0 is leftmost, higher values move right (east)\n- Y-axis (second number): 0 is topmost, higher values move down (south)\n- North decreases Y, south increases Y, east increases X, west decreases X\n\nYou can see how many cells you can move in each direction:\n- North: 8 cells (to cell (10, 1))\n- South: 0 cells\n- East: 1 cells (to cell (11, 9)) [EXIT VISIBLE!]\n- West: 9 cells (to cell (1, 9))\n\n*** THE EXIT IS VISIBLE TO THE EAST! Go east to reach it! ***\n\nYour current position is (10, 9).\nThe goal is at position (11, 9).\n\nYou have been leaving breadcrumbs as you travel.\nYour journey so far:\n  1. S: (1,1)\u2192(1,2)\n  2. S: (1,2)\u2192(1,3)\n  3. S: (1,3)\u2192(1,4)\n  4. S: (1,4)\u2192(1,5)\n  5. E: (1,5)\u2192(2,5)\n  6. E: (2,5)\u2192(3,5)\n  7. E: (3,5)\u2192(4,5)\n  8. E: (4,5)\u2192(5,5)\n  9. E: (5,5)\u2192(6,5)\n  10. E: (6,5)\u2192(7,5)\n  11. E: (7,5)\u2192(8,5)\n  12. S: (8,5)\u2192(8,6)\n  13. S: (8,6)\u2192(8,7)\n  14. W: (8,7)\u2192(7,7)\n  15. W: (7,7)\u2192(6,7)\n  16. W: (6,7)\u2192(5,7)\n  17. W: (5,7)\u2192(4,7)\n  18. W: (4,7)\u2192(3,7)\n  19. W: (3,7)\u2192(2,7)\n  20. W: (2,7)\u2192(1,7)\n  21. S: (1,7)\u2192(1,8)\n  22. S: (1,8)\u2192(1,9)\n  23. E: (1,9)\u2192(2,9)\n  24. E: (2,9)\u2192(3,9)\n  25. E: (3,9)\u2192(4,9)\n  26. E: (4,9)\u2192(5,9)\n  27. E: (5,9)\u2192(6,9)\n  28. E: (6,9)\u2192(7,9)\n  29. E: (7,9)\u2192(8,9)\n  30. E: (8,9)\u2192(9,9)\n  31. E: (9,9)\u2192(10,9)\n\nUse the move function to navigate. Choose a direction: north, south, east, or west.\n\nWARNING: If you visit the same cell 10 times, the evaluation will be terminated. Avoid getting stuck in loops!\n"
+          }
+        ],
+        "max_tokens": 5000,
+        "temperature": 0.1,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "move",
+              "description": "Make a move in the specified direction",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string",
+                    "enum": [
+                      "north",
+                      "south",
+                      "east",
+                      "west"
+                    ],
+                    "description": "The direction to move"
+                  }
+                },
+                "required": [
+                  "direction"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "reasoning": {
+          "enabled": true,
+          "effort": "medium",
+          "exclude": false
+        },
+        "usage": {
+          "include": true
+        }
+      },
+      "response": {
+        "id": "gen-1771639284-JsDuvXRPLny9h4w6A5qQ",
+        "provider": "Google AI Studio",
+        "model": "google/gemini-3.1-pro-preview",
+        "object": "chat.completion",
+        "created": 1771639290,
+        "choices": [
+          {
+            "logprobs": null,
+            "finish_reason": "tool_calls",
+            "native_finish_reason": "STOP",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "",
+              "refusal": null,
+              "reasoning": null,
+              "tool_calls": [
+                {
+                  "type": "function",
+                  "index": 0,
+                  "id": "tool_move_bNAcfCAGOqBhO4S6EJz3",
+                  "function": {
+                    "name": "move",
+                    "arguments": "{\u0022direction\u0022:\u0022east\u0022}"
+                  }
+                }
+              ],
+              "reasoning_details": [
+                {
+                  "id": "tool_move_bNAcfCAGOqBhO4S6EJz3",
+                  "format": "google-gemini-v1",
+                  "index": 0,
+                  "type": "reasoning.encrypted",
+                  "data": "Es4BCssBAb4\u002B9vtRZRbP1NcXJWVcoNTEjIXU7liunAFAukOtqxR1Jq5d2FLZCooF1IPel0uB1EvB2ocF0qPHYNwlnbk8KnjO7xHuanTwyQoxu6hCNvabuGhXkc7J9dqxGgPWz3kx1TXhEVmYaFeZuTE6JRiFIo0NVhDDPiDoNLWr\u002B0/\u002BmKVtnGhnx0HzNaqkQlRMaLbfHVvaMGudHn0zuYyJphOewX0YC6gCYoogXj3yXaPhUxeYKCDPytxYFJ/aSkRAu0YTxrgYkKkqvKQguDc="
+                }
+              ],
+              "annotations": []
+            }
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 901,
+          "completion_tokens": 55,
+          "total_tokens": 956,
+          "cost": 0.002462,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.002462,
+            "upstream_inference_prompt_cost": 0.001802,
+            "upstream_inference_completions_cost": 0.00066
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 41,
+            "image_tokens": 0
+          }
+        }
+      },
+      "httpStatusCode": 200,
+      "latencyMs": 9356.4797
+    }
+  ]
+}

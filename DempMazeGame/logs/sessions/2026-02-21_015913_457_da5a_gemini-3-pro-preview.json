@@ -1,0 +1,643 @@
+{
+  "sessionId": "da5a9cbd-725d-4903-9211-94d1825e0392",
+  "startTime": "2026-02-21T01:59:13.457539Z",
+  "endTime": "2026-02-21T02:03:06.5697883Z",
+  "durationSeconds": 233.1122493,
+  "model": {
+    "id": "google/gemini-3.1-pro-preview",
+    "name": "Gemini 3 Pro Preview"
+  },
+  "settings": {
+    "showCoordinates": true,
+    "showAsciiMap": false,
+    "delayBetweenMoves": 0,
+    "distanceToWall": true,
+    "showGoalCoordinates": true,
+    "breadcrumbs": true,
+    "maxRevisitsPerCell": 10,
+    "maxMoves": 50,
+    "reasoningEnabled": true,
+    "reasoningEffort": "medium"
+  },
+  "outcome": {
+    "won": true,
+    "stoppedByUser": false,
+    "reachedMaxMoves": false,
+    "tooManyRevisits": false,
+    "errorOccurred": false
+  },
+  "metrics": {
+    "totalMoves": 34,
+    "successfulMoves": 34,
+    "wallCollisions": 0,
+    "uniquePositionsVisited": 32,
+    "backtrackCount": 2
+  },
+  "tokenUsage": {
+    "totalPromptTokens": 20417,
+    "totalCompletionTokens": 4025,
+    "totalTokens": 24442,
+    "totalReasoningTokens": 3640
+  },
+  "cost": {
+    "totalCostUsd": 0.089134,
+    "costPerMove": 0.0026215882352941176470588235,
+    "isEstimate": false
+  },
+  "moves": [
+    {
+      "moveNumber": 1,
+      "direction": "S",
+      "fromPosition": {
+        "row": 1,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 248,
+      "completionTokens": 71,
+      "reasoningTokens": 64,
+      "costUsd": 0.001348,
+      "reasoning": "**Mapping the Terrain**\n\nI\u0027ve begun charting the course, starting at (1, 1). My destination is (11, 9). Currently, I see two initial moves: South, which offers a jump of 4 cells, and East, allowing a hop of 2 cells. I will test the southern route first.\n\n\n"
+    },
+    {
+      "moveNumber": 2,
+      "direction": "S",
+      "fromPosition": {
+        "row": 2,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 333,
+      "completionTokens": 104,
+      "reasoningTokens": 90,
+      "costUsd": 0.001914
+    },
+    {
+      "moveNumber": 3,
+      "direction": "S",
+      "fromPosition": {
+        "row": 3,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 350,
+      "completionTokens": 104,
+      "reasoningTokens": 90,
+      "costUsd": 0.001948
+    },
+    {
+      "moveNumber": 4,
+      "direction": "S",
+      "fromPosition": {
+        "row": 4,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 367,
+      "completionTokens": 127,
+      "reasoningTokens": 113,
+      "costUsd": 0.002258
+    },
+    {
+      "moveNumber": 5,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 333,
+      "completionTokens": 90,
+      "reasoningTokens": 83,
+      "costUsd": 0.001746,
+      "reasoning": "**Charting the Course Forward**\n\nI\u0027ve got a clear path now, heading east. Avoiding any backtracking is key, so the prior north trajectory is irrelevant. It\u0027s all about that eastern push to reach the final coordinates. I\u0027m focusing solely on that eastward advancement, seven cells in total, as the optimal route.\n\n\n"
+    },
+    {
+      "moveNumber": 6,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 401,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.00175
+    },
+    {
+      "moveNumber": 7,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 418,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001784
+    },
+    {
+      "moveNumber": 8,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 384,
+      "completionTokens": 78,
+      "reasoningTokens": 71,
+      "costUsd": 0.001704,
+      "reasoning": "**Mapping a Route**\n\nI\u0027ve got the current location and the target coordinates locked in. Considering the possible moves, it looks like heading East is the smartest play. That\u0027ll get me closer to (11, 9) in fewer steps.\n\n\n"
+    },
+    {
+      "moveNumber": 9,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 401,
+      "completionTokens": 72,
+      "reasoningTokens": 65,
+      "costUsd": 0.001666,
+      "reasoning": "**Planning a Route**\n\nI\u0027ve got the current coordinates and the target location mapped out. It seems like the optimal strategy is to head east. I can move three spaces east, getting me closer to the desired coordinates. The other direction is less useful.\n\n\n"
+    },
+    {
+      "moveNumber": 10,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 469,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001886
+    },
+    {
+      "moveNumber": 11,
+      "direction": "E",
+      "fromPosition": {
+        "row": 5,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 487,
+      "completionTokens": 79,
+      "reasoningTokens": 65,
+      "costUsd": 0.001922
+    },
+    {
+      "moveNumber": 12,
+      "direction": "S",
+      "fromPosition": {
+        "row": 5,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 463,
+      "completionTokens": 119,
+      "reasoningTokens": 112,
+      "costUsd": 0.002354,
+      "reasoning": "**Evaluating Available Moves**\n\nThe current (8, 5) position constrains movement. Considering the goal at (11, 9), I\u0027ve determined that a west and south path is the most effective. Therefore, I will prioritize a move West to (1, 5) to then progress South to (8, 7) or further.\n\n\n**Reassessing Strategic Paths**\n\nHaving considered my current position, the goal, and available moves, I see that I can go West or South. The optimal route appears to be south, but I still favor West to (1, 5) from prior analysis. I will prioritize a move South.\n\n\n"
+    },
+    {
+      "moveNumber": 13,
+      "direction": "S",
+      "fromPosition": {
+        "row": 6,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 523,
+      "completionTokens": 108,
+      "reasoningTokens": 94,
+      "costUsd": 0.002342
+    },
+    {
+      "moveNumber": 14,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 541,
+      "completionTokens": 134,
+      "reasoningTokens": 120,
+      "costUsd": 0.00269
+    },
+    {
+      "moveNumber": 15,
+      "direction": "E",
+      "fromPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 508,
+      "completionTokens": 130,
+      "reasoningTokens": 123,
+      "costUsd": 0.002576,
+      "reasoning": "**Examining the Possibilities**\n\nI\u0027m focused on the available moves from my current (7, 7) position, especially concerning the East and West options. I\u0027ve realized a recent move brought me here, and now I\u0027m backtracking to examine the path taken and the paths not taken, especially from (8,7). It seems important to consider every possible move, for optimal strategy.\n\n\n**Evaluating Reversal Moves**\n\nI\u0027m now contemplating my move from (7, 7) back to (8, 7) after my previous decision to move West. Revisiting the path at (8,7), the implications of moving East have become a priority. Examining whether that single move East would have been a more viable long-term strategy, and thus the most efficient way to get to (11,9), is the immediate objective.\n\n\n"
+    },
+    {
+      "moveNumber": 16,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 599,
+      "completionTokens": 302,
+      "reasoningTokens": 288,
+      "costUsd": 0.004822,
+      "reasoning": "**Analyzing Possible Moves**\n\nI\u0027m currently at (8, 7), and my target is (11, 9). I\u0027ve analyzed available movements: north offers 4 cells to (8, 3), west 7 cells to (1, 7). South is blocked, and east is inaccessible. Given the current location, the next logical move might be north or west. I am focusing on the shortest path to the end goal.\n\n\n"
+    },
+    {
+      "moveNumber": 17,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 572,
+      "completionTokens": 356,
+      "reasoningTokens": 349,
+      "costUsd": 0.005416,
+      "reasoning": "**Mapping the Route**\n\nI\u0027m currently at (7, 7) and need to reach (11, 9). I\u0027ve got a lot of West travel available! But I keep oscillating. I\u0027ve been taking the cell to the east to (8, 7) from (7,7) repeatedly.  It seems I\u0027m stuck, and the current move I\u0027m testing is one east from (7, 5). I should try a different approach.\n\n\n**Analyzing the Alternatives**\n\nI\u0027ve decided to abandon the repeated east and west movements between (7, 7) and (8, 7). That was a mistake! Now I\u0027m considering the paths available from (8,7). It looks like I was wrong - I can go north or south from (8,6) to (8,7), and the west path gets me nowhere. My next step will be to travel west from (7,7) to explore a different path.\n\n\n"
+    },
+    {
+      "moveNumber": 18,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 625,
+      "completionTokens": 232,
+      "reasoningTokens": 218,
+      "costUsd": 0.004034,
+      "reasoning": "**Analyzing Movement Options**\n\nI\u0027m currently at (6, 7) and aiming for (11, 9). I have two east moves available, and five west. Interestingly, I\u0027ve just come from (7, 7) and need to remember that. It looks like I was just on a previous move from (8,5) to (8,6) on my journey.\n\n\n"
+    },
+    {
+      "moveNumber": 19,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 592,
+      "completionTokens": 242,
+      "reasoningTokens": 235,
+      "costUsd": 0.004088,
+      "reasoning": "**Evaluating Available Options**\n\nI\u0027m currently at (5, 7) and need to reach (11, 9). I can move East three times or West four. The path to the West does not make sense since it doubles back. I also know I came from (6, 7), which was an East movement. It might be helpful to document my journey from (8,5).\n\n\n**Assessing the Current State**\n\nNow I see my current position is (5, 7) and the goal is at (11, 9). My available moves are East (3 times) or West (4 times). I\u0027ve noted that I came from (6, 7) by moving East and that the West path seems counterproductive, taking me away from the goal.\n\n\n"
+    },
+    {
+      "moveNumber": 20,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 610,
+      "completionTokens": 280,
+      "reasoningTokens": 273,
+      "costUsd": 0.00458,
+      "reasoning": "**Calculating Optimal Pathing**\n\nI\u0027m currently at (4, 7), aiming for (11, 9). Considering available moves, I can go East 4 steps or West 3 steps. However, I recall originating from (5, 7) by heading East. The recent step in my journey history is from (8,5) to (8,6) by going South. Now I must analyze the best possible move that will lead me closer to my goal.\n\n\n**Navigating the Route\u0027s History**\n\nI\u0027m currently at (4, 7), needing to reach (11, 9). The history shows a Westward trend: I came from (5,7) to (4, 7). Examining recent steps reveals a \u0022West\u0022 movement. Recalling my path, I\u0027ve looped at (8,7). Now, the most recent leg brings me to (4,7) and I\u0027m choosing West to move toward (1,7).\n\n\n"
+    },
+    {
+      "moveNumber": 21,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 679,
+      "completionTokens": 286,
+      "reasoningTokens": 272,
+      "costUsd": 0.00479,
+      "reasoning": "**Analyzing Current Movement**\n\nI\u0027m currently at position (3, 7) and aiming for (11, 9). I have two immediate options: moving East or West. The East move seems more promising with 5 units available, taking me to (8, 7). However, I recall my last move was from (8, 7) traveling West, so I am going to analyze the entire journey.\n\n\n"
+    },
+    {
+      "moveNumber": 22,
+      "direction": "W",
+      "fromPosition": {
+        "row": 7,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 697,
+      "completionTokens": 125,
+      "reasoningTokens": 111,
+      "costUsd": 0.002894
+    },
+    {
+      "moveNumber": 23,
+      "direction": "S",
+      "fromPosition": {
+        "row": 7,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 715,
+      "completionTokens": 119,
+      "reasoningTokens": 105,
+      "costUsd": 0.002858
+    },
+    {
+      "moveNumber": 24,
+      "direction": "S",
+      "fromPosition": {
+        "row": 8,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "wasSuccessful": true,
+      "promptTokens": 733,
+      "completionTokens": 111,
+      "reasoningTokens": 97,
+      "costUsd": 0.002798
+    },
+    {
+      "moveNumber": 25,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 1
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "wasSuccessful": true,
+      "promptTokens": 725,
+      "completionTokens": 51,
+      "reasoningTokens": 44,
+      "costUsd": 0.002062,
+      "reasoning": "**Contemplating Maze Navigation**\n\nI\u0027ve located myself at coordinates (1, 9) within this maze. My target is (11, 9). Encouragingly, the exit is directly East! My next action is clear; I\u0027ll proceed Eastward.\n\n\n"
+    },
+    {
+      "moveNumber": 26,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 2
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "wasSuccessful": true,
+      "promptTokens": 793,
+      "completionTokens": 56,
+      "reasoningTokens": 42,
+      "costUsd": 0.002258
+    },
+    {
+      "moveNumber": 27,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 3
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "wasSuccessful": true,
+      "promptTokens": 811,
+      "completionTokens": 58,
+      "reasoningTokens": 44,
+      "costUsd": 0.002318
+    },
+    {
+      "moveNumber": 28,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 4
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "wasSuccessful": true,
+      "promptTokens": 829,
+      "completionTokens": 59,
+      "reasoningTokens": 45,
+      "costUsd": 0.002366
+    },
+    {
+      "moveNumber": 29,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 5
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "wasSuccessful": true,
+      "promptTokens": 847,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.002318
+    },
+    {
+      "moveNumber": 30,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 6
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "wasSuccessful": true,
+      "promptTokens": 865,
+      "completionTokens": 52,
+      "reasoningTokens": 38,
+      "costUsd": 0.002354
+    },
+    {
+      "moveNumber": 31,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 7
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "wasSuccessful": true,
+      "promptTokens": 832,
+      "completionTokens": 49,
+      "reasoningTokens": 42,
+      "costUsd": 0.002252,
+      "reasoning": "**Orienting to the Exit**\n\nI\u0027ve located the exit, which is a mere four cells east. My current position is (7, 9), and I need to advance to (11, 9) to reach the goal. The path is clear, so I\u0027ll prioritize moving east.\n\n\n"
+    },
+    {
+      "moveNumber": 32,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 8
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "wasSuccessful": true,
+      "promptTokens": 850,
+      "completionTokens": 45,
+      "reasoningTokens": 38,
+      "costUsd": 0.00224,
+      "reasoning": "**Planning the Path East**\n\nI\u0027ve determined my current position and the exit\u0027s coordinates. My plan is now simplified: move east. The exit\u0027s visibility confirms the direction. It\u0027s a straightforward approach, directly towards the goal.\n\n\n"
+    },
+    {
+      "moveNumber": 33,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 9
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "wasSuccessful": true,
+      "promptTokens": 868,
+      "completionTokens": 49,
+      "reasoningTokens": 42,
+      "costUsd": 0.002324,
+      "reasoning": "**Mapping the Route**\n\nI\u0027ve determined my current position (9, 9) and the goal coordinates (11, 9). The exit, thankfully, is just two cells east. My next action is clear; I need to head east to reach the exit.\n\n\n"
+    },
+    {
+      "moveNumber": 34,
+      "direction": "E",
+      "fromPosition": {
+        "row": 9,
+        "col": 10
+      },
+      "toPosition": {
+        "row": 9,
+        "col": 11
+      },
+      "wasSuccessful": true,
+      "promptTokens": 949,
+      "completionTokens": 48,
+      "reasoningTokens": 34,
+      "costUsd": 0.002474
+    }
+  ]
+}
